@@ -89,14 +89,14 @@
 <i></i>
 ===================================================================================
 * [Bryce Shearn](https://github.com/BryceShearn)
-* <b>Primary Role: Database Analyst</b>
-*   *Primary Focus: planning, implementing, and maintaining the DataBase
-*     *Assisted++ Role: Creation and implementation of Controllers and DAOs
+* <b>Primary Role: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</b>
+*   *Primary Focus: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+*     *Assisted++ Role: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
 ===================================================================================
 * [Anna Hanson](https://github.com/A-Hanson)
-* <b>Primary Role:SCRUM Master</b>
-*   *Primary Focus:in creation and implementation of Controllers, DAOs
-*     *Assisted Role: Aided in Database Structuring
+* <b>Primary Role:lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</b>
+*   *Primary Focus:in lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+*     *Assisted Role: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
 ===================================================================================
 * [Ramon Armendariz](https://github.com/RamonArmen96)
 * <b>Primary Role: lorem ipsum lorem ipsum</b>
