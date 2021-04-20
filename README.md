@@ -11,23 +11,23 @@
 <br />
 <p align="center">
   <a href="https://github.com/BryceShearn/Coding-Coverage">
-    <img src="http://3.140.95.0:8080/CodingCoverage/images/codingCoverage.png" alt="Logo" width="150" height="150">
+    <img src=" -- IMAGE LINK -- " alt="Logo" width="150" height="150">
   </a>
 
-  <h3 align="center">Coding Coverage</h3>
+  <h3 align="center">Cluster Cafe</h3>
 
   <p align="center">
     <kbd>
       <br />
-      Coding Coverage is a Web Application designed to provide
+      Cluster Cafe is a Web Application designed to provide a platform for groups and organizations in local communities
       <br />
       <br />
       <br />
-      training tools, community support, and guidance 
+       the ability to arrange meetings and events based on topics of their own choosing. A user is allowed to post looking for others interested in a like-minded 
       <br />
       <br />
       <br />
-      for current and aspiring developers.   
+      topic or is able to search for events or groups in their local area based off of their nearest coffee shop.   
       <br />
       <br />
       <br />
