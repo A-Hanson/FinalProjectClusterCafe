@@ -11,7 +11,7 @@
  
     <!-- entities -->
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clustercafedb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Eastern" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clustercafedb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
       <property name="javax.persistence.jdbc.user" value="clustercafeuser"/>
       <property name="javax.persistence.jdbc.password" value="clustercafepassword" />
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
