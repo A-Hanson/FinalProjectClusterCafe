@@ -1,1 +1,3 @@
 rootProject.name = 'ClusterCafe'
+
+includeFlat 'JPAClusterCafe'
