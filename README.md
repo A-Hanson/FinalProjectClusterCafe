@@ -11,7 +11,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/BryceShearn/Coding-Coverage">
-    <img src="https://images.unsplash.com/photo-1558382031-c3adabe9aaca?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80" alt="Logo" width="250" height="300">
+    <img src="https://images.unsplash.com/photo-1558382031-c3adabe9aaca?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80" alt="Logo" width="250" height="325">
   </a>
 
   <h3 align="center">Cluster Cafe</h3>
