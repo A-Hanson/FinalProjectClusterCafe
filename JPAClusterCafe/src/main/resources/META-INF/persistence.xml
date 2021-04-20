@@ -8,6 +8,14 @@
     </provider>
     <!-- entities -->
     <class>com.skilldistillery.clustercafe.entities.User</class>
+    <class>com.skilldistillery.clustercafe.entities.Store</class>
+    <class>com.skilldistillery.clustercafe.entities.PostComment</class>
+    <class>com.skilldistillery.clustercafe.entities.Post</class>
+    <class>com.skilldistillery.clustercafe.entities.Message</class>
+    <class>com.skilldistillery.clustercafe.entities.Meeting</class>
+    <class>com.skilldistillery.clustercafe.entities.GroupMessage</class>
+    <class>com.skilldistillery.clustercafe.entities.ClusterGroup</class>
+    <class>com.skilldistillery.clustercafe.entities.Category</class>
  
     <!-- entities -->
     <properties>
