@@ -19,15 +19,23 @@
   <p align="center">
     <kbd>
       <br />
-      Cluster Cafe is a Web Application designed to provide a platform for groups and organizations in local communities
+      Cluster Cafe is a Web Application designed to provide a platform for groups
       <br />
       <br />
       <br />
-       the ability to arrange meetings and events based on topics of their own choosing. A user is allowed to post looking for others interested in a like-minded 
+      and organizations in local communities. Members have the ability to arrange
       <br />
       <br />
       <br />
-      topic or is able to search for events or groups in their local area based off of their nearest coffee shop.   
+      meetings and events based on topics of their own choosing. A user is allowed  
+      <br />
+      <br />
+      <br />
+      to post looking for others interested in a topic or is able to search for  
+      <br />
+      <br />
+      <br />
+      events or groups in their local area based off of their nearest coffee shop.
       <br />
       <br />
       <br />
