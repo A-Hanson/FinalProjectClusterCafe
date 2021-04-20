@@ -19,11 +19,11 @@
   <p align="center">
     <kbd>
       <br />
-      Cluster Cafe is a Web Application designed to provide a platform for groups
+      Cluster Cafe is a Web Application designed to provide a platform for
       <br />
       <br />
       <br />
-      and organizations in local communities. Members have the ability to arrange
+      individuals in local communities. Members have the ability to arrange
       <br />
       <br />
       <br />
@@ -31,25 +31,25 @@
       <br />
       <br />
       <br />
-      to post looking for others interested in a topic or is able to search for  
+      to post looking for others interested in a topic. A user is also able to search  
       <br />
       <br />
       <br />
-      events or groups in their local area based off of their nearest coffee shop.
+      for events or meetings in their local area based off of their nearest coffee shop.
       <br />
       <br />
       <br />
     </kbd>
   <br />
   <br />
-    <a href="https://github.com/BryceShearn/Coding-Coverage"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/BryceShearn/FinalProject"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://tinyurl.com/CodingCoverage">View Website</a>
+    <a href=" -- WEBSITE LINK --">View Website</a>
     ·
-    <a href="https://github.com/BryceShearn/Coding-Coverage/issues">Report Bug</a>
+    <a href="https://github.com/BryceShearn/FinalProject/issues">Report Bug</a>
     ·
-    <a href="https://github.com/BryceShearn/Coding-Coverage/issues">Request Feature</a>
+    <a href="https://github.com/BryceShearn/FinalProject/issues">Request Feature</a>
   </p>
 </p>
 
@@ -79,7 +79,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://tinyurl.com/CodingCoverage)
+[![Product Name Screen Shot][product-screenshot]](-- WEBSITE LINK --)
  
 
 <br />
@@ -88,20 +88,20 @@
 ### Meet The Creators:
 <i></i>
 ===================================================================================
-* [Thomas Webel](https://github.com/Thwebel)
+* [Bryce Shearn](https://github.com/BryceShearn)
 * <b>Primary Role: Database Analyst</b>
 *   *Primary Focus: planning, implementing, and maintaining the DataBase
 *     *Assisted++ Role: Creation and implementation of Controllers and DAOs
 ===================================================================================
-* [Tylor Shearn](https://github.com/TylorShearn)
+* [Anna Hanson](https://github.com/A-Hanson)
 * <b>Primary Role:SCRUM Master</b>
 *   *Primary Focus:in creation and implementation of Controllers, DAOs
 *     *Assisted Role: Aided in Database Structuring
 ===================================================================================
-* [Bryce Shearn](https://github.com/BryceShearn)
-* <b>Primary Role: Lead Front End Developer</b>
-*   *Primary Focus: planning, structuring, developing, and designing the client side
-*     *Assisted Role: Creation & design of Controllers, DAOs and Database Structuring
+* [Ramon Armendariz](https://github.com/RamonArmen96)
+* <b>Primary Role: lorem ipsum lorem ipsum</b>
+*   *Primary Focus: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+*     *Assisted Role: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
 ===================================================================================
 
 
@@ -124,7 +124,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/BryceShearn/Coding-Coverage/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/BryceShearn/FinalProject/issues) for a list of proposed features (and known issues).
 
 
 
@@ -151,14 +151,14 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 <br />
-[Thomas Webel](https://github.com/Thwebel)
-<br />
-[Tylor Shearn](https://github.com/TylorShearn)
-<br />
 [Bryce Shearn](https://github.com/BryceShearn)
+<br />
+[Anna Hanson](https://github.com/A-Hanson)
+<br />
+[Ramon Armendariz](https://github.com/RamonArmen96)
 
 
-Project Link: [https://github.com/BryceShearn/Coding-Coverage](https://github.com/BryceShearn/Coding-Coverage)
+Project Link: [https://github.com/BryceShearn/FinalProject](https://github.com/BryceShearn/Coding-Coverage)
 
 
 
@@ -175,15 +175,15 @@ Project Link: [https://github.com/BryceShearn/Coding-Coverage](https://github.co
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/BryceShearn/Coding-Coverage.svg?style=for-the-badge
-[contributors-url]: https://github.com/BryceShearn/Coding-Coverage/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/BryceShearn/Coding-Coverage.svg?style=for-the-badge
-[forks-url]: https://github.com/BryceShearn/Coding-Coverage/network/members
-[stars-shield]: https://img.shields.io/github/stars/BryceShearn/Coding-Coverage.svg?style=for-the-badge
-[stars-url]: https://github.com/BryceShearn/Coding-Coverage/stargazers
-[issues-shield]: https://img.shields.io/github/issues/BryceShearn/Coding-Coverage.svg?style=for-the-badge
-[issues-url]: https://github.com/BryceShearn/Coding-Coverage/issues
-[license-shield]: https://img.shields.io/github/license/BryceShearn/Coding-Coverage.svg?style=for-the-badge
-[license-url]: https://github.com/BryceShearn/Coding-Coverage/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/BryceShearn/FinalProject.svg?style=for-the-badge
+[contributors-url]: https://github.com/BryceShearn/FinalProject/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/BryceShearn/FinalProject.svg?style=for-the-badge
+[forks-url]: https://github.com/BryceShearn/FinalProject/network/members
+[stars-shield]: https://img.shields.io/github/stars/BryceShearn/FinalProject.svg?style=for-the-badge
+[stars-url]: https://github.com/BryceShearn/FinalProject/stargazers
+[issues-shield]: https://img.shields.io/github/issues/BryceShearn/FinalProject.svg?style=for-the-badge
+[issues-url]: https://github.com/BryceShearn/FinalProject/issues
+[license-shield]: https://img.shields.io/github/license/BryceShearn/FinalProject.svg?style=for-the-badge
+[license-url]: https://github.com/BryceShearn/FinalProject/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/BryceShearn
