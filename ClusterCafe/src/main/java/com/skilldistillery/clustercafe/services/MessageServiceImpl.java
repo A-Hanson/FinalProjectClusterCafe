@@ -55,10 +55,10 @@ public class MessageServiceImpl implements MessageService{
 			if ( message.getContent() != null ) {
 				updatedMessage.setContent(message.getContent());
 			}
-			if ( message.getRead() != null ) {
-				updatedMessage.setRead(true);
+			if ( message.getSeen() != null ) {
+				updatedMessage.setSeen(true);
 			}
-			if ( message.getCreator() != null) {
+			if ( message.getCreator() != null ) {
 				updatedMessage.setCreator(message.getCreator());
 			}
 		}
