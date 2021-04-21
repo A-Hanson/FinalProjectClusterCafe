@@ -19,10 +19,10 @@
           <a class="btn btn-success" [routerLink]="['/login']"> Login</a>
         </li>
           <!-- LOGOUT -->
-        <li class="nav-item" *ngIf="checkLogin()">
-          <a class="btn btn-danger" [routerLink]="['/logout']"> Logout</a>
+          <li *ngIf="checkLogin()">
+            <app-logout></app-logout>
+          </li>
           <!-- LOGOUT -->
-        </li>
       </ul>
     </div>
   </div>
