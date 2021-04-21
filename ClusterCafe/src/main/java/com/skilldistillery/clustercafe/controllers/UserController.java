@@ -55,6 +55,7 @@ public class UserController {
 			HttpServletResponse res) {
 		try {
 			userSvc.create(user);
+			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();			
 			url.append("/").append(user.getId());
 			res.setHeader("location", url.toString());
