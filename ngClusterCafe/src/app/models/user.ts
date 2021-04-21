@@ -1,20 +1,20 @@
 export class User {
 
   id: number
-  username: string
-  password: string
-  email: string
+  username: string;
+  password: string;
+  email: string;
   firstName: string;
   lastName: string;
-  imgUrl: string
-  pronouns: string
-  dob: string
+  imgUrl: string;
+  pronouns: string;
+  dob: string;
   age: number;
   location: string;
-  enabled: boolean
-  role: string
-  gender: string
-  createdAt: string
+  enabled: boolean;
+  role: string;
+  gender: string;
+  createdAt: string;
 
 constructor(
   id?: number,
