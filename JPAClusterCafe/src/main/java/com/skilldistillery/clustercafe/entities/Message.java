@@ -108,11 +108,11 @@ public class Message {
 		this.read = read;
 	}
 
-	public User getcreator() {
+	public User getCreator() {
 		return creator;
 	}
 
-	public void setcreator(User creator) {
+	public void setCreator(User creator) {
 		this.creator = creator;
 	}
 
