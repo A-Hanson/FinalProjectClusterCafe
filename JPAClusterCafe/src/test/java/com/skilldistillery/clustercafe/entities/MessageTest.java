@@ -47,7 +47,7 @@ class MessageTest {
 		assertNotNull(message);
 		assertEquals("Test Message", message.getTitle());
 		assertEquals("I love apples and bananas", message.getContent());
-		assertEquals(1, message.getcreator().getId());
+		assertEquals(1, message.getCreator().getId());
 		assertEquals(true, message.getEnabled());
 		assertEquals(false, message.getRead());
 	}

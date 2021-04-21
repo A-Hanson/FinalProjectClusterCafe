@@ -69,7 +69,7 @@ public class UserController {
 	
 
 	@PutMapping("users/{id}") 
-	public User show(@PathVariable int id, 
+	public User update(@PathVariable int id, 
 					@RequestBody User user,
 					HttpServletRequest req, 
 					HttpServletResponse res){
