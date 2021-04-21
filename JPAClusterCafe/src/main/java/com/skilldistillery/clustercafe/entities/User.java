@@ -2,16 +2,22 @@ package com.skilldistillery.clustercafe.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -44,6 +50,15 @@ public class User {
 	
 	private String gender;
 	
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(
+			name="group_user",
+			joinColumns= @JoinColumn(name="user_id"),
+			inverseJoinColumns= @JoinColumn(name="cluster_group_id")
+			)
+	private List<ClusterGroup> clusterGroups;
+	
 	@Column(name="created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
@@ -56,7 +71,15 @@ public class User {
 //	Constructor
 	public User() {}
 
-//	Methods
+public List<ClusterGroup> getClusterGroups() {
+		return clusterGroups;
+	}
+
+	public void setClusterGroups(List<ClusterGroup> clusterGroups) {
+		this.clusterGroups = clusterGroups;
+	}
+
+	//	Methods
 	public int getId() {
 		return id;
 	}

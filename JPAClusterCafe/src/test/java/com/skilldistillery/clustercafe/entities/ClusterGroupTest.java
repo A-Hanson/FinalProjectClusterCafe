@@ -56,5 +56,17 @@ class ClusterGroupTest {
 		assertTrue(clusterGroup.getEnabled());
 		assertNotNull(clusterGroup.getModerator());
 	}
+	@Test
+	@DisplayName("Test User cluster group Join table")
+	void test_3() {
+//		mysql> select store.name from user join store on user.store_id = store.id WHERE user.id=1;
+//		+--------------------------+
+//		| name                     |
+//		+--------------------------+
+//		| Volcano Tea House Aurora |
+		assertNotNull(clusterGroup);
+		assertNotNull(clusterGroup.getUsers());
+		assertTrue(clusterGroup.getUsers().size() > 0);
 
+	}
 }
