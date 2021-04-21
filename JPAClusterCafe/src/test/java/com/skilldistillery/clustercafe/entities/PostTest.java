@@ -55,5 +55,35 @@ class PostTest {
 		assertTrue(post.getEnabled());
 		assertFalse(post.getFlagged());
 	}
+	
+	@Test
+	@DisplayName("Test Post to User mapping")
+	void test_2() {
+//		mysql> select user.username from post JOIN user ON post.user_id = user.id WHERE post.id=1;
+//		+----------+
+//		| username |
+//		+----------+
+//		| test     |
+//		+----------+	
+		assertNotNull(post);
+		assertNotNull(post.getUser());
+		assertEquals("test", post.getUser().getUsername());
+
+	}
+	
+	@Test
+	@DisplayName("Test Post to Category mapping")
+	void test_3() {
+//		mysql> select category.name from post JOIN category ON post.category_id = category.id WHERE post.id=1;
+//		+---------+
+//		| name    |
+//		+---------+
+//		| Running |
+//		+---------+
+		assertNotNull(post);
+		assertNotNull(post.getCategory());
+		assertEquals("Running", post.getCategory().getName());
+		
+	}
 
 }
