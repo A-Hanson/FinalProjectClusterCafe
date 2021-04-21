@@ -1,10 +1,10 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from "src/environments/environment";
+import { Post } from "../models/post";
 import { AuthService } from "./auth.service";
-
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,8 @@ export class PostService {
   }
 
   create(newPost: Post): Observable<Post[]> {
-    newPost.completed = false;
-    newPost.description = '';
+    newPost.enabled = true;
+    newPost.flagged = false;
     return this.http.post<Post[]>(this.url, newPost, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
@@ -62,4 +62,15 @@ export class PostService {
     );
   }
 
+  private getHttpOptions() {
+    const credentials = this.auth.getCredentials();
+    // Send credentials as Authorization header (this is spring security convention for basic auth)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return httpOptions;
+  }
 }
