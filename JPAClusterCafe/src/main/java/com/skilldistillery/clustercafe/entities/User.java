@@ -1,9 +1,17 @@
 package com.skilldistillery.clustercafe.entities;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class User {
@@ -14,6 +22,35 @@ public class User {
 	private String username;
 	
 	private String password;
+	
+	private String email;
+	
+	@Column(name="first_name")
+	private String firstName;
+	
+	@Column(name="last_name")
+	private String lastName;
+	
+	@Column(name="img_url")
+	private String imgUrl;
+	
+	private String pronouns;
+	
+	private LocalDate dob;
+	
+	private Boolean enabled = true;
+	
+	private String role;
+	
+	private String gender;
+	
+	@Column(name="created_at")
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@ManyToOne
+	@JoinColumn(name="store_id")
+	private Store store;
 
 	
 //	Constructor
@@ -50,9 +87,127 @@ public class User {
 	}
 
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public String getPronouns() {
+		return pronouns;
+	}
+
+	public void setPronouns(String pronouns) {
+		this.pronouns = pronouns;
+	}
+
+	public LocalDate getDob() {
+		return dob;
+	}
+
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", username=");
+		builder.append(username);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", imgUrl=");
+		builder.append(imgUrl);
+		builder.append(", pronouns=");
+		builder.append(pronouns);
+		builder.append(", dob=");
+		builder.append(dob);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", role=");
+		builder.append(role);
+		builder.append(", gender=");
+		builder.append(gender);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", store=");
+		builder.append(store);
+		builder.append("]");
+		return builder.toString();
 	}
 
 
