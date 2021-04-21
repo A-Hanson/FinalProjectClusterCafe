@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.username, this.password).subscribe(
       success => {
         this.reset();
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/landing-page');
       },
       fail => {
         console.log("Could not log user in: " + fail);
