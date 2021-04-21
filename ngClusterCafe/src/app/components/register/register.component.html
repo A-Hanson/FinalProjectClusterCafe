@@ -1,1 +1,32 @@
-<p>register works!</p>
+<div class="container">
+  <h5>DEBUGGING MODE</h5>
+  <h5>Register New User</h5>
+  <form>
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="newUser.firstName">
+    </div>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="newUser.lastName">
+    </div>
+    <div class="mb-3">
+      <label for="dob" class="form-label">Date of Birth</label>
+      <input type="date" class="form-control" id="dob" name="dob" [(ngModel)]="newUser.dob">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" [(ngModel)]="newUser.email">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">User Name</label>
+      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="newUser.username">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="newUser.password">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="register()">Submit</button>
+  </form>
+</div>
