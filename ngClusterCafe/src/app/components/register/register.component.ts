@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.newUser).subscribe(
       user => {
         console.log("User Registered!")
-        this.authService.login(user['username'], user['password']).subscribe(
+        this.authService.login(this.newUser.username, this.newUser.password).subscribe(
           success => {
             console.log("User Logged In!!")
             this.router.navigateByUrl('/home');
