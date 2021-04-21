@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Meeting {
@@ -22,9 +23,11 @@ public class Meeting {
 
 	private String description;
 	
+	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category;
 
+	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
@@ -32,6 +35,7 @@ public class Meeting {
 
 	private boolean flagged;
 	
+	@ManyToOne
 	@JoinColumn(name="store_id")
 	private Store store;
 	
