@@ -49,7 +49,7 @@ class MessageTest {
 		assertEquals("I love apples and bananas", message.getContent());
 		assertEquals(1, message.getCreator().getId());
 		assertEquals(true, message.getEnabled());
-		assertEquals(false, message.getRead());
+		assertEquals(false, message.getSeen());
 	}
 	
 }
