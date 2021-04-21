@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  // ON BACKEND STORE ID IS HARDWIRED in AuthServiceImpl
   newUser: User = new User();
 
   constructor(
@@ -22,10 +23,11 @@ export class RegisterComponent implements OnInit {
   register() {
     this.authService.register(this.newUser).subscribe(
       user => {
+        console.log("User Registered!")
         this.authService.login(user['username'], user['password']).subscribe(
           success => {
             console.log("User Logged In!!")
-            this.router.navigateByUrl('/#######');
+            this.router.navigateByUrl('/home');
           },
           fail => {
             console.log("User unable to login: " + fail);
