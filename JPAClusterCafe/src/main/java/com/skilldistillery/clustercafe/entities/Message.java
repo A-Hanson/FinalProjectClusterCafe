@@ -23,7 +23,7 @@ public class Message {
 	private String title;
 	private String content;
 	private Boolean enabled;
-	private Boolean read;
+	private Boolean seen;
 	
 	@ManyToOne
 	@JoinColumn(name="creator_id")
@@ -52,14 +52,14 @@ public class Message {
 	}
 
 	
-	public Message(int id, String title, String content, Boolean enabled, Boolean read, User creator,
+	public Message(int id, String title, String content, Boolean enabled, Boolean seen, User creator,
 			LocalDateTime createdAt, LocalDateTime updatedAt, Message parentMessageId, User recipient) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.enabled = enabled;
-		this.read = read;
+		this.seen = seen;
 		this.creator = creator;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -100,12 +100,12 @@ public class Message {
 		this.enabled = enabled;
 	}
 
-	public Boolean getRead() {
-		return read;
+	public Boolean getSeen() {
+		return seen;
 	}
 
-	public void setRead(Boolean read) {
-		this.read = read;
+	public void setSeen(Boolean seen) {
+		this.seen = seen;
 	}
 
 	public User getCreator() {
@@ -175,8 +175,8 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", title=" + title + ", content=" + content + ", enabled=" + enabled + ", read="
-				+ read + ", creator=" + creator + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+		return "Message [id=" + id + ", title=" + title + ", content=" + content + ", enabled=" + enabled + ", seen="
+				+ seen + ", creator=" + creator + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
 				+ ", parentMessageId=" + parentMessageId + ", recipient=" + recipient + "]";
 	}
 }
