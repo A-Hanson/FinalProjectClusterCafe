@@ -18,7 +18,9 @@
           <!-- LOGIN -->
           <a class="btn btn-success" [routerLink]="['/login']"> Login</a>
         </li>
+          <!-- LOGOUT -->
         <li class="nav-item" *ngIf="checkLogin()">
+          <a class="btn btn-danger" [routerLink]="['/logout']"> Logout</a>
           <!-- LOGOUT -->
         </li>
       </ul>
