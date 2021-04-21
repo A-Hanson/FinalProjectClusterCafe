@@ -28,8 +28,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post show(int id, String username) {
-		return postRepo.findByIdAndEnabledTrueAndUser_Username(id, username);
+	public Post show(int id) {
+		return postRepo.findByIdAndEnabledTrue(id);
 	}
 
 	@Override

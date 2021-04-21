@@ -37,9 +37,8 @@ public class PostController {
 	@GetMapping("posts/{id}") 
 	public Post show(@PathVariable int id, 
 					HttpServletRequest req, 
-					HttpServletResponse res,
-					Principal principal) {
-		Post post = postSvc.show(id, principal.getName());
+					HttpServletResponse res) {
+		Post post = postSvc.show(id);
 		if (post == null) {
 			res.setStatus(404);
 		}
