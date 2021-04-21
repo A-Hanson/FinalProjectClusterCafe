@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `updated_at` DATETIME NULL,
   `enabled` TINYINT NULL,
   `parent_message_id` INT NULL,
-  `read` TINYINT NULL,
+  `seen` TINYINT NULL,
   `recipient_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_message_user1_idx` (`creator_id` ASC),
@@ -346,7 +346,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `clustercafedb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (1, 'test', 'test', 'test@test.com', 'Thor', 'Bird', NULL, 'He / His', '2007-05-15', 1, 'standard', 'male', '2021-04-20', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (1, 'test', '$2a$10$l0e1qFzGwkUQRpNAj15Tau064aiixnS9pLi5VlYvwJMzHxwlTaWUu', 'test@test.com', 'Thor', 'Bird', NULL, 'He / His', '2007-05-15', 1, 'standard', 'male', '2021-04-20', 1);
 
 COMMIT;
 
@@ -426,7 +426,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `clustercafedb`;
-INSERT INTO `message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `read`, `recipient_id`) VALUES (1, 'Test Message', 'I love apples and bananas', 1, '2021-04-20 00:00:00.00', NULL, 1, NULL, 0, 1);
+INSERT INTO `message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `seen`, `recipient_id`) VALUES (1, 'Test Message', 'I love apples and bananas', 1, '2021-04-20 00:00:00.00', NULL, 1, NULL, 0, 1);
 
 COMMIT;
 
