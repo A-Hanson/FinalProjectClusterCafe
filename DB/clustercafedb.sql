@@ -358,6 +358,21 @@ COMMIT;
 START TRANSACTION;
 USE `clustercafedb`;
 INSERT INTO `category` (`id`, `name`) VALUES (1, 'Running');
+INSERT INTO `category` (`id`, `name`) VALUES (2, 'Walking');
+INSERT INTO `category` (`id`, `name`) VALUES (3, 'Cycling');
+INSERT INTO `category` (`id`, `name`) VALUES (4, 'Gaming');
+INSERT INTO `category` (`id`, `name`) VALUES (5, 'Team Sports');
+INSERT INTO `category` (`id`, `name`) VALUES (6, 'Swimming');
+INSERT INTO `category` (`id`, `name`) VALUES (7, 'Hiking');
+INSERT INTO `category` (`id`, `name`) VALUES (8, 'Fishing');
+INSERT INTO `category` (`id`, `name`) VALUES (9, 'Boating');
+INSERT INTO `category` (`id`, `name`) VALUES (10, 'Snow Sports');
+INSERT INTO `category` (`id`, `name`) VALUES (11, 'Diving');
+INSERT INTO `category` (`id`, `name`) VALUES (12, 'Programming');
+INSERT INTO `category` (`id`, `name`) VALUES (13, 'Moms');
+INSERT INTO `category` (`id`, `name`) VALUES (14, 'Dads');
+INSERT INTO `category` (`id`, `name`) VALUES (15, 'Crafting');
+INSERT INTO `category` (`id`, `name`) VALUES (16, 'Photography');
 
 COMMIT;
 

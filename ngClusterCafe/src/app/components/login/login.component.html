@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <h5>Login</h5>
   <form>
     <div class="mb-3">
@@ -11,4 +11,35 @@
     </div>
     <button type="submit" class="btn btn-primary" (click)="login()">Submit</button>
   </form>
+</div> -->
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <!-- <img src="https://img.icons8.com/cotton/2x/login-rounded-right.png" style="max-width:10%;" id="icon" alt="User Icon" /> -->
+      <h2 class="text-dark">Cluster Cafe</h2>
+    </div>
+
+    <!-- Login Form -->
+    <form>
+      <input type="text" class="fadeIn second" name="username" id="username" placeholder="Username" [(ngModel)]="username">
+      <input type="text" id="password" class="fadeIn third" name="password" id="password" placeholder="password" [(ngModel)]="password">
+      <input type="submit" class="fadeIn fourth" value="Log In" (click)="login()">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <!-- <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div> -->
+
+  </div>
 </div>
