@@ -6,13 +6,13 @@
   <p>{{selected.content}}</p>
   <p>{{selected.title}}</p>
   <div class="row">
-    <div class="col-2">
+    <div class="col-1">
       <button class="btn btn-info" (click)='setEditPost()'>Edit</button>
     </div>
-    <div class="col-2">
+    <div class="col-1">
       <button class="btn btn-primary" (click)='displayTable()'>Back</button>
     </div>
-    <div class="col-2">
+    <div class="col-1" *ngIf="selected.user === currentUser || currentUser.role === 'admin'">
       <button class="btn btn-danger" (click)="deletedPost(selected.id)">Delete</button>
     </div>
 
