@@ -1,4 +1,4 @@
-<!-- <p>post-list works!</p> -->
+<h4>DEBUGGING MODE: User role - {{currentUser.role}}</h4>
 <h1>{{title}} <span class="badge badge-primary">{{getNumberOfPosts()}}</span></h1>
 <!-- detail div -->
 <div *ngIf='selected && !editPost'>
@@ -31,15 +31,19 @@
     <th>Title</th>
     <th>Created At</th>
     <th>Content</th>
-    <th>Delete</th>
+    <th>Author</th>
+    <th>More Info</th>
+    <th *ngIf="currentUser.role==='admin'">Delete</th>
   </thead>
   <tbody>
     <tr *ngFor="let post of posts">
       <td (click)='displayPost(post)'>{{post.title}}</td>
       <td>{{post.createdAt | date:'short' }}</td>
       <td> {{post.content}}</td>
+      <td>{{post.user.firstName}} {{post.user.lastName}}</td>
       <!-- <td><input (change)="updatePost(post, false)" type="checkbox" [(ngModel)]='post.completed'></td> -->
-      <td><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td>
+      <td><button class="btn btn-info" (click)='displayPost(post)'>...</button></td>
+      <td *ngIf="currentUser.role==='admin'"><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td>
     </tr>
   </tbody>
 </table>

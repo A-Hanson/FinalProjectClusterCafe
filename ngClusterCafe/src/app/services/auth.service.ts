@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,6 @@ export class AuthService {
 
   login(username, password) {
     // Make credentials
-    console.log("In authService.login()")
-    console.log(username);
-    console.log(password);
     const credentials = this.generateBasicAuthCredentials(username, password);
     // Send credentials as Authorization header (this is spring security convention for basic auth)
     const httpOptions = {
@@ -71,5 +69,6 @@ export class AuthService {
   getCredentials() {
     return localStorage.getItem('credentials');
   }
+
 }
 

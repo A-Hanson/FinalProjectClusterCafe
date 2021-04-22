@@ -21,6 +21,11 @@ public class UserServiceImpl implements UserService{
 	public List<User> index() {
 		return userRepo.findAll();
 	}
+	
+	@Override
+	public User showLoggedIn(String username) {
+		return userRepo.findByUsername(username);
+	}
 
 	@Override
 	public User show(int id) {

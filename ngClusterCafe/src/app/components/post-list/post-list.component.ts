@@ -5,6 +5,7 @@ import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { PostService } from 'src/app/services/post.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-post-list',
@@ -18,13 +19,14 @@ title = 'ngPost';
 newPost = new Post();
 editPost = null;
 categories: Category[] = [];
-currentUser: User = null;
+currentUser: User = null;  //JUST GETTING SET UP CORRECT
 
 constructor(
   private postService: PostService,
   private route: ActivatedRoute,
   private router: Router,
-  private categoryService: CategoryService
+  private categoryService: CategoryService,
+  private userService: UserService
 ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,13 @@ constructor(
     };
     this.reload();
     this.reloadCategories();
+    // this.loadCurrentUser();
+    this.testArea();
+  }
+// GETTING SET UP CORRECT
+  testArea() {
+    this.currentUser = new User();
+    this.currentUser.role = "standard";
   }
 
   reload() {
@@ -55,11 +64,16 @@ constructor(
   reloadCategories() {
     this.categoryService.index().subscribe(
       data => {this.categories = data},
-      err => {console.error('Error: ' + err)}
+      err => {console.error('Error loading categories: ' + err)}
     );
   }
 
-
+  // loadCurrentUser() {
+  //   this.userService.showLoggedIn().subscribe(
+  //     data => {this.currentUser = data},
+  //     err => {console.error('Error loading current user: ' + err)}
+  //   );
+  // }
 
   getNumberOfPosts = function() {
     return this.posts.length;
