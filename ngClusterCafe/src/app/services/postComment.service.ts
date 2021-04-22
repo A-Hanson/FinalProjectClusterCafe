@@ -1,22 +1,23 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
 import { PostComment } from '../models/postComment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostCommentService {
-// ADD AUTH SERVICE
   // private baseUrl = 'http://localhost:8084/';
   // private url = this.baseUrl + 'api/games';
   private url = environment.baseUrl + 'api/comments';
 
 
   constructor(
-private http: HttpClient
+private http: HttpClient,
+private auth: AuthService
   ) { }
 
   index(): Observable<PostComment[]>{
@@ -26,8 +27,19 @@ private http: HttpClient
         return throwError(err);
       })
     )
-
   }
+    private getHttpOptions() {
+      const credentials = this.auth.getCredentials();
+      // Send credentials as Authorization header (this is spring security convention for basic auth)
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest'
+        })
+      };
+      return httpOptions;
+    }
+
   // create(game: Game) {
   //   return this.http.post<Game>(this.url, game).pipe(
   //     catchError((err: any) => {
@@ -72,5 +84,6 @@ private http: HttpClient
          return throwError('Error getting comments');
       })
      );
- }
+
   }
+}
