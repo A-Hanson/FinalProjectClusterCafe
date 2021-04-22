@@ -4,15 +4,13 @@
 <div *ngIf='selected && !editPost'>
   <p>{{selected.id}}</p>
   <p>{{selected.content}}</p>
-  <p>{{selected.task}}</p>
-  <p>{{selected.completed}}</p>
+  <p>{{selected.title}}</p>
   <button (click)='setEditPost()'>Edit</button>
   <button (click)='displayTable()'>Back</button>
 </div>
 <!-- edit task -->
 <div *ngIf='editPost'>
-   Task: <input type="text" name="post" placeholder="Post" [(ngModel)]='editPost.post' /><br />
-   Completed: <input type="checkbox" id="completed" name="completed" [(ngModel)]='editPost.completed' /><br />
+   Title: <input type="text" name="post" placeholder="Post" [(ngModel)]='editPost.title' /><br />
    content: <input type="text" name="content" placeholder="content" [(ngModel)]='editPost.content' /><br />
    <button (click)='editPost = null'>Cancel</button> <button (click)='updatePost(editPost)'>Save</button>
 </div>
