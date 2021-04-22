@@ -70,7 +70,8 @@ public class MessageServiceImpl implements MessageService{
 	public boolean softDelete(int id) {
 		boolean deleted = false;
 		if ( messageRepo.findById(id).isPresent()) {
-			messageRepo.deleteById(id);
+			Message message = messageRepo.findById(id).get();
+			message.setEnabled(false);
 			deleted = true;
 		}
 		return deleted;
