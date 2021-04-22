@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
+import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -17,7 +18,7 @@ title = 'ngPost';
 newPost = new Post();
 editPost = null;
 categories: Category[] = [];
-newPostCategory: Category = null;
+currentUser: User = null;
 
 constructor(
   private postService: PostService,
@@ -70,7 +71,7 @@ constructor(
     this.selected = null;
   }
   addPost(): void {
-    // this.newPost.category = this.newPostCategory;
+
     console.log(this.newPost);
     this.postService.create(this.newPost).subscribe(
       data => {
