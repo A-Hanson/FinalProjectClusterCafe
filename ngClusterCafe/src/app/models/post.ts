@@ -10,7 +10,7 @@ export class Post {
   enabled: boolean;
   flagged: boolean;
   user: User;
-  category: Category;
+  category: Category = new Category();
 
 
   constructor(
@@ -32,7 +32,8 @@ export class Post {
       this.enabled = enabled;
       this.flagged = flagged;
       this.user = user;
-      this.category = category;
+
+      this.category = category === undefined ? new Category() : category;
 }
 
 }

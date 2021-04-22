@@ -17,6 +17,7 @@ title = 'ngPost';
 newPost = new Post();
 editPost = null;
 categories: Category[] = [];
+newPostCategory: Category = null;
 
 constructor(
   private postService: PostService,
@@ -68,8 +69,9 @@ constructor(
   displayTable(): void {
     this.selected = null;
   }
-  addPost(post: Post): void {
-    console.log(post);
+  addPost(): void {
+    // this.newPost.category = this.newPostCategory;
+    console.log(this.newPost);
     this.postService.create(this.newPost).subscribe(
       data => {
         this.newPost = new Post();
