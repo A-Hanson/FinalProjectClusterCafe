@@ -1,3 +1,4 @@
+import { Category } from "./category";
 import { User } from "./user";
 
 export class Post {
@@ -9,7 +10,7 @@ export class Post {
   enabled: boolean;
   flagged: boolean;
   user: User;
-
+  category: Category;
 
 
   constructor(

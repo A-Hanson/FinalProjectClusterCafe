@@ -31,7 +31,28 @@
     </tr>
   </tbody>
 </table>
-<div *ngIf='!selected'>
-  <input type="text" name="post" placeholder="Add new post" [(ngModel)]="newPost" />
+<form *ngIf='!selected' class="vertical-input-group" >
+  <div class="input-group">
+  <input type="text" name='title' placeholder="Title" [(ngModel)]='newPost.title' >
+  </div>
+  <div class="input-group">
+  <input type="text" name='XXXX' placeholder="Content" [(ngModel)]='newPost.content'>
+  </div>
+  <select id='peeps' name='people' [(ngModel)]='newPost.category'>
+    <option *ngFor="let category of categories" [value]="category.title">
+      {{category.title}}
+    </option>
+  </select>
+
+
+
+  <div class="input-group">
+    <input type="text" name='XXXX' placeholder="Content" [(ngModel)]='newPost.category'>
+    </div>
+
+  <button (click)='addPost()' class="btn btn-success btn-sm">New Post</button>
+  </form>
+<!-- <div *ngIf='!selected'>
+  <input type="text" name="post" placeholder="Add new post" [(ngModel)]='newPost.post' />
   <button (click)="addPost()">Submit</button>
-</div>
+</div> -->
