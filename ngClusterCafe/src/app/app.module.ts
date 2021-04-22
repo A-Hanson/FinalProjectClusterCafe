@@ -15,6 +15,8 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserLandingPageComponent } from './components/user-landing-page/user-landing-page.component';
 import { PostListComponent } from './components/post-list/post-list.component';
+import { PostCommentListComponent } from './components/postComment-list/postComment-list.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { PostListComponent } from './components/post-list/post-list.component';
     LoginComponent,
     LogoutComponent,
     UserLandingPageComponent,
-    PostListComponent
+    PostListComponent,
+    PostCommentListComponent
   ],
   imports: [
     BrowserModule,

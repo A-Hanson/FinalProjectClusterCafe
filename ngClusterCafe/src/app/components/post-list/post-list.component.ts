@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
+import { PostComment } from 'src/app/models/postComment';
+import { PostCommentService } from 'src/app/services/postComment.service';
 import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { PostService } from 'src/app/services/post.service';
@@ -19,6 +21,8 @@ title = 'ngPost';
 newPost = new Post();
 editPost = null;
 categories: Category[] = [];
+newPostCategory: Category = null;
+postComments: PostComment[] = [];
 currentUser: User = null;  //JUST GETTING SET UP CORRECT
 
 constructor(
@@ -26,6 +30,7 @@ constructor(
   private route: ActivatedRoute,
   private router: Router,
   private categoryService: CategoryService,
+  private postCommentService: PostCommentService,
   private userService: UserService
 ) { }
 
@@ -45,14 +50,14 @@ constructor(
     };
     this.reload();
     this.reloadCategories();
-    // this.loadCurrentUser();
-    this.testArea();
+    this.loadCurrentUser();
+    // this.testArea();
   }
 // GETTING SET UP CORRECT
-  testArea() {
-    this.currentUser = new User();
-    this.currentUser.role = "standard";
-  }
+  // testArea() {
+  //   this.currentUser = new User();
+  //   this.currentUser.role = "standard";
+  // }
 
   reload() {
     this.postService.index().subscribe(
@@ -68,12 +73,12 @@ constructor(
     );
   }
 
-  // loadCurrentUser() {
-  //   this.userService.showLoggedIn().subscribe(
-  //     data => {this.currentUser = data},
-  //     err => {console.error('Error loading current user: ' + err)}
-  //   );
-  // }
+  loadCurrentUser() {
+    this.userService.retrieveLoggedIn().subscribe(
+      data => {this.currentUser = data},
+      err => {console.error('Error loading current user: ' + err)}
+    );
+  }
 
   getNumberOfPosts = function() {
     return this.posts.length;

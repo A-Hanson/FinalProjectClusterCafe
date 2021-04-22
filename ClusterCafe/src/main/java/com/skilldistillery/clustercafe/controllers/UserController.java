@@ -50,7 +50,7 @@ public class UserController {
 		return user;
 	}
 	
-	@GetMapping("users/loggedIn") 
+	@GetMapping("users/username") 
 	public User showLoggedIn(Principal principal, 
 			HttpServletRequest req, 
 			HttpServletResponse res){
