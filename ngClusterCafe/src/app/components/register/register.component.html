@@ -1,4 +1,69 @@
-<div class="container">
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<title>CSS Responsive Contact Form With Google Map</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  crossorigin="anonymous">
+</head>
+
+<body>
+<div class="contact-wrap">
+  <div class="contact-in">
+
+
+  </div>
+  <div class="contact-in">
+    <h1>Register Account</h1>
+    <form>
+      <input type="text" placeholder="First Name" class="contact-in-input" name="firstname" id="firstname" [(ngModel)]="newUser.firstName">
+      <input type="text" placeholder="Last Name" class="contact-in-input" name="lastname" id="lastname" [(ngModel)]="newUser.lastName">
+      <input type="text" placeholder="Username" class="contact-in-input" name="username" id="username" [(ngModel)]="newUser.username">
+      <input type="text" placeholder="Email" class="contact-in-input" name="email" id="email" [(ngModel)]="newUser.email">
+      <input type="password" placeholder="Password" class="contact-in-input" name="password" id="password" [(ngModel)]="newUser.password">
+      <!-- <input type="password" placeholder="Re-enter Password" class="contact-in-input" name="password" id="password" [(ngModel)]="newUser.password"> -->
+      <input type="date" placeholder="Date of Birth" class="contact-in-input" name="dob" id="dob" value= "<?php echo date('Y-m-d'); ?>" [(ngModel)]="newUser.dob">
+      <p></p>
+      <span> Preferred Pronoun &nbsp;</span>
+      <select id='pronoun' name='pronoun' [(ngModel)]='newUser.pronouns'>
+          <option selected disabled>Choose here</option>
+          <option *ngFor="let pronoun of pronouns" [value]="pronoun">
+          {{pronoun}}
+        </option>
+      </select>
+      <span> Gender &nbsp;</span>
+      <select id='gender' name='gender' [(ngModel)]='newUser.gender'>
+        <option selected disabled>Choose here</option>
+        <option *ngFor="let gender of genders" [value]="gender">
+        {{gender}}
+      </option>
+    </select>
+    <p></p>
+      <!-- \/ NEEDS TO BE EDITED AND NEEDS TO REFERENCE GOOGLE MAPS API WHEN IMPLEMENTED \/ -->
+      <!-- <input type="text" placeholder="Selected coffee shop" class="contact-in-input" name="selectedcoffeeshop" id="selectedcoffeeshop" [(ngModel)]="selectedcoffeeshop"> -->
+      <button type="submit" class="contact-in-btn" (click)="register()">Submit</button>
+      </form>
+  </div>
+  <div class="contact-in">
+    <h1> Select Your Home Coffee Shop </h1>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d196281.882898
+                 22207!2d-104.99554117229887!3d39.76425433602047!2m3!1f0!2f0!3f0!3m2
+                 !1i1024!2i768!4f13.1!3m3!1m2!1s0x876b80aa231f17cf%3A0x118ef4f8278a3
+                 6d6!2sDenver%2C%20CO!5e0!3m2!1sen!2sus!4v1619114061553!5m2!1sen!2sus"
+            width="100%"
+            height="auto"
+            frameborder="0"
+            style="border:0;"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0">
+    </iframe>
+  </div>
+</div>
+</body>
+
+<!-- </html><div class="container">
   <h5>DEBUGGING MODE</h5>
   <h5>Register New User</h5>
   <form>
@@ -29,4 +94,4 @@
     </div>
     <button type="submit" class="btn btn-primary" (click)="register()">Submit</button>
   </form>
-</div>
+</div> -->
