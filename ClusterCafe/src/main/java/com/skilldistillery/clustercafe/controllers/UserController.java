@@ -1,5 +1,6 @@
 package com.skilldistillery.clustercafe.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,17 @@ public class UserController {
 					HttpServletRequest req, 
 					HttpServletResponse res){
 		User user = userSvc.show(id);
+		if (user == null) {
+			res.setStatus(404);
+		}
+		return user;
+	}
+	
+	@GetMapping("users/loggedIn") 
+	public User showLoggedIn(Principal principal, 
+			HttpServletRequest req, 
+			HttpServletResponse res){
+		User user = userSvc.showLoggedIn(principal.getName());
 		if (user == null) {
 			res.setStatus(404);
 		}
