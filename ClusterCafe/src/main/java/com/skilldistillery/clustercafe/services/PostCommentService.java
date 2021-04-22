@@ -9,6 +9,6 @@ public interface PostCommentService {
 	List<PostComment> indexByPost(int id);
 	PostComment show(int commentId, int postId);
 	PostComment create(int postId, String username, PostComment postComment);
-	PostComment update(int id, String username, PostComment postComment);
-	boolean softDelete(int id, String username);
+	PostComment update(int commentId, int postId, String username, PostComment postComment);
+	boolean softDelete(int commentId, int postId, String username);
 }

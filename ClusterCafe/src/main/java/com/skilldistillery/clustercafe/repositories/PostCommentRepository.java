@@ -10,4 +10,6 @@ public interface PostCommentRepository extends JpaRepository<PostComment, Intege
 	List<PostComment> findByEnabledTrue();
 	List<PostComment> findByEnabledTrueAndPost_Id(int id);
 	PostComment findByIdAndEnabledTrueAndPost_Id(int commentId, int postId);
+	PostComment findByIdAndEnabledTrueAndPost_IdAndUser_username(int commentId, int postId, String username);
+
 }

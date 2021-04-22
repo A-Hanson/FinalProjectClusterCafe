@@ -68,15 +68,33 @@ public class PostCommentServiceImpl implements PostCommentService {
 	}
 
 	@Override
-	public PostComment update(int id, String username, PostComment postComment) {
-		// TODO Auto-generated method stub
-		return null;
+	public PostComment update(int commentId, int postId, String username, PostComment postComment) {
+		PostComment managedComment = pcRepo.findByIdAndEnabledTrueAndPost_IdAndUser_username(commentId, postId, username);
+		if (managedComment != null ) {
+			managedComment.setContent(postComment.getContent());
+			
+		} else if (pcRepo.findByIdAndEnabledTrueAndPost_Id(commentId, postId) != null) {
+			managedComment = pcRepo.findByIdAndEnabledTrueAndPost_Id(commentId, postId);
+			managedComment.setFlagged(postComment.getFlagged());
+		} 
+		return managedComment;
 	}
 
 	@Override
-	public boolean softDelete(int id, String username) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean softDelete(int commentId, int postId, String username) {
+		boolean deleted = false;
+		User user = userRepo.findByUsername(username);
+		PostComment userPostComment = pcRepo.findByIdAndEnabledTrueAndPost_IdAndUser_username(commentId, postId, username);
+		if (userPostComment != null) {
+			userPostComment.setEnabled(false);
+			deleted = true;
+		} else if (user != null && user.getRole().equals("admin") 
+				&& pcRepo.findByIdAndEnabledTrueAndPost_Id(commentId, postId) != null) {
+			userPostComment = pcRepo.findByIdAndEnabledTrueAndPost_Id(commentId, postId);
+			userPostComment.setEnabled(false);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }
