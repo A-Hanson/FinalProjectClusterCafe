@@ -347,6 +347,7 @@ COMMIT;
 START TRANSACTION;
 USE `clustercafedb`;
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (1, 'test', '$2a$10$l0e1qFzGwkUQRpNAj15Tau064aiixnS9pLi5VlYvwJMzHxwlTaWUu', 'test@test.com', 'Thor', 'Bird', NULL, 'He / His', '2007-05-15', 1, 'standard', 'male', '2021-04-20', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (2, 'admin', '$2a$10$/qvYRJCxHUa4Qi2.WL0LqOsvUIpSxfxvdkNYrwX/UgrpenaOg/ie6', 'admin@admin.com', 'Adam', 'Min', NULL, 'He / His', '1995-10-10', 1, 'admin', 'male', '2021-4-22', 1);
 
 COMMIT;
 

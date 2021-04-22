@@ -82,7 +82,8 @@ public class UserServiceImpl implements UserService{
 	public boolean softDelete(int id) {
 		boolean deleted = false;
 		if (userRepo.findById(id).isPresent()) {
-			userRepo.deleteById(id);
+			User user = userRepo.findById(id).get();
+			user.setEnabled(false);
 			deleted = true;
 		}
 		return deleted;
