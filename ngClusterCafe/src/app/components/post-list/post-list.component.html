@@ -1,4 +1,4 @@
-<!-- <p>post-list works!</p> -->
+<h4>DEBUGGING MODE: User role - {{currentUser.role}}</h4>
 <h1>{{title}} <span class="badge badge-primary">{{getNumberOfPosts()}}</span></h1>
 <!-- detail div -->
 <div *ngIf='selected && !editPost'>
@@ -30,26 +30,45 @@
 		</form>
 	</div>
 
+  <div class="row">
+    <div class="col-1">
+      <button class="btn btn-info" (click)='setEditPost()'>Edit</button>
+    </div>
+    <div class="col-1">
+      <button class="btn btn-primary" (click)='displayTable()'>Back</button>
+    </div>
+    <div class="col-1" *ngIf="selected.user === currentUser || currentUser.role === 'admin'">
+      <button class="btn btn-danger" (click)="deletedPost(selected.id)">Delete</button>
+    </div>
 
+  </div>
 </div>
 <!-- edit task -->
 <div *ngIf='editPost'>
    Title: <input type="text" name="post" placeholder="Post" [(ngModel)]='editPost.title' /><br />
    content: <input type="text" name="content" placeholder="content" [(ngModel)]='editPost.content' /><br />
-   <button (click)='editPost = null'>Cancel</button> <button (click)='updatePost(editPost)'>Save</button>
+   <button class="btn btn-warning" (click)='editPost = null'>Cancel</button>
+   <button class="btn btn-primary" (click)='updatePost(editPost)'>Save</button>
+
 </div>
 <table class="table table-striped table-hover" *ngIf='!selected'>
   <thead class="thead thead-dark">
-    <th>Post</th>
-    <th>Mark</th>
-    <th>Completed</th>
+    <th>Title</th>
+    <th>Created At</th>
+    <th>Content</th>
+    <th>Author</th>
+    <th>More Info</th>
+    <th *ngIf="currentUser.role==='admin'">Delete</th>
   </thead>
   <tbody>
     <tr *ngFor="let post of posts">
       <td (click)='displayPost(post)'>{{post.title}}</td>
+      <td>{{post.createdAt | date:'short' }}</td>
       <td> {{post.content}}</td>
+      <td>{{post.user.firstName}} {{post.user.lastName}}</td>
       <!-- <td><input (change)="updatePost(post, false)" type="checkbox" [(ngModel)]='post.completed'></td> -->
-      <td><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td>
+      <td><button class="btn btn-info" (click)='displayPost(post)'>...</button></td>
+      <td *ngIf="currentUser.role==='admin'"><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td>
     </tr>
   </tbody>
 </table>

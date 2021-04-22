@@ -69,6 +69,9 @@ public class PostServiceImpl implements PostService {
 			if (post.getTitle() != null && post.getTitle().length() > 0) {
 				managedPost.setTitle(post.getTitle());
 			}
+		} else if (postRepo.findByIdAndEnabledTrue(id) != null) {
+			managedPost = postRepo.findByIdAndEnabledTrue(id);
+			managedPost.setFlagged(post.getFlagged());
 		}
 		return managedPost;
 	}
@@ -78,7 +81,8 @@ public class PostServiceImpl implements PostService {
 		boolean deleted = false;
 		User user = userRepo.findByUsername(username);
 		Post userPost = postRepo.findByIdAndEnabledTrueAndUser_Username(id, username);
-		if (user.getRole().equals("admin") && postRepo.findById(id).isPresent()) {
+		if (user != null && user.getRole().equals("admin") 
+				&& postRepo.findById(id).isPresent()) {
 			Post post = postRepo.findById(id).get();
 			post.setEnabled(false);
 			deleted = true;

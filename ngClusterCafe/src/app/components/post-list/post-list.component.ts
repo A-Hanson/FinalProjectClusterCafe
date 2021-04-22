@@ -3,9 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
 import { PostComment } from 'src/app/models/postComment';
+import { PostCommentService } from 'src/app/services/postComment.service';
+import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { PostService } from 'src/app/services/post.service';
-import { PostCommentService } from 'src/app/services/postComment.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-post-list',
@@ -21,13 +23,15 @@ editPost = null;
 categories: Category[] = [];
 newPostCategory: Category = null;
 postComments: PostComment[] = [];
+currentUser: User = null;  //JUST GETTING SET UP CORRECT
 
 constructor(
   private postService: PostService,
   private route: ActivatedRoute,
   private router: Router,
   private categoryService: CategoryService,
-  private postCommentService: PostCommentService
+  private postCommentService: PostCommentService,
+  private userService: UserService
 ) { }
 
   ngOnInit(): void {
@@ -46,7 +50,14 @@ constructor(
     };
     this.reload();
     this.reloadCategories();
+    this.loadCurrentUser();
+    // this.testArea();
   }
+// GETTING SET UP CORRECT
+  // testArea() {
+  //   this.currentUser = new User();
+  //   this.currentUser.role = "standard";
+  // }
 
   reload() {
     this.postService.index().subscribe(
@@ -58,15 +69,16 @@ constructor(
   reloadCategories() {
     this.categoryService.index().subscribe(
       data => {this.categories = data},
-      err => {console.error('Error: ' + err)}
+      err => {console.error('Error loading categories: ' + err)}
     );
   }
-  // reloadPostComments() {
-  //   this.postCommentService.index().subscribe(
-  //     data => {this.postComments = data},
-  //     err => {console.error('Error: ' + err)}
-  //   );
-  // }
+
+  loadCurrentUser() {
+    this.userService.retrieveLoggedIn().subscribe(
+      data => {this.currentUser = data},
+      err => {console.error('Error loading current user: ' + err)}
+    );
+  }
 
   getNumberOfPosts = function() {
     return this.posts.length;
@@ -78,7 +90,7 @@ constructor(
     this.selected = null;
   }
   addPost(): void {
-    // this.newPost.category = this.newPostCategory;
+
     console.log(this.newPost);
     this.postService.create(this.newPost).subscribe(
       data => {
