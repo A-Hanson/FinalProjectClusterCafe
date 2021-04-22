@@ -58,6 +58,7 @@ public class PostCommentServiceImpl implements PostCommentService {
 				if (postComment.getFlagged() == null) {
 					postComment.setFlagged(false);
 				}
+				pcRepo.saveAndFlush(postComment);
 			}
 
 		} else {
