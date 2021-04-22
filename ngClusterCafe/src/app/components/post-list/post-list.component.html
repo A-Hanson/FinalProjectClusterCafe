@@ -7,6 +7,30 @@
   <p>{{selected.title}}</p>
   <button (click)='setEditPost()'>Edit</button>
   <button (click)='displayTable()'>Back</button>
+
+  <h4>Comments</h4>
+  <div *ngIf='selected && !editPost' class="container">
+<app-postComment-list></app-postComment-list>
+
+	</div>
+
+	 <div *ngIf='selected && !editPost' >
+		<h5><em>Leave a comment</em></h5>
+
+		<form width="60%" class="container">
+		  <div class="form-group">
+		    <label>Name</label>
+		    <input type="text" class="form-control" ng-model="comment.name">
+		  </div>
+		  <div class="form-group">
+		    <label>Comment</label>
+		    <input type="text" class="form-control"  ng-model="comment.content">
+		  </div>
+		  <button type="submit" class="btn btn-primary" ng-click="vm.addComment(vm.selectedPost.id, comment); comment={}">Submit</button>
+		</form>
+	</div>
+
+
 </div>
 <!-- edit task -->
 <div *ngIf='editPost'>

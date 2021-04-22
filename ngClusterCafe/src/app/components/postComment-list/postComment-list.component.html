@@ -1,0 +1,15 @@
+<table *ngIf='!selected' class="table table-dark table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Comment</td>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let postComment of postComments">
+        <td>{{postComment.name}}</td>
+        <td>{{postComment.content}}</td>
+      </tr>
+    </tbody>
+  </table>

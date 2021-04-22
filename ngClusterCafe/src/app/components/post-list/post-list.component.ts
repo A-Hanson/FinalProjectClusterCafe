@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
+import { PostComment } from 'src/app/models/postComment';
 import { CategoryService } from 'src/app/services/category.service';
 import { PostService } from 'src/app/services/post.service';
+import { PostCommentService } from 'src/app/services/postComment.service';
 
 @Component({
   selector: 'app-post-list',
@@ -18,12 +20,14 @@ newPost = new Post();
 editPost = null;
 categories: Category[] = [];
 newPostCategory: Category = null;
+postComments: PostComment[] = [];
 
 constructor(
   private postService: PostService,
   private route: ActivatedRoute,
   private router: Router,
-  private categoryService: CategoryService
+  private categoryService: CategoryService,
+  private postCommentService: PostCommentService
 ) { }
 
   ngOnInit(): void {
@@ -57,8 +61,12 @@ constructor(
       err => {console.error('Error: ' + err)}
     );
   }
-
-
+  // reloadPostComments() {
+  //   this.postCommentService.index().subscribe(
+  //     data => {this.postComments = data},
+  //     err => {console.error('Error: ' + err)}
+  //   );
+  // }
 
   getNumberOfPosts = function() {
     return this.posts.length;
