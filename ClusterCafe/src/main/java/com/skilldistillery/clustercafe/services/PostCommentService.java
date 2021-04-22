@@ -6,7 +6,9 @@ import com.skilldistillery.clustercafe.entities.PostComment;
 
 public interface PostCommentService {
 	List<PostComment> index();
-	List<PostComment> indexByComment(int id);
-	PostComment show(int id);
-//	PostComment create(); FINISH ME
+	List<PostComment> indexByPost(int id);
+	PostComment show(int commentId, int postId);
+	PostComment create(int postId, String username, PostComment postComment);
+	PostComment update(int id, String username, PostComment postComment);
+	boolean softDelete(int id, String username);
 }
