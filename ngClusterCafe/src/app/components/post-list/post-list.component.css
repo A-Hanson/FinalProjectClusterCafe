@@ -1,0 +1,13 @@
+.danger {
+  background-color: red;
+}
+.warning {
+  background-color: yellow;
+}
+.safe {
+  background-color: green;
+}
+.complete {
+  color: gray;
+  text-decoration: line-through;
+}
