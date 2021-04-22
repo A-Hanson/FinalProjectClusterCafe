@@ -39,8 +39,8 @@
   <input type="text" name='XXXX' placeholder="Content" [(ngModel)]='newPost.content'>
   </div>
   <div class ="input-group">
-    <select id='category'name='category' [(ngModel)]='newPost.category'>
-    <option *ngFor="let category of categories" [value]="newPost.category">
+    <select id='category' name='category' [(ngModel)]='newPost.category.id'>
+    <option *ngFor="let category of categories" [value]="category.id">
       {{category.name}}
     </option>
   </select>
