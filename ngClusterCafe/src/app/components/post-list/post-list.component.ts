@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
+import { CategoryService } from 'src/app/services/category.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -14,12 +16,13 @@ selected = null;
 title = 'ngPost';
 newPost = new Post();
 editPost = null;
-
+categories: Category[] = [];
 
 constructor(
   private postService: PostService,
   private route: ActivatedRoute,
-  private router: Router
+  private router: Router,
+  private categoryService: CategoryService
 ) { }
 
   ngOnInit(): void {
@@ -37,6 +40,7 @@ constructor(
       )
     };
     this.reload();
+    this.reloadCategories();
   }
 
   reload() {
@@ -45,6 +49,16 @@ constructor(
       err => {console.error('Error: ' + err)}
     );
   }
+
+  reloadCategories() {
+    this.categoryService.index().subscribe(
+      data => {this.categories = data},
+      err => {console.error('Error: ' + err)}
+    );
+  }
+
+
+
   getNumberOfPosts = function() {
     return this.posts.length;
   }

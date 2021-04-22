@@ -38,19 +38,24 @@
   <div class="input-group">
   <input type="text" name='XXXX' placeholder="Content" [(ngModel)]='newPost.content'>
   </div>
-  <select id='peeps' name='people' [(ngModel)]='newPost.category'>
-    <option *ngFor="let category of categories" [value]="category.title">
-      {{category.title}}
+  <div class ="input-group">
+    <select id='category'name='category' [(ngModel)]='newPost.category'>
+    <option *ngFor="let category of categories" [value]="category">
+      {{category.name}}
     </option>
   </select>
+  </div>
+<!-- <div *ngIf='!selected'>
+  <input type="text" name="post" placeholder="Add new post" [(ngModel)]='newPost.post' />
+  <button (click)="addPost()">Submit</button>
+</div> -->
 
 
-
-  <div class="input-group">
+  <!-- <div class="input-group">
     <input type="text" name='XXXX' placeholder="Content" [(ngModel)]='newPost.category'>
-    </div>
+    </div> -->
 
-  <button (click)='addPost()' class="btn btn-success btn-sm">New Post</button>
+  <button (click)='addPost()' type="submit" class="btn btn-success btn-sm">New Post</button>
   </form>
 <!-- <div *ngIf='!selected'>
   <input type="text" name="post" placeholder="Add new post" [(ngModel)]='newPost.post' />
