@@ -18,8 +18,8 @@ export class UserService {
   ) { }
 
   // INDEX
-  showLoggedIn(): Observable<User> {
-    return this.http.get<User>(this.url + '/loggedIn', this.getHttpOptions()).pipe(
+  retrieveLoggedIn(): Observable<User> {
+    return this.http.get<User>(this.url + '/username', this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('PostService.show(): error retrieving post: ' + err);
         return throwError(err);

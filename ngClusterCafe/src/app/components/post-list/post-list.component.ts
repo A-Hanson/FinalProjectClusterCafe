@@ -45,14 +45,14 @@ constructor(
     };
     this.reload();
     this.reloadCategories();
-    // this.loadCurrentUser();
-    this.testArea();
+    this.loadCurrentUser();
+    // this.testArea();
   }
 // GETTING SET UP CORRECT
-  testArea() {
-    this.currentUser = new User();
-    this.currentUser.role = "standard";
-  }
+  // testArea() {
+  //   this.currentUser = new User();
+  //   this.currentUser.role = "standard";
+  // }
 
   reload() {
     this.postService.index().subscribe(
@@ -68,12 +68,12 @@ constructor(
     );
   }
 
-  // loadCurrentUser() {
-  //   this.userService.showLoggedIn().subscribe(
-  //     data => {this.currentUser = data},
-  //     err => {console.error('Error loading current user: ' + err)}
-  //   );
-  // }
+  loadCurrentUser() {
+    this.userService.retrieveLoggedIn().subscribe(
+      data => {this.currentUser = data},
+      err => {console.error('Error loading current user: ' + err)}
+    );
+  }
 
   getNumberOfPosts = function() {
     return this.posts.length;
