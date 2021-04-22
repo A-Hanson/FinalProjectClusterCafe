@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,7 +72,50 @@ public class PostCommentController {
 		}
 		return postComment;
 	}
-
+	
+	@PutMapping("{postId}/comments/{commentId}")
+	public PostComment update(@PathVariable int postId, 
+			@PathVariable int commentId,
+			@RequestBody PostComment postComment,
+			HttpServletRequest req, 
+			HttpServletResponse res,
+			Principal principal) {
+		try {
+			postComment = pcSvc.update(commentId, postId, principal.getName(), postComment);
+			if (postComment == null) {
+				res.setStatus(404);
+			}
+			res.setStatus(200);
+			StringBuffer url = req.getRequestURL();			
+			url.append("/").append(postComment.getId());
+			res.setHeader("location", url.toString());
+		} catch (Exception e) {
+			System.err.println(e);
+			res.setStatus(400);
+			postComment = null;
+		}
+		return postComment;
+	}
+	
+	@DeleteMapping("{postId}/comments/{commentId}")
+	public void delete(@PathVariable int postId, 
+			@PathVariable int commentId,
+			HttpServletRequest req, 
+			HttpServletResponse res,
+			Principal principal) {
+		try {
+			boolean deleted = pcSvc.softDelete(commentId, postId, principal.getName());
+			if (deleted) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+			
+		} catch (Exception e) {
+			System.err.println(e);
+			res.setStatus(400);
+		}
+	}
 }
 
 
