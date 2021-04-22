@@ -1,5 +1,6 @@
 package com.skilldistillery.clustercafe.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,103 +17,102 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.clustercafe.entities.User;
-import com.skilldistillery.clustercafe.services.UserService;
+import com.skilldistillery.clustercafe.entities.Post;
+import com.skilldistillery.clustercafe.services.PostService;
 
 @CrossOrigin({"*", "http://localhost:4290"})
 @RequestMapping("api")
 @RestController
-public class UserController {
-//	NO AUTHENTICATION AT THIS TIME
-
+public class PostController {
+	
 	@Autowired
-	private UserService userSvc;
+	private PostService postSvc;
 	
-	@GetMapping("ping")
-	public String ping() {
-		return "pong";
+	@GetMapping("posts") 
+	public List<Post> index(HttpServletRequest req, HttpServletResponse res){
+//		All enabled posts
+		return postSvc.index();
 	}
 	
-	@GetMapping("users") 
-	public List<User> index(HttpServletRequest req, HttpServletResponse res){
-		return userSvc.index();
-	}
-	
-	@GetMapping("users/{id}") 
-	public User show(@PathVariable int id, 
+	@GetMapping("posts/{id}") 
+	public Post show(@PathVariable int id, 
 					HttpServletRequest req, 
-					HttpServletResponse res){
-		User user = userSvc.show(id);
-		if (user == null) {
+					HttpServletResponse res) {
+		Post post = postSvc.show(id);
+		if (post == null) {
 			res.setStatus(404);
 		}
-		return user;
+		return post;
 	}
 	
-	@PostMapping("users")
-	public User create(@RequestBody User user,
+	@PostMapping("posts")
+	public Post create(@RequestBody Post post,
 			HttpServletRequest req, 
-			HttpServletResponse res) {
+			HttpServletResponse res,
+			Principal principal) {
 		try {
-			userSvc.create(user);
+			postSvc.create(principal.getName(), post);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();			
-			url.append("/").append(user.getId());
+			url.append("/").append(post.getId());
 			res.setHeader("location", url.toString());
 		}
 		catch  (Exception e) {
 			System.err.println(e);
 			res.setStatus(400);
-			user = null;
+			post = null;
 		}
-		return user;
+		return post;
 	}
 	
-
-	@PutMapping("users/{id}") 
-	public User update(@PathVariable int id, 
-					@RequestBody User user,
-					HttpServletRequest req, 
-					HttpServletResponse res){
+	@PutMapping("posts/{id}")
+	public Post update(@PathVariable int id,
+			@RequestBody Post post,
+			HttpServletRequest req, 
+			HttpServletResponse res,
+			Principal principal) {
 		try {
-			user = userSvc.update(id, user);
-			if (user == null) {
+			post = postSvc.update(id, principal.getName(), post);
+			if (post == null) {
 				res.setStatus(404);
 			}
 			res.setStatus(200);
 			StringBuffer url = req.getRequestURL();			
-			url.append("/").append(user.getId());
+			url.append("/").append(post.getId());
 			res.setHeader("location", url.toString());
 		}
 		catch  (Exception e) {
 			System.err.println(e);
 			res.setStatus(400);
-			user = null;
+			post = null;
 		}
-		return user;
+		return post;
 	}
 	
-	@DeleteMapping("users/{id}")
-	public void destroy(@PathVariable int id, 
+	@DeleteMapping("posts/{id}")
+	public void destory(@PathVariable int id, 
 					HttpServletRequest req, 
-					HttpServletResponse res) {
+					HttpServletResponse res,
+					Principal principal) {
 		try {
-			boolean deleted = userSvc.softDelete(id);
+			boolean deleted = postSvc.softDelete(id, principal.getName());
 			if (deleted) {
 				res.setStatus(204);
 			} else {
 				res.setStatus(404);
-				
 			}
+			
 		}
 		catch (Exception e) {
 			System.err.println(e);
 			res.setStatus(400);			
-		}		
+		}	
 	}
-	
-	
+
 }
+
+
+
 
 
 
