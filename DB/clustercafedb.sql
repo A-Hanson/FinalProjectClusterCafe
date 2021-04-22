@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `store_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_user_store1_idx` (`store_id` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   CONSTRAINT `fk_user_store1`
     FOREIGN KEY (`store_id`)
     REFERENCES `store` (`id`)
