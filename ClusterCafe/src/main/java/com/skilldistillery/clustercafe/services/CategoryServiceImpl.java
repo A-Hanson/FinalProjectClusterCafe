@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.clustercafe.entities.Category;
 import com.skilldistillery.clustercafe.repositories.CategoryRepository;
-@Service
+
 @Transactional
+@Service
 public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepo;

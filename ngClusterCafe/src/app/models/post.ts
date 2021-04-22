@@ -21,7 +21,8 @@ export class Post {
     updatedAt?: string,
     enabled?: boolean,
     flagged?: boolean,
-    user?: User
+    user?: User,
+    category?: Category
     ){
       this.id = id;
       this.title = title;
@@ -31,6 +32,7 @@ export class Post {
       this.enabled = enabled;
       this.flagged = flagged;
       this.user = user;
+      this.category = category;
 }
 
 }
