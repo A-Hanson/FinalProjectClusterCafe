@@ -11,6 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterComponent implements OnInit {
   // ON BACKEND STORE ID IS HARDWIRED in AuthServiceImpl
   newUser: User = new User();
+  pronouns: string[] = ["He / Him", "She / Her", "They / Them", "Ze / Zir"]
+  genders: string[] = ["Male", "Female", "Transgender", "Gender neutral",
+                       "Non-binary", "A-gender", "Pangender",
+                       "Genderqueer", "Two-spirit", "third gender"
+                      ]
 
   constructor(
     private authService: AuthService,
@@ -25,7 +30,7 @@ export class RegisterComponent implements OnInit {
       user => {
         this.authService.login(this.newUser.username, this.newUser.password).subscribe(
           success => {
-            this.router.navigateByUrl('/landing-page');
+            this.router.navigateByUrl('/landingPage');
           },
           fail => {
             console.log("User unable to login: " + fail);
@@ -40,5 +45,4 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-
 }
