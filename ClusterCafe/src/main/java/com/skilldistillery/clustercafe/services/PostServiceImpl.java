@@ -69,6 +69,9 @@ public class PostServiceImpl implements PostService {
 			if (post.getTitle() != null && post.getTitle().length() > 0) {
 				managedPost.setTitle(post.getTitle());
 			}
+		} else if (postRepo.findByIdAndEnabledTrue(id) != null) {
+			managedPost = postRepo.findByIdAndEnabledTrue(id);
+			managedPost.setFlagged(post.getFlagged());
 		}
 		return managedPost;
 	}
