@@ -76,9 +76,15 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public boolean softDelete(int id, String username) {
 		boolean deleted = false;
-		Post post = postRepo.findByIdAndEnabledTrueAndUser_Username(id, username);
-		if (post != null) {
+		User user = userRepo.findByUsername(username);
+		Post userPost = postRepo.findByIdAndEnabledTrueAndUser_Username(id, username);
+		if (user.getRole().equals("admin") && postRepo.findById(id).isPresent()) {
+			Post post = postRepo.findById(id).get();
 			post.setEnabled(false);
+			deleted = true;
+		}
+		else if (userPost != null) {
+			userPost.setEnabled(false);
 			deleted = true;
 		}
 		return deleted;
