@@ -23,6 +23,7 @@ editPost = null;
 categories: Category[] = [];
 newPostCategory: Category = null;
 postComments: PostComment[] = [];
+newComment: PostComment = new PostComment();
 currentUser: User = null;  //JUST GETTING SET UP CORRECT
 
 constructor(
@@ -72,6 +73,12 @@ constructor(
       err => {console.error('Error loading categories: ' + err)}
     );
   }
+  reloadComments(){
+    this.postService.getCommentsForPost(this.selected.id).subscribe(
+      data => {this.postComments = data},
+      err => {console.error('Error loading comments for this post' + err)}
+      );
+  }
 
   loadCurrentUser() {
     this.userService.retrieveLoggedIn().subscribe(
@@ -85,7 +92,9 @@ constructor(
   }
   displayPost(post) {
     this.selected = post;
-  }
+    this.reloadComments();
+      }
+
   displayTable(): void {
     this.selected = null;
   }
@@ -131,6 +140,21 @@ constructor(
         console.error('Error: ' + err);
       }
     );
+  }
+
+  addComment(id: number) {
+
+    // console.log(this.newPost);
+    this.postService.addCommentForPost(this.selected.id, this.newComment).subscribe(
+      data => {
+        this.newComment = new PostComment();
+        this.reloadComments();
+      },
+      err => {
+        console.error('Error: ' + err);
+      }
+    );
+
   }
 
 }

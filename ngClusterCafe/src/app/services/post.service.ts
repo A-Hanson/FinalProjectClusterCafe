@@ -4,6 +4,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from "src/environments/environment";
 import { Post } from "../models/post";
+import { PostComment } from "../models/postComment";
 import { AuthService } from "./auth.service";
 
 @Injectable({
@@ -73,4 +74,21 @@ export class PostService {
     };
     return httpOptions;
   }
+
+ getCommentsForPost(id: number): Observable<PostComment[]> {
+  return this.http.get<PostComment[]>(this.url + '/' + id + '/comments', this.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      console.log(err);
+      return throwError('Error');
+    })
+  );
+ }
+ addCommentForPost(id: number, comment: PostComment): Observable<PostComment> {
+  return this.http.post<PostComment>(this.url + '/' + id + '/comments', comment, this.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      console.log(err);
+      return throwError('Error');
+    })
+  );
+ }
 }
