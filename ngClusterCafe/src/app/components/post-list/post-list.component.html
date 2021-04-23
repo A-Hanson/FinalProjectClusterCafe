@@ -1,3 +1,4 @@
+
 <h4>DEBUGGING MODE: User role - {{currentUser.role}}</h4>
 <h1>{{title}} <span class="badge badge-primary">{{getNumberOfPosts()}}</span></h1>
 <!-- detail div -->
@@ -5,8 +6,6 @@
   <p>{{selected.id}}</p>
   <p>{{selected.content}}</p>
   <p>{{selected.title}}</p>
-  <button (click)='setEditPost()'>Edit</button>
-  <button (click)='displayTable()'>Back</button>
 
   <div class="row">
     <div class="col-1">
@@ -96,4 +95,3 @@
 		  <button type="submit" class="btn btn-primary" (click)="addComment(selected.id)">Submit</button>
 		</form>
 	</div>
-
