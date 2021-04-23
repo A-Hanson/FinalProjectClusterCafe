@@ -23,14 +23,15 @@ editPost = null;
 categories: Category[] = [];
 newPostCategory: Category = null;
 postComments: PostComment[] = [];
-currentUser: User = null;  //JUST GETTING SET UP CORRECT
+newComment: PostComment = new PostComment();
+editedComment: PostComment = null;
+currentUser: User = null;
 
 constructor(
   private postService: PostService,
   private route: ActivatedRoute,
   private router: Router,
   private categoryService: CategoryService,
-  private postCommentService: PostCommentService,
   private userService: UserService
 ) { }
 
@@ -51,13 +52,7 @@ constructor(
     this.reload();
     this.reloadCategories();
     this.loadCurrentUser();
-    // this.testArea();
   }
-// GETTING SET UP CORRECT
-  // testArea() {
-  //   this.currentUser = new User();
-  //   this.currentUser.role = "standard";
-  // }
 
   reload() {
     this.postService.index().subscribe(
@@ -72,6 +67,12 @@ constructor(
       err => {console.error('Error loading categories: ' + err)}
     );
   }
+  reloadComments(){
+    this.postService.getCommentsForPost(this.selected.id).subscribe(
+      data => {this.postComments = data},
+      err => {console.error('Error loading comments for this post' + err)}
+      );
+  }
 
   loadCurrentUser() {
     this.userService.retrieveLoggedIn().subscribe(
@@ -85,7 +86,9 @@ constructor(
   }
   displayPost(post) {
     this.selected = post;
-  }
+    this.reloadComments();
+      }
+
   displayTable(): void {
     this.selected = null;
   }
@@ -122,13 +125,63 @@ constructor(
     );
   }
 
+  flagPost(post: Post) {
+    post.flagged = true;
+    this.updatePost(post, false);
+  }
+
   deletedPost(id: number): void {
     this.postService.delete(id).subscribe(
       data => {
+        this.selected = null;
         this.reload();
       },
       err => {
         console.error('Error: ' + err);
+      }
+    );
+  }
+
+  addComment(id: number) {
+
+    this.postService.addCommentForPost(this.selected.id, this.newComment).subscribe(
+      data => {
+        this.newComment = new PostComment();
+        this.reloadComments();
+      },
+      err => {
+        console.error('Error: ' + err);
+      }
+    );
+  }
+  setEditComment(comment: PostComment) {
+    this.editedComment = comment;
+  }
+
+  editComment(comment: PostComment) {
+    this.postService.editCommentForPost(comment.post.id, comment.id, comment).subscribe(
+      data => {
+        this.editedComment = null;
+        this.reloadComments();
+      },
+      err => {
+        console.error('Error editing comment: ' + err);
+      }
+    );
+  }
+
+  flagComment(comment: PostComment) {
+    comment.flagged = true;
+    this.editComment(comment);
+  }
+
+  deleteComment(comment: PostComment) {
+    this.postService.deleteCommentForPost(comment.post.id, comment.id).subscribe(
+      data => {
+        this.reloadComments();
+      },
+      err => {
+        console.error('Error deleting comment: ' + err);
       }
     );
   }

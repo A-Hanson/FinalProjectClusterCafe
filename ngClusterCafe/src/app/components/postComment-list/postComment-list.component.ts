@@ -30,7 +30,7 @@ export class PostCommentListComponent implements OnInit {
 
         },
         fail =>{
-          console.error("TodoListComponent.ngOnInIt(): todo retrieve failed");
+          console.error("PostListComponent.ngOnInIt(): todo retrieve failed");
           console.error(fail);
           this.router.navigateByUrl('notFound');
 

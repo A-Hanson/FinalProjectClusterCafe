@@ -4,6 +4,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from "src/environments/environment";
 import { Post } from "../models/post";
+import { PostComment } from "../models/postComment";
 import { AuthService } from "./auth.service";
 
 @Injectable({
@@ -73,4 +74,44 @@ export class PostService {
     };
     return httpOptions;
   }
+// POST COMMENTS
+
+   getCommentsForPost(id: number): Observable<PostComment[]> {
+    return this.http.get<PostComment[]>(this.url + '/' + id + '/comments', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error');
+      })
+    );
+   }
+
+   addCommentForPost(id: number, comment: PostComment): Observable<PostComment> {
+     comment.enabled = true;
+     comment.flagged = false;
+    return this.http.post<PostComment>(this.url + '/' + id + '/comments', comment, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error');
+      })
+    );
+   }
+
+  editCommentForPost(postId: number, commentId: number, editedComment: PostComment): Observable<PostComment> {
+    return this.http.put<PostComment>(this.url + '/' + postId + '/comments/' + commentId, editedComment, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error');
+      })
+    );
+  }
+
+  deleteCommentForPost(postId: number, commentId: number) {
+    return this.http.delete<void>(this.url + '/' + postId + '/comments/' + commentId, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error');
+      })
+    );
+  }
+
 }
