@@ -3,22 +3,22 @@
 <h1>{{title}} <span class="badge badge-primary">{{getNumberOfPosts()}}</span></h1>
 <!-- detail div -->
 <div *ngIf='selected && !editPost'>
-  <p>{{selected.id}}</p>
-  <p>{{selected.content}}</p>
-  <p>{{selected.title}}</p>
+  <p>Post Id: {{selected.id}}</p>
+  <p>Post Title: {{selected.title}}</p>
+  <p>Post Content: {{selected.content}}</p>
 
   <div class="row">
-    <div class="col-1">
+    <div class="col-1" *ngIf="selected.user.id === currentUser.id">
       <button class="btn btn-info" (click)='setEditPost()'>Edit</button>
     </div>
     <div class="col-1">
       <button class="btn btn-primary" (click)='displayTable()'>Back</button>
     </div>
-    <div class="col-1" *ngIf="selected.user === currentUser || currentUser.role === 'admin'">
+    <div class="col-1" *ngIf="selected.user.id === currentUser.id || currentUser.role === 'admin'">
       <button class="btn btn-danger" (click)="deletedPost(selected.id)">Delete</button>
     </div>
-
   </div>
+
 </div>
 <!-- edit task -->
 <div *ngIf='editPost'>
@@ -34,7 +34,7 @@
     <th>Created At</th>
     <th>Content</th>
     <th>Author</th>
-    <th>More Info</th>
+    <th></th>
     <th *ngIf="currentUser.role==='admin'">Delete</th>
   </thead>
   <tbody>
@@ -44,8 +44,12 @@
       <td> {{post.content}}</td>
       <td>{{post.user.firstName}} {{post.user.lastName}}</td>
       <!-- <td><input (change)="updatePost(post, false)" type="checkbox" [(ngModel)]='post.completed'></td> -->
-      <td><button class="btn btn-info" (click)='displayPost(post)'>...</button></td>
-      <td *ngIf="currentUser.role==='admin'"><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td>
+      <td>
+        <button class="btn btn-info" (click)='displayPost(post)'>More Info</button>
+        <button class="btn btn-warning" (click)='flagPost(post)' *ngIf="post.user.id !== currentUser.id && currentUser.role !== 'admin' && !post.flagged">Flag</button>
+        <button class="btn btn-danger" (click)="deletedPost(post.id)" *ngIf="currentUser.role==='admin'">X</button>
+      </td>
+      <!-- <td *ngIf="currentUser.role==='admin'"><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td> -->
     </tr>
   </tbody>
 </table>
@@ -65,26 +69,40 @@
   </div>
   <button (click)='addPost()' type="submit" class="btn btn-success btn-sm">New Post</button>
   </form>
-
+<!-- DISPLAY A POST'S COMMENTS -->
   <div *ngIf='selected && !editPost' class="container">
     <h4>Comments</h4>
-<table class="table table-dark table-striped table-hover table-bordered">
-  <thead>
-    <tr>
-      <td>Name</td>
-      <td>Comment</td>
+  <table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Comment</td>
+        <td>Created At</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let postComment of postComments">
+        <td>{{postComment.user.firstName}}</td>
+        <td>{{postComment.content}}</td>
+        <td>{{postComment.createdAt | date: "short"}}</td>
+        <td>
+          <button class="btn btn-info" (click)='setEditComment(postComment)' *ngIf="postComment.user.id === currentUser.id">Edit</button>
+          <button class="btn btn-warning" (click)='flagComment(postComment)' *ngIf="postComment.user.id !== currentUser.id && currentUser.role !== 'admin' && !postComment.flagged">Flag</button>
+          <button class="btn btn-danger" (click)="deleteComment(postComment)" *ngIf="postComment.user.id === currentUser.id || currentUser.role === 'admin'">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
 
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let postComment of postComments">
-      <td>{{postComment.user.firstName}}</td>
-      <td>{{postComment.content}}</td>
-    </tr>
-  </tbody>
-</table>
+    <div class="col-1" *ngIf="selected.user.id === currentUser.id || currentUser.role === 'admin'">
+      <button class="btn btn-danger" (click)="deletedPost(selected.id)">Delete</button>
+    </div>
+  </div>
 	</div>
-	 <div *ngIf='selected && !editPost' >
+  <!-- ADD A NEW COMMENT TO SELECTED POST -->
+	 <div *ngIf='selected && !editPost && !editedComment' >
 		<h5><em>Leave a comment</em></h5>
 
 		<form width="60%" class="container">
@@ -95,3 +113,16 @@
 		  <button type="submit" class="btn btn-primary" (click)="addComment(selected.id)">Submit</button>
 		</form>
 	</div>
+  <!-- EDIT COMMENT TO SELECTED POST -->
+	 <div *ngIf='editedComment' >
+		<h5><em>Edit comment</em></h5>
+
+		<form width="60%" class="container">
+		  <div class="form-group">
+		    <label>Comment</label>
+		    <input type="text" class="form-control"  [(ngModel)]="editedComment.content" name="content">
+		  </div>
+		  <button type="submit" class="btn btn-primary" (click)="editComment(editedComment)">Submit</button>
+		</form>
+	</div>
+
