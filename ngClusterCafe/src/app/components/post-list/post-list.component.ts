@@ -156,6 +156,7 @@ constructor(
   editComment(comment: PostComment) {
     this.postService.editCommentForPost(comment.post.id, comment.id, comment).subscribe(
       data => {
+        this.editedComment = null;
         this.reloadComments();
       },
       err => {
