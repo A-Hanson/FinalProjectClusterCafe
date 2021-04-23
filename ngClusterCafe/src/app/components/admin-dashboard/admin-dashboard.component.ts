@@ -34,8 +34,50 @@ export class AdminDashboardComponent implements OnInit {
     this.loadInitial();
   }
 
-  loadInitial() {
+  selectPost(post: Post) {
+    this.selectedPost = post;
+  }
 
+  unflagPost(post: Post) {
+    post.flagged = false;
+    this.postService.update(post).subscribe(
+      data => {
+        this.loadFlaggedPosts();
+      },
+      err => {
+        console.error('Error in unflagPost()')
+        console.error('Error unflagging post for admin' + err)
+      }
+    )
+  }
+
+  deletePost(post: Post) {
+    this.postService.delete(post.id).subscribe(
+      data => {
+        this.loadFlaggedPosts();
+      },
+      err => {
+        console.error('Error in deletePost()')
+        console.error('Error deleteing post for admin' + err)
+      }
+    )
+  }
+
+// Helpers
+  loadInitial() {
+    this.loadFlaggedPosts();
+  }
+
+  loadFlaggedPosts() {
+    this.postService.indexFlagged().subscribe(
+      data => {
+        this.posts = data
+      },
+      err => {
+        console.error('Error in loadFlaggedPosts()')
+        console.error('Error loading flagged posts for admin' + err)
+      }
+    )
   }
 
 }
