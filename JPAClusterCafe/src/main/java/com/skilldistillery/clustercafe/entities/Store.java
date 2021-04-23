@@ -30,7 +30,7 @@ public class Store {
 	
 	private String category;
 	
-	private boolean enabled;
+	private Boolean enabled;
 
 	public Store() {
 		super();
