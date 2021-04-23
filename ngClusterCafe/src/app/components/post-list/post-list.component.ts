@@ -125,6 +125,11 @@ constructor(
     );
   }
 
+  flagPost(post: Post) {
+    post.flagged = true;
+    this.updatePost(post, false);
+  }
+
   deletedPost(id: number): void {
     this.postService.delete(id).subscribe(
       data => {

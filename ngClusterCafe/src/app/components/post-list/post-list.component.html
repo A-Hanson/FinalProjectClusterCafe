@@ -33,7 +33,7 @@
     <th>Created At</th>
     <th>Content</th>
     <th>Author</th>
-    <th>More Info</th>
+    <th></th>
     <th *ngIf="currentUser.role==='admin'">Delete</th>
   </thead>
   <tbody>
@@ -43,8 +43,12 @@
       <td> {{post.content}}</td>
       <td>{{post.user.firstName}} {{post.user.lastName}}</td>
       <!-- <td><input (change)="updatePost(post, false)" type="checkbox" [(ngModel)]='post.completed'></td> -->
-      <td><button class="btn btn-info" (click)='displayPost(post)'>...</button></td>
-      <td *ngIf="currentUser.role==='admin'"><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td>
+      <td>
+        <button class="btn btn-info" (click)='displayPost(post)'>More Info</button>
+        <button class="btn btn-warning" (click)='flagPost(post)' *ngIf="post.user.id !== currentUser.id && currentUser.role !== 'admin' && !post.flagged">Flag</button>
+        <button class="btn btn-danger" (click)="deletedPost(post.id)" *ngIf="currentUser.role==='admin'">X</button>
+      </td>
+      <!-- <td *ngIf="currentUser.role==='admin'"><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td> -->
     </tr>
   </tbody>
 </table>
