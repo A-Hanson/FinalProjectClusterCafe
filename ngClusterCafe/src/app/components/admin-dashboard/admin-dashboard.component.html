@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="container" name="welcome">
+    <h4>Welcome Back Admin!</h4>
+  </div>
+  <div class="container" name="dashboard">
+    <button class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('toggle-1')">Toggle Posts</button>
+    <button class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('toggle-2')">Toggle Comments</button>
+    <hr/>
+    <ngb-accordion #acc="ngbAccordion">
+      <ngb-panel id="toggle-1" title="Flagged Posts">
+        <ng-template ngbPanelContent>
+          Placeholder for Posts
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="toggle-2" title="Flagged Comments">
+        <ng-template ngbPanelContent>
+          Placeholder for Comments
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+
+
+
+
+
+</div>

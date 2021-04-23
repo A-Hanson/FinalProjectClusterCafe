@@ -16,6 +16,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { UserLandingPageComponent } from './components/user-landing-page/user-landing-page.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostCommentListComponent } from './components/postComment-list/postComment-list.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { PostCommentListComponent } from './components/postComment-list/postComm
     LogoutComponent,
     UserLandingPageComponent,
     PostListComponent,
-    PostCommentListComponent
+    PostCommentListComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
