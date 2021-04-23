@@ -31,9 +31,9 @@ public class Meeting {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	private boolean enabled;
+	private Boolean enabled;
 
-	private boolean flagged;
+	private Boolean flagged;
 	
 	@ManyToOne
 	@JoinColumn(name="store_id")
@@ -92,19 +92,19 @@ public class Meeting {
 		this.user = user;
 	}
 
-	public boolean isEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	public boolean isFlagged() {
+	public Boolean getFlagged() {
 		return flagged;
 	}
 
-	public void setFlagged(boolean flagged) {
+	public void setFlagged(Boolean flagged) {
 		this.flagged = flagged;
 	}
 
