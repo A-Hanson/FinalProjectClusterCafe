@@ -24,14 +24,14 @@ categories: Category[] = [];
 newPostCategory: Category = null;
 postComments: PostComment[] = [];
 newComment: PostComment = new PostComment();
-currentUser: User = null;  //JUST GETTING SET UP CORRECT
+editedComment: PostComment = null;
+currentUser: User = null;
 
 constructor(
   private postService: PostService,
   private route: ActivatedRoute,
   private router: Router,
   private categoryService: CategoryService,
-  private postCommentService: PostCommentService,
   private userService: UserService
 ) { }
 
@@ -52,13 +52,7 @@ constructor(
     this.reload();
     this.reloadCategories();
     this.loadCurrentUser();
-    // this.testArea();
   }
-// GETTING SET UP CORRECT
-  // testArea() {
-  //   this.currentUser = new User();
-  //   this.currentUser.role = "standard";
-  // }
 
   reload() {
     this.postService.index().subscribe(
@@ -134,6 +128,7 @@ constructor(
   deletedPost(id: number): void {
     this.postService.delete(id).subscribe(
       data => {
+        this.selected = null;
         this.reload();
       },
       err => {
@@ -144,7 +139,6 @@ constructor(
 
   addComment(id: number) {
 
-    // console.log(this.newPost);
     this.postService.addCommentForPost(this.selected.id, this.newComment).subscribe(
       data => {
         this.newComment = new PostComment();
@@ -154,7 +148,36 @@ constructor(
         console.error('Error: ' + err);
       }
     );
+  }
+  setEditComment(comment: PostComment) {
+    this.editedComment = comment;
+  }
 
+  editComment(comment: PostComment) {
+    this.postService.editCommentForPost(comment.post.id, comment.id, comment).subscribe(
+      data => {
+        this.reloadComments();
+      },
+      err => {
+        console.error('Error editing comment: ' + err);
+      }
+    );
+  }
+
+  flagComment(comment: PostComment) {
+    comment.flagged = true;
+    this.editComment(comment);
+  }
+
+  deleteComment(comment: PostComment) {
+    this.postService.deleteCommentForPost(comment.post.id, comment.id).subscribe(
+      data => {
+        this.reloadComments();
+      },
+      err => {
+        console.error('Error deleting comment: ' + err);
+      }
+    );
   }
 
 }
