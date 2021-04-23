@@ -34,6 +34,18 @@ public class PostController {
 		return postSvc.index();
 	}
 	
+	@GetMapping("posts/flagged") 
+	public List<Post> indexFlagged(HttpServletRequest req, 
+			HttpServletResponse res,
+			Principal principal){
+//		All flagged posts to an admin
+		List<Post> posts = postSvc.indexFlagged(principal.getName());
+		if (posts == null) {
+			res.setStatus(403);
+		}
+		return posts;
+	}
+	
 	@GetMapping("posts/{id}") 
 	public Post show(@PathVariable int id, 
 					HttpServletRequest req, 

@@ -8,6 +8,7 @@ import com.skilldistillery.clustercafe.entities.Post;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 	List<Post> findByEnabledTrue();
+	List<Post> findByFlaggedTrueAndEnabledTrue();
 	Post findByIdAndEnabledTrue(int id);
 	Post findByIdAndEnabledTrueAndUser_Username(int id, String username);
 }
