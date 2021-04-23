@@ -1,0 +1,14 @@
+#banner{
+  /* width: 500px;
+  height: 300px; */
+  margin:auto;
+  text-align:center; /*centers horizontally*/
+  /* line-height:300px; same as height and for centering vertically */
+}
+.header {
+  padding: 10px;
+  text-align: center;
+  background: #534a4b;
+  color: white;
+  font-size: 30px;
+}
