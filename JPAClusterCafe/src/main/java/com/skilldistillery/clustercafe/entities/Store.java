@@ -30,7 +30,7 @@ public class Store {
 	
 	private String category;
 	
-	private Boolean enabled;
+	private Boolean enabled = true;
 
 	public Store() {
 		super();
@@ -108,11 +108,11 @@ public class Store {
 		this.category = category;
 	}
 
-	public boolean isEnabled() {
+	public Boolean isEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 

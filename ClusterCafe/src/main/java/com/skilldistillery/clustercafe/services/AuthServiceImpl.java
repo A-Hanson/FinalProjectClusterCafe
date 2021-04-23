@@ -27,6 +27,7 @@ public class AuthServiceImpl implements AuthService {
 		user.setEnabled(true);
 		Store store = new Store();// DEBUGGING MODE ONLY
 		store.setId(1);// DEBUGGING MODE ONLY
+		store.setEnabled(true);
 		user.setStore(store); // DEBUGGING MODE ONLY
 
 		userRepo.saveAndFlush(user);

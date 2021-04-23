@@ -1,3 +1,5 @@
+import { Store } from "./store";
+
 export class User {
 
   id: number
@@ -10,7 +12,7 @@ export class User {
   pronouns: string;
   dob: string;
   age: number;
-  location: string;
+  store: Store;
   enabled: boolean;
   role: string;
   gender: string;
@@ -27,7 +29,7 @@ constructor(
   pronouns?: string,
   dob?: string,
   age?: number,
-  location?: string,
+  store?: Store,
   enabled?: boolean,
   role?: string,
   gender?: string,
@@ -43,7 +45,7 @@ constructor(
     this.pronouns = pronouns;
     this.dob = dob;
     this.age = age;
-    this.location = location;
+    this.store = store;
     this.enabled = enabled;
     this.role = role;
     this.gender = gender;
