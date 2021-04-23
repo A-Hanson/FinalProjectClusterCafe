@@ -347,8 +347,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `clustercafedb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (1, 'test', '$2a$10$l0e1qFzGwkUQRpNAj15Tau064aiixnS9pLi5VlYvwJMzHxwlTaWUu', 'test@test.com', 'Thor', 'Bird', NULL, 'He / His', '2007-05-15', 1, 'standard', 'male', '2021-04-20', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (2, 'admin', '$2a$10$/qvYRJCxHUa4Qi2.WL0LqOsvUIpSxfxvdkNYrwX/UgrpenaOg/ie6', 'admin@admin.com', 'Adam', 'Min', NULL, 'He / His', '1995-10-10', 1, 'admin', 'male', '2021-4-22', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (1, 'test', '$2a$10$l0e1qFzGwkUQRpNAj15Tau064aiixnS9pLi5VlYvwJMzHxwlTaWUu', 'test@test.com', 'Thor', 'Bird', NULL, 'He / His', '2007-05-15', 1, 'standard', 'Male', '2021-04-20', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (2, 'admin', '$2a$10$/qvYRJCxHUa4Qi2.WL0LqOsvUIpSxfxvdkNYrwX/UgrpenaOg/ie6', 'admin@admin.com', 'Adam', 'Min', NULL, 'He / His', '1995-10-10', 1, 'admin', 'Male', '2021-04-22', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `img_url`, `pronouns`, `dob`, `enabled`, `role`, `gender`, `created_at`, `store_id`) VALUES (3, 'test2', '$2a$10$l0e1qFzGwkUQRpNAj15Tau064aiixnS9pLi5VlYvwJMzHxwlTaWUu', 'test2@test.com', 'Bad', 'Human', NULL, 'He / His', '2000-09-09', 0, 'standard', 'Male', '2021-04-23', 1);
 
 COMMIT;
 
@@ -384,6 +385,8 @@ COMMIT;
 START TRANSACTION;
 USE `clustercafedb`;
 INSERT INTO `meeting` (`id`, `name`, `description`, `category_id`, `user_id`, `enabled`, `flagged`, `store_id`, `created_at`, `updated_at`, `meeting_date`) VALUES (1, 'Jogging', 'Let\'s go flying!!!', 1, 1, 1, 0, 1, '2021-04-20 00:00:00.00', NULL, '2021-04-24 00:00:00.00');
+INSERT INTO `meeting` (`id`, `name`, `description`, `category_id`, `user_id`, `enabled`, `flagged`, `store_id`, `created_at`, `updated_at`, `meeting_date`) VALUES (2, 'Bad Meeting', 'Baaaaaaaaad', 1, 1, 1, 1, 1, '2021-04-20 00:00:00.00', '2021-04-22 00:00:00.00', '2021-04-26 00:00:00.00');
+INSERT INTO `meeting` (`id`, `name`, `description`, `category_id`, `user_id`, `enabled`, `flagged`, `store_id`, `created_at`, `updated_at`, `meeting_date`) VALUES (3, 'Deleted Meeting', 'Already deleted', 1, 1, 0, 1, 1, '2021-04-20 00:00:00.00', '2021-04-22 00:00:00.00', '2021-04-26 00:00:00.00');
 
 COMMIT;
 
@@ -403,7 +406,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `clustercafedb`;
-INSERT INTO `post` (`id`, `title`, `content`, `created_at`, `updated_at`, `enabled`, `flagged`, `user_id`, `category_id`) VALUES (1, 'Looking for other runners', 'Entry level runner seeks other entry level runners to run with.', '2021-04-20', NULL, 1, 0, 1, 1);
+INSERT INTO `post` (`id`, `title`, `content`, `created_at`, `updated_at`, `enabled`, `flagged`, `user_id`, `category_id`) VALUES (1, 'Looking for other runners', 'Entry level runner seeks other entry level runners to run with.', '2021-04-20 00:00:00.00', NULL, 1, 0, 1, 1);
+INSERT INTO `post` (`id`, `title`, `content`, `created_at`, `updated_at`, `enabled`, `flagged`, `user_id`, `category_id`) VALUES (2, 'Looking for REALLY FAST PEOPLE', 'ONLY FAST PEEEEEEPS', '2021-04-20 00:00:00.00', '2021-04-23 00:00:00.00', 1, 1, 1, 1);
+INSERT INTO `post` (`id`, `title`, `content`, `created_at`, `updated_at`, `enabled`, `flagged`, `user_id`, `category_id`) VALUES (3, 'Thor is the best', 'He is number 1 forever and ever.', '2021-04-20 00:00:00.00', '2021-04-23 00:00:00.00', 0, 1, 1, 1);
 
 COMMIT;
 
@@ -414,6 +419,9 @@ COMMIT;
 START TRANSACTION;
 USE `clustercafedb`;
 INSERT INTO `post_comment` (`id`, `content`, `post_id`, `user_id`, `enabled`, `flagged`, `created_at`, `updated_at`) VALUES (1, 'No silly people.', 1, 1, 1, 0, '2021-04-20 00:00:00.00', NULL);
+INSERT INTO `post_comment` (`id`, `content`, `post_id`, `user_id`, `enabled`, `flagged`, `created_at`, `updated_at`) VALUES (2, 'Boooooo, bad post', 1, 1, 1, 1, '2021-04-20 00:00:00.00', '2021-04-22 00:00:00.00');
+INSERT INTO `post_comment` (`id`, `content`, `post_id`, `user_id`, `enabled`, `flagged`, `created_at`, `updated_at`) VALUES (3, 'deleted comment here for testing', 1, 1, 0, 1, '2021-04-20 00:00:00.00', '2021-04-22 00:00:00.00');
+INSERT INTO `post_comment` (`id`, `content`, `post_id`, `user_id`, `enabled`, `flagged`, `created_at`, `updated_at`) VALUES (4, 'comment for deleted user', 1, 3, 1, 0, '2021-04-20 00:00:00.00', NULL);
 
 COMMIT;
 
@@ -424,6 +432,7 @@ COMMIT;
 START TRANSACTION;
 USE `clustercafedb`;
 INSERT INTO `cluster_group` (`id`, `name`, `description`, `created_at`, `enabled`, `img_url`, `moderator_id`) VALUES (1, 'Aurora Runners', 'Low-key casual running!', '2021-04-20 00:00:00.00', 1, NULL, 1);
+INSERT INTO `cluster_group` (`id`, `name`, `description`, `created_at`, `enabled`, `img_url`, `moderator_id`) VALUES (2, 'Admin Users', 'Admin Only!', '2021-04-20 00:00:00.00', 1, NULL, 2);
 
 COMMIT;
 
@@ -434,6 +443,7 @@ COMMIT;
 START TRANSACTION;
 USE `clustercafedb`;
 INSERT INTO `group_user` (`cluster_group_id`, `user_id`) VALUES (1, 1);
+INSERT INTO `group_user` (`cluster_group_id`, `user_id`) VALUES (2, 2);
 
 COMMIT;
 
@@ -444,6 +454,9 @@ COMMIT;
 START TRANSACTION;
 USE `clustercafedb`;
 INSERT INTO `message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `seen`, `recipient_id`) VALUES (1, 'Test Message', 'I love apples and bananas', 1, '2021-04-20 00:00:00.00', NULL, 1, NULL, 0, 1);
+INSERT INTO `message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `seen`, `recipient_id`) VALUES (2, 'Test Message to another user', 'I hate apples and bananas', 1, '2021-04-20 00:00:00.00', '2021-04-21 00:00:00.00', 1, NULL, 1, 2);
+INSERT INTO `message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `seen`, `recipient_id`) VALUES (3, 'Test Reply', 'but why?', 2, '2021-04-21 00:00:00.00', NULL, 1, 2, 0, 1);
+INSERT INTO `message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `seen`, `recipient_id`) VALUES (4, 'Test Deleted Message', 'no no no no', 1, '2021-04-20 00:00:00.00', '2021-04-20 00:00:00.00', 0, NULL, 1, 1);
 
 COMMIT;
 
@@ -454,6 +467,8 @@ COMMIT;
 START TRANSACTION;
 USE `clustercafedb`;
 INSERT INTO `group_message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `cluster_group_id`) VALUES (1, 'Test Group Message', 'Lalalalala', 1, '2021-04-20 00:00:00.00', NULL, 1, NULL, 1);
+INSERT INTO `group_message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `cluster_group_id`) VALUES (2, 'Test Reply Message', 'can you hear me?', 1, '2021-04-21 00:00:00.00', NULL, 1, 1, 1);
+INSERT INTO `group_message` (`id`, `title`, `content`, `creator_id`, `created_at`, `updated_at`, `enabled`, `parent_message_id`, `cluster_group_id`) VALUES (3, 'Test Deleted Message', 'you should be able to see me... not!', 1, '2021-04-20 00:00:00.00', '2021-04-21 00:00:00.00', 0, NULL, 1);
 
 COMMIT;
 
