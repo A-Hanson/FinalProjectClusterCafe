@@ -8,24 +8,7 @@ import { Router } from '@angular/router';
 })
 export class UserLandingPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
-
-
-  goToLogin($myParam: string = ''): void {
-    const navigationDetails: string[] = ['/login'];
-    if($myParam.length) {
-      navigationDetails.push($myParam);
-    }
-    this.router.navigate(navigationDetails);
-  }
-
-  goToRegister($myParam: string = ''): void {
-    const navigationDetails: string[] = ['/register'];
-    if($myParam.length) {
-      navigationDetails.push($myParam);
-    }
-    this.router.navigate(navigationDetails);
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }
