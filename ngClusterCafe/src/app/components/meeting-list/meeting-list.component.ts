@@ -45,6 +45,11 @@ export class MeetingListComponent implements OnInit {
     this.updateMeeting(meeting);
   }
 
+  unflagMeeting(meeting: Meeting) {
+    meeting.flagged = false;
+    this.updateMeeting(meeting);
+  }
+
 
 
   // Sending Data

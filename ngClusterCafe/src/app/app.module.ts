@@ -18,6 +18,7 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { PostCommentListComponent } from './components/postComment-list/postComment-list.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { MeetingListComponent } from './components/meeting-list/meeting-list.component';
+import { FlaggedPipe } from './pipes/flagged.pipe';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MeetingListComponent } from './components/meeting-list/meeting-list.com
     PostListComponent,
     PostCommentListComponent,
     AdminDashboardComponent,
-    MeetingListComponent
+    MeetingListComponent,
+    FlaggedPipe
   ],
   imports: [
     BrowserModule,
