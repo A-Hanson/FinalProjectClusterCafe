@@ -11,10 +11,12 @@
 <br />
 <p align="center">
   <a href="https://github.com/BryceShearn/Coding-Coverage">
-    <img src="https://traversymedia.com/downloads/cover.jpg" alt="Logo" width="550" height="350">
+    <video width="320" height="240" controls>
+  <source src="video.mov" type="video/mp4">
+</video>
   </a>
 
-  <h3 align="center">Cluster Cafe</h3>
+  <h3 align="center">Cluster Café</h3>
 
   <p align="center">
     <kbd>
