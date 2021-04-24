@@ -53,7 +53,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public Meeting update(int id, String username, Meeting meeting) {
-		Meeting updatedMeeting = meetingRepo.findByIdAndEnabledTrue(id);
+		Meeting updatedMeeting = meetingRepo.findByIdAndEnabledTrueAndUser_username(id, username);
 		if (updatedMeeting != null) {
 			if (meeting.getEnabled() != null) {
 				updatedMeeting.setEnabled(meeting.getEnabled());
