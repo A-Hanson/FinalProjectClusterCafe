@@ -9,3 +9,8 @@
   font-size:14px;
   font-weight:700;
 }
+.thumbnail{
+  width: 2%;
+  height: 2%;
+  overflow: auto;
+}
