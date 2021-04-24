@@ -17,6 +17,7 @@ export class MeetingListComponent implements OnInit {
   selected = null;
   categories: Category[] = [];
   currentUser: User = null;
+  admin: boolean = false;
 
   constructor(
     private meetingService: MeetingService,
@@ -39,6 +40,36 @@ export class MeetingListComponent implements OnInit {
     this.selected = null;
   }
 
+  flagMeeting(meeting: Meeting) {
+    meeting.flagged = true;
+    this.updateMeeting(meeting);
+  }
+
+
+
+  // Sending Data
+  updateMeeting(meeting: Meeting) {
+    this.meetingService.update(meeting).subscribe(
+      data => {
+        this.reloadMeetings();
+      },
+      err => {
+        console.error('Error updating meeting: ' + err)
+      }
+    );
+  }
+
+  deleteMeeting(meeting: Meeting) {
+    this.meetingService.delete(meeting.id).subscribe(
+      data => {
+        this.reloadMeetings();
+        this.selected = null;
+      },
+      err => {
+        console.error('Error deleting meeting: ' + err)
+      }
+    );
+  }
 
   // HELPERS
   initialLoad() {
@@ -67,9 +98,20 @@ export class MeetingListComponent implements OnInit {
 
   reloadCurrentUser() {
     this.userService.retrieveLoggedIn().subscribe(
-      data => {this.currentUser = data},
+      data => {
+        this.currentUser = data;
+        this.checkForAdmin();
+      },
       err => {console.error('Error loading current user: ' + err)}
     );
+  }
+
+  checkForAdmin() {
+    if (this.currentUser.role === 'admin') {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
   }
 
 }
