@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.clustercafe.entities.Meeting;
+import com.skilldistillery.clustercafe.entities.Store;
 import com.skilldistillery.clustercafe.entities.User;
 import com.skilldistillery.clustercafe.repositories.MeetingRepository;
 import com.skilldistillery.clustercafe.repositories.UserRepository;
@@ -43,6 +44,11 @@ public class MeetingServiceImpl implements MeetingService {
 			}
 			if (meeting.getFlagged() == null) {
 				meeting.setFlagged(false);
+			}
+			if (meeting.getStore() == null) { // DEBUGGING PURPOSES ONLY
+				Store store = new Store();
+				store.setId(1);
+				meeting.setStore(store);
 			}
 			meetingRepo.saveAndFlush(meeting);
 		} else {

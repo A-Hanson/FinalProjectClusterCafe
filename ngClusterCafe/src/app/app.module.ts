@@ -17,6 +17,7 @@ import { UserLandingPageComponent } from './components/user-landing-page/user-la
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostCommentListComponent } from './components/postComment-list/postComment-list.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { MeetingListComponent } from './components/meeting-list/meeting-list.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     UserLandingPageComponent,
     PostListComponent,
     PostCommentListComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    MeetingListComponent
   ],
   imports: [
     BrowserModule,
