@@ -26,6 +26,15 @@ public class PostServiceImpl implements PostService {
 	public List<Post> index() {
 		return postRepo.findByEnabledTrue();
 	}
+	
+	@Override
+	public List<Post> indexFlagged(String username) {
+		User user = userRepo.findByUsername(username);
+		if (user != null && user.getRole().equals("admin")) {
+			return postRepo.findByFlaggedTrueAndEnabledTrue();
+		}
+		return null;
+	}
 
 	@Override
 	public Post show(int id) {
