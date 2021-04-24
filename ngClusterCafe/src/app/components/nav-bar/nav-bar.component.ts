@@ -10,7 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NavBarComponent implements OnInit {
 
-  currentUser: User = null;
+  currentUser: User = new User();
+  loggedIn: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -19,7 +20,7 @@ export class NavBarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.checkLogin
+    // this.checkLogin();
     this.loadCurrentUser();
 
   }
@@ -31,5 +32,26 @@ export class NavBarComponent implements OnInit {
       data => {this.currentUser = data},
       err => {console.error('Error loading current user: ' + err)}
     );
+  }
+  checkAdmin(){
+    console.log(this.currentUser);
+    console.log(this.currentUser.role);
+    if (this.checkLogin() && this.loggedIn===false){
+      console.log("inside if statement");
+      this.loggedIn = true;
+      this.loadCurrentUser();
+    } else if(this.checkLogin() && this.loggedIn===true){
+    console.log("nothing");
+
+    }
+    else{
+      this.loggedIn = false;
+      this.currentUser = new User();
+    }
+
+    if (this.currentUser.role==='admin'){
+    return true;
+    }
+    return false;
   }
 }
