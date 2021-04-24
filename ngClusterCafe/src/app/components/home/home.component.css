@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+:root {
+	--primary-color: #3a4052;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Caveat', cursive;
+	line-height: 1.5;
+}
+
+h1 {
+	font-family: 'Dancing Script', cursive;
+  font-weight: 200;
+	font-size: 55px;
+	line-height: 1.2;
+	margin-bottom: 13px;
+}
+
+.test {
+  border-bottom: 1.5px solid #fff !important;
+}
+
+h3 {
+  font-size:30px;
+}
+
+.landingPageSec1 {
+	height: 75vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: #fff;
+	padding: 0px 20px 150px 0px;
+}
+
+.landingPageVidCon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: var(--primary-color) url('/https://traversymedia.com/downloads/cover.jpg') no-repeat center
+		center/cover;
+}
+
+.landingPageVidCon video {
+	min-width: 100%;
+	min-height: 100%;
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	object-fit: cover;
+}
+
+.landingPageVidCon:after {
+	content: '';
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+}
+
+.content {
+	z-index: 2;
+  border: 1px outset white;
+  border-radius: 10px;
+  padding: 20px 20px 30px 20px;
+  box-shadow: 1px 1px 5px 1px #fff !important;
+  opacity: 2;
+}
+
+.content button {
+	display: inline-block;
+	padding: 1px 25px;
+	background: var(--primary-color);
+	color: #fff;
+	border-radius: 10px;
+	border: solid #fff 1px;
+	margin-top: 25px;
+  margin-left: 5px;
+	opacity: 0.7;
+  font-size:25px;
+}
+
+.content button:nth-child(even) {
+  padding: 1px 20px;
+  font-size:25px;
+}
+
+.btn:hover {
+	transform: scale(0.97);
+  background: #fff;
+  background-color: #fff !important;
+  opacity: 0.8 !important;
+  box-shadow: 1px 1px 20px 1px #fff !important;
+  color: #000 !important;
+  color: #000;
+}
+
+.code {
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.changing-text {
+  background-color: #f8e100;
+  font-size: 1em;
+  line-height: 0.9em;
+  margin-left: 0.15em;
+  margin-right: 0.15em;
+  margin-top: 0.15em;
+  padding-left: 0.125em;
+  padding-right: 0.125em;
+  text-transform: capitalize;
+  will-change: width;
+  font-family: "Bubbler One","webster", marketweb, Market OT, sans-serif;
+}
+
+.bracket {
+  font-size: 1.4em;
+  line-height: 1.15;
+  font-family: tenso, sans-serif;
+  font-weight: 500;
+}
