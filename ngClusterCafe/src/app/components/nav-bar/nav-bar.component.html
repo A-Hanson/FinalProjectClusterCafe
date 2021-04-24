@@ -18,8 +18,8 @@
         <li class="nav-item" *ngIf="checkLogin()">
           <a class="nav-link"  [routerLink]="['/posts']"> Posts </a>
         </li>
-        <li class="nav-item" *ngIf="checkLogin()">
-          <a class="nav-link" *ngIf="currentUser.role === 'admin'" [routerLink]="['/adminDashboard']"> Admin </a>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="currentUser.role==='admin'" [routerLink]="['/adminDashboard']"> Admin </a>
         </li>
 
         <!-- OTHER PAGES HERE -->

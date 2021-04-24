@@ -19,7 +19,7 @@ export class NavBarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.checkLogin
     this.loadCurrentUser();
 
   }
