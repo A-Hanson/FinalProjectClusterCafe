@@ -10,13 +10,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/BryceShearn/Coding-Coverage">
+  <a href="https://github.com/BryceShearn/FinalProject">
+ </a>
     <img width="650" src="https://user-images.githubusercontent.com/71369385/115953240-485e2800-a4b8-11eb-89c4-b0338893b9c5.mp4" style="max-width: 650px">
-  </a>
     
-
-
-
   <h3 align="center">Cluster Café</h3>
 
   <p align="center">
