@@ -1,1 +1,13 @@
-<p>meeting-list works!</p>
+
+<!-- list all enabled meetings -->
+<div ng-hide="selected">
+	<div *ngFor="let meeting of meetings" ng-click="displayMeeting(meeting)" class="card">
+	 <div class="card-body">
+	    <div>
+	    		<h5 class="card-title" >{{meeting.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{meeting.user.firstName}} {{meeting.user.lastName}}</h6>
+	    </div>
+		<p class="card-text">{{meeting.description}}</p>
+	 </div>
+	</div>
+</div>

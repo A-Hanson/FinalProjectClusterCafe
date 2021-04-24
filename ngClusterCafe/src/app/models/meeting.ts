@@ -6,8 +6,9 @@ export class Meeting {
   id: number;
   name: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  creationDate: string;
+  updatedDate: string;
+  meetingDate: string;
   enabled: boolean;
   flagged: boolean;
   store: Store;
@@ -18,8 +19,9 @@ export class Meeting {
     id?: number,
     name?: string,
     description?: string,
-    createdAt?: string,
-    updatedAt?: string,
+    creationDate?: string,
+    updatedDate?: string,
+    meetingDate?: string,
     enabled?: boolean,
     flagged?: boolean,
     store?: Store,
@@ -29,8 +31,9 @@ export class Meeting {
   this.id = id;
   this.name = name;
   this.description = description;
-  this.createdAt = createdAt;
-  this.updatedAt = updatedAt;
+  this.creationDate = creationDate;
+  this.updatedDate = updatedDate;
+  this.meetingDate = meetingDate;
   this.enabled = enabled;
   this.flagged = flagged;
   this.store = store;
