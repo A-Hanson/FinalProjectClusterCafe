@@ -122,4 +122,13 @@ export class PostService {
       })
     );
   }
+
+  indexFlaggedComments(): Observable<PostComment[]> {
+    return this.http.get<PostComment[]>(this.url + '/comments/flagged', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Unable to load flagged Post Comments for admin');
+      })
+    );
+  }
 }

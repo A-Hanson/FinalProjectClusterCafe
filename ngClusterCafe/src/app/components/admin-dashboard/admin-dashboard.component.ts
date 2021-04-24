@@ -17,7 +17,6 @@ export class AdminDashboardComponent implements OnInit {
   posts: Post[] = [];
   selectedPost: Post = null;
   categories: Category[] = [];
-  newPostCategory: Category = null;
   postComments: PostComment[] = [];
   selectedComment: PostComment = null;
   currentUser: User = null;
@@ -63,9 +62,39 @@ export class AdminDashboardComponent implements OnInit {
     )
   }
 
+  selectPostComment(comment: PostComment){
+    this.selectedComment = comment;
+  }
+
+  unflagPostComment(comment: PostComment) {
+    comment.flagged = false;
+    this.postService.editCommentForPost(comment.post.id, comment.id, comment).subscribe(
+      data => {
+        this.loadFlaggedPostComments();
+      },
+      err => {
+        console.error('Error in unflagPostComment()')
+        console.error('Error unflagging postComment for admin' + err)
+      }
+    );
+  }
+
+  deletePostComment(comment: PostComment) {
+    this.postService.deleteCommentForPost(comment.post.id, comment.id).subscribe(
+      data => {
+        this.loadFlaggedPostComments();
+      },
+      err => {
+        console.error('Error in deletePostComment()')
+        console.error('Error deleting postComment for admin' + err)
+      }
+    );
+  }
+
 // Helpers
   loadInitial() {
     this.loadFlaggedPosts();
+    this.loadFlaggedPostComments();
   }
 
   loadFlaggedPosts() {
@@ -76,6 +105,18 @@ export class AdminDashboardComponent implements OnInit {
       err => {
         console.error('Error in loadFlaggedPosts()')
         console.error('Error loading flagged posts for admin' + err)
+      }
+    )
+  }
+
+  loadFlaggedPostComments() {
+    this.postService.indexFlaggedComments().subscribe(
+      data => {
+        this.postComments = data
+      },
+      err => {
+        console.error('Error in loadFlaggedPostComments()')
+        console.error('Error loading flagged comments for admin' + err)
       }
     )
   }

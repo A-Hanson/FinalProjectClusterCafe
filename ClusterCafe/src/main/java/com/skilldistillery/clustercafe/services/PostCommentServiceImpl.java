@@ -32,6 +32,15 @@ public class PostCommentServiceImpl implements PostCommentService {
 	public List<PostComment> index() {
 		return pcRepo.findByEnabledTrue();
 	}
+	
+	@Override
+	public List<PostComment> indexFlagged(String username) {
+		User user = userRepo.findByUsername(username);
+		if (user != null && user.getRole().equals("admin")) {
+			return pcRepo.findByFlaggedTrueAndEnabledTrue();
+		}
+		return null;
+	}
 
 	@Override
 	public List<PostComment> indexByPost(int id) {

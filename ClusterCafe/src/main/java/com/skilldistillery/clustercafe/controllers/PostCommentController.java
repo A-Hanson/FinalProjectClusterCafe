@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.clustercafe.entities.Post;
 import com.skilldistillery.clustercafe.entities.PostComment;
 import com.skilldistillery.clustercafe.services.PostCommentService;
 
@@ -27,6 +28,17 @@ public class PostCommentController {
 	
 	@Autowired
 	private PostCommentService pcSvc;
+	
+	@GetMapping("comments/flagged") 
+	public List<PostComment> indexFlagged(HttpServletRequest req, 
+			HttpServletResponse res,
+			Principal principal) {
+		List<PostComment> comments = pcSvc.indexFlagged(principal.getName());
+		if (comments == null) {
+			res.setStatus(403);
+		}
+		return comments;
+	}
 	
 	@GetMapping("{id}/comments")
 	public List<PostComment> allCommentsForPost(@PathVariable int id,
