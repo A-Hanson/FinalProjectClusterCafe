@@ -33,6 +33,17 @@ public class MeetingController {
 	return meetingSvc.showAllForAdmin();
 	}
 	
+	@GetMapping("meetings/flagged")
+	public List<Meeting> showAllFlaggedForAdmin(HttpServletRequest req, 
+			HttpServletResponse res,
+			Principal principal) {
+		List<Meeting> meetings = meetingSvc.showAllFlaggedForAdmin(principal.getName());
+		if (meetings == null) {
+			res.setStatus(403);
+		}
+		return meetings;
+	}
+	
 	@GetMapping("meetings/{id}")
 	public Meeting show(@PathVariable int id, HttpServletRequest req, HttpServletResponse res) {
 		Meeting meeting = meetingSvc.show(id);

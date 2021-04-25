@@ -74,4 +74,14 @@ export class MeetingService {
     };
     return httpOptions;
   }
+
+  // ADMIN REQUESTS
+  indexFlagged(): Observable<Meeting[]> {
+    return this.http.get<Meeting[]>(this.url + '/flagged', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Unable to load flagged meetings for Admin');
+      })
+    );
+  }
 }

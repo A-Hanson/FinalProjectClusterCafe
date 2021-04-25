@@ -30,6 +30,15 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 	
 	@Override
+	public List<Meeting> showAllFlaggedForAdmin(String username) {
+		User user = userRepo.findByUsername(username);
+		if (user != null && user.getRole().equals("admin")) {
+			return meetingRepo.findByFlaggedTrueAndEnabledTrue();			
+		}
+		return null;
+	}
+	
+	@Override
 	public Meeting show(int id) {
 		return meetingRepo.findByIdAndEnabledTrue(id);
 	}
