@@ -20,6 +20,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { MeetingListComponent } from './components/meeting-list/meeting-list.component';
 import { FlaggedPipe } from './pipes/flagged.pipe';
 import { NewMeetingComponent } from './components/new-meeting/new-meeting.component';
+import { CategoryService } from './services/category.service';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { NewMeetingComponent } from './components/new-meeting/new-meeting.compon
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

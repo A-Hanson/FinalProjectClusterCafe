@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MeetingListComponent implements OnInit {
   meetings: Meeting[] = [];
-  selected = null;
+  selected: Meeting = null;
   categories: Category[] = [];
   currentUser: User = null;
   admin: boolean = false;
@@ -50,7 +50,14 @@ export class MeetingListComponent implements OnInit {
     meeting.flagged = false;
     this.updateMeeting(meeting);
   }
-
+// Talking to child component
+  addMeeting(newMeeting: Meeting) {
+    if (newMeeting) {
+      this.selected = newMeeting;
+    } else {
+      this.addNewMeeting = false;
+    }
+  }
 
 
   // Sending Data

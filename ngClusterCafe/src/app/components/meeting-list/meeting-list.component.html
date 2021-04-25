@@ -14,11 +14,21 @@
     </div>
   </div>
 </div>
+<!-- Add a new Meeting -->
 <div *ngIf="addNewMeeting">
-  <app-new-meeting></app-new-meeting>
-  <button class="btn btn-outline-danger" (click)="addNewMeeting=false">Cancel</button>
+  <ul>
+    <li *ngFor="let c of categories">{{c.name}}</li>
+  </ul>
+  <app-new-meeting (newMeetingEvent)="addMeeting($event)"></app-new-meeting>
 </div>
-<div *ngIf="!selected" class="container overflow-hidden p-4">
+<!-- Display Details of Meeting -->
+<div *ngIf="selected && !addNewMeeting" class="container overflow-hidden p-4">
+  <h2>FINISH ME</h2>
+  <h4>Meeting Id: {{selected.id}}, name: {{selected.name}}</h4>
+  <button class="btn btn-primary" (click)='displayAll()'>Go Back</button>
+</div>
+<!-- Show All Meetings -->
+<div *ngIf="!selected && !addNewMeeting" class="container overflow-hidden p-4">
 	<div *ngFor="let meeting of meetings | flagged: currentUser.role" ng-click="displayMeeting(meeting)" class="card" >
     <div class="row g-0">
       <div class="col-md-1">
@@ -29,9 +39,17 @@
       </div>
       <div class="col-md-9">
         <div class="card-body">
-          <div>
+          <div class="row">
+            <div class="col">
               <h5 class="card-title" >{{meeting.name}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{meeting.user.firstName}} {{meeting.user.lastName}}</h6>
+            </div>
+            <div class="col d-flex justify-content-end">
+              <p>
+                Happening at <br>
+                {{meeting.meetingDate | date: "short"}}
+              </p>
+            </div>
           </div>
         <p class="card-text">{{meeting.description}}</p>
         </div>
@@ -39,7 +57,7 @@
       <div class="col-md-2">
         <div class="card-body">
             <div class="card-text text-end">
-
+              <button class="btn btn-info" (click)='displayMeeting(meeting)'>More Info</button>
               <button type="button" class="btn btn-warning" (click)="unflagMeeting(meeting)" *ngIf="meeting.flagged">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
                   <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
@@ -57,13 +75,9 @@
                   <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                 </svg>
               </button>
-
             </div>
-
-
         </div>
       </div>
-
     </div>
 	</div>
 </div>
