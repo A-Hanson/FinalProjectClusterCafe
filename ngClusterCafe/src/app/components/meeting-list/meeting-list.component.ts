@@ -18,6 +18,7 @@ export class MeetingListComponent implements OnInit {
   categories: Category[] = [];
   currentUser: User = null;
   admin: boolean = false;
+  addNewMeeting = false;
 
   constructor(
     private meetingService: MeetingService,

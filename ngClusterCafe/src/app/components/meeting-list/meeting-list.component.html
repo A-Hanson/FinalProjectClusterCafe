@@ -1,11 +1,33 @@
-<div class="container">
+
 <!-- list all enabled meetings -->
-<div ng-hide="selected">
-  <h3 class="warning">DEBUGGING STATEMENT. Current user role: {{currentUser.role}}</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <h4 class="warning">DEBUGGING MODE: User role - {{currentUser.role}}</h4>
+      <h2>Meetings</h2>
+      <h5>See what others have planned</h5>
+    </div>
+    <div class="col-md-2 d-flex" *ngIf="!addNewMeeting && !selected">
+      <div class="align-self-end">
+        <button class="btn btn-primary" (click)="addNewMeeting=true">Add New Meeting</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="addNewMeeting">
+  <app-new-meeting></app-new-meeting>
+  <button class="btn btn-outline-danger" (click)="addNewMeeting=false">Cancel</button>
+</div>
+<div *ngIf="!selected" class="container overflow-hidden p-4">
 	<div *ngFor="let meeting of meetings | flagged: currentUser.role" ng-click="displayMeeting(meeting)" class="card" >
     <div class="row g-0">
-      <div class="col-md-10">
+      <div class="col-md-1">
+        <div class="card-text">
+          <h5 id="card-category" class="card-body bg-light">{{meeting.category.name}}</h5>
+        </div>
 
+      </div>
+      <div class="col-md-9">
         <div class="card-body">
           <div>
               <h5 class="card-title" >{{meeting.name}}</h5>
@@ -45,4 +67,4 @@
     </div>
 	</div>
 </div>
-</div>
+
