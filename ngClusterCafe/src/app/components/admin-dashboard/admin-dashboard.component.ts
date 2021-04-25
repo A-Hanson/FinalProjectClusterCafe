@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
+import { Meeting } from 'src/app/models/meeting';
 import { Post } from 'src/app/models/post';
 import { PostComment } from 'src/app/models/postComment';
 import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
+import { MeetingService } from 'src/app/services/meeting.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,6 +21,8 @@ export class AdminDashboardComponent implements OnInit {
   categories: Category[] = [];
   postComments: PostComment[] = [];
   selectedComment: PostComment = null;
+  meetings: Meeting[] = [];
+  selectedMeeting: Meeting = null;
   currentUser: User = null;
 
   constructor(
@@ -26,7 +30,8 @@ export class AdminDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private categoryService: CategoryService,
-    private userService: UserService
+    private userService: UserService,
+    private meetingService: MeetingService
   ) { }
 
   ngOnInit(): void {
@@ -91,6 +96,36 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
+  selectMeeting(meeting: Meeting) {
+    this.selectedMeeting = meeting;
+  }
+
+  unflagMeeting(meeting: Meeting) {
+    meeting.flagged = false;
+    this.meetingService.update(meeting).subscribe(
+      data => {
+        this.loadFlaggedMeetings();
+      },
+      err => {
+        console.error('Error in unflagMeeting()')
+        console.error('Error updating Meeting for admin' + err)
+      }
+    )
+  }
+
+  deleteMeeting(meeting: Meeting) {
+    meeting.flagged = false;
+    this.meetingService.delete(meeting.id).subscribe(
+      data => {
+        this.loadFlaggedMeetings();
+      },
+      err => {
+        console.error('Error in deleteMeeting()')
+        console.error('Error deleting Meeting for admin' + err)
+      }
+    )
+  }
+
 // Helpers
   reloadCurrentUser() {
     this.userService.retrieveLoggedIn().subscribe(
@@ -115,6 +150,7 @@ export class AdminDashboardComponent implements OnInit {
   loadInitial() {
     this.loadFlaggedPosts();
     this.loadFlaggedPostComments();
+    this.loadFlaggedMeetings();
   }
 
   loadFlaggedPosts() {
@@ -137,6 +173,18 @@ export class AdminDashboardComponent implements OnInit {
       err => {
         console.error('Error in loadFlaggedPostComments()')
         console.error('Error loading flagged comments for admin' + err)
+      }
+    )
+  }
+
+  loadFlaggedMeetings() {
+    this.meetingService.indexFlagged().subscribe(
+      data => {
+        this.meetings = data;
+      },
+      err => {
+        console.error('Error in loadFlaggedMeetings()')
+        console.error('Error loading flagged meetings for admin' + err)
       }
     )
   }
