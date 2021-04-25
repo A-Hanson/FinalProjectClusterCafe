@@ -17,7 +17,6 @@ import { UserService } from 'src/app/services/user.service';
 export class PostListComponent implements OnInit {
 posts: Post[] = [];
 selected = null;
-title = 'ngPost';
 newPost = new Post();
 editPost = null;
 categories: Category[] = [];
@@ -26,6 +25,7 @@ postComments: PostComment[] = [];
 newComment: PostComment = new PostComment();
 editedComment: PostComment = null;
 currentUser: User = null;
+admin: boolean = false;
 
 constructor(
   private postService: PostService,
@@ -76,14 +76,22 @@ constructor(
 
   loadCurrentUser() {
     this.userService.retrieveLoggedIn().subscribe(
-      data => {this.currentUser = data},
+      data => {
+        this.currentUser = data
+        this.checkForAdmin();
+      },
       err => {console.error('Error loading current user: ' + err)}
     );
   }
 
-  getNumberOfPosts = function() {
-    return this.posts.length;
+  checkForAdmin() {
+    if (this.currentUser.role === 'admin') {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
   }
+
   displayPost(post) {
     this.selected = post;
     this.reloadComments();
@@ -127,6 +135,11 @@ constructor(
 
   flagPost(post: Post) {
     post.flagged = true;
+    this.updatePost(post, false);
+  }
+
+  unflagPost(post: Post) {
+    post.flagged = false;
     this.updatePost(post, false);
   }
 

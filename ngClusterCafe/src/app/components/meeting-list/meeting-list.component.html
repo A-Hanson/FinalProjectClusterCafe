@@ -1,7 +1,7 @@
-
+<div class="container">
 <!-- list all enabled meetings -->
 <div ng-hide="selected">
-  <h3>DEBUGGING STATEMENT. Current user role: {{currentUser.role}}</h3>
+  <h3 class="warning">DEBUGGING STATEMENT. Current user role: {{currentUser.role}}</h3>
 	<div *ngFor="let meeting of meetings | flagged: currentUser.role" ng-click="displayMeeting(meeting)" class="card" >
     <div class="row g-0">
       <div class="col-md-10">
@@ -44,4 +44,5 @@
 
     </div>
 	</div>
+</div>
 </div>
