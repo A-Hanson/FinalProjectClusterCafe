@@ -30,7 +30,7 @@ export class AdminDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadInitial();
+    this.reloadCurrentUser();
   }
 
   selectPost(post: Post) {
@@ -92,6 +92,26 @@ export class AdminDashboardComponent implements OnInit {
   }
 
 // Helpers
+  reloadCurrentUser() {
+    this.userService.retrieveLoggedIn().subscribe(
+      data => {
+        this.currentUser = data;
+        console.log("user loaded")
+        this.checkForAdmin();
+      },
+      err => {console.error('Error loading current user: ' + err)}
+    );
+  }
+
+  checkForAdmin() {
+    if (this.currentUser.role === 'admin') {
+      console.log("user is an admin")
+      this.loadInitial()
+    } else {
+      this.router.navigateByUrl('notFound');
+    }
+  }
+
   loadInitial() {
     this.loadFlaggedPosts();
     this.loadFlaggedPostComments();
