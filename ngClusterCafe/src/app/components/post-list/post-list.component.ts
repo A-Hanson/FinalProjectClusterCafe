@@ -18,6 +18,7 @@ export class PostListComponent implements OnInit {
 posts: Post[] = [];
 selected = null;
 newPost = new Post();
+addNewPost: boolean = false;
 editPost = null;
 categories: Category[] = [];
 newPostCategory: Category = null;
@@ -53,7 +54,7 @@ constructor(
     this.reloadCategories();
     this.loadCurrentUser();
   }
-
+// LOAD INFO
   reload() {
     this.postService.index().subscribe(
       data => {this.posts = data},
@@ -91,7 +92,7 @@ constructor(
       this.admin = false;
     }
   }
-
+// DISPLAY
   displayPost(post) {
     this.selected = post;
     this.reloadComments();
@@ -100,12 +101,16 @@ constructor(
   displayTable(): void {
     this.selected = null;
   }
-  addPost(): void {
+  cancelAddPost() {
+    this.newPost = new Post();
+    this.addNewPost = false;
+  }
 
-    console.log(this.newPost);
+  addPost(): void {
     this.postService.create(this.newPost).subscribe(
       data => {
         this.newPost = new Post();
+        this.addNewPost = false;
         this.reload();
       },
       err => {

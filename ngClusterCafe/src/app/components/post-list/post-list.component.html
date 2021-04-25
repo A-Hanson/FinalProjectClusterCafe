@@ -1,12 +1,49 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col">
+    <div class="col-md-10">
       <h4 class="warning">DEBUGGING MODE: User role - {{currentUser.role}}</h4>
       <h2>Posts</h2>
       <h5>Let others know what you are looking for</h5>
     </div>
+    <div class="col-md-2 d-flex" *ngIf="!addNewPost && !selected">
+      <div class="align-self-end">
+        <button class="btn btn-primary" (click)="addNewPost = true">Add New Post</button>
+      </div>
+    </div>
   </div>
-
+</div>
+<!-- ADD A NEW POST -->
+<div class="container overflow-hidden p-4" *ngIf='!selected && addNewPost'>
+  <form class="vertical-input-group" >
+    <div class="row g-2">
+      <div class="col p-3">
+          <label for="newTitle" class="form-label">Title</label>
+          <input type="text" id="newTitle" name='title' placeholder="Title" [(ngModel)]='newPost.title' class="form-control">
+      </div>
+      <div class="col p-3">
+          <label for="newCategory" class="form-label">Category</label>
+          <select id='newCategory' name='category' [(ngModel)]='newPost.category.id' class="form-control">
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{category.name}}
+            </option>
+          </select>
+      </div>
+    </div>
+    <div class="row g-2">
+      <div class="col p-3">
+        <div class="form-floating">
+          <label for="floatingTextarea2">Adventure awaits</label>
+          <textarea class="form-control" placeholder="I am looking for..." id="floatingTextarea2" style="height: 100px" [(ngModel)]='newPost.content'></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row g-2 d-flex flex-row-reverse">
+      <button (click)='addPost()' type="submit" class="btn btn-success btn">New Post</button>
+      <button (click)='cancelAddPost()' type="submit" class="btn btn-danger btn">Cancel</button>
+    </div>
+  </form>
+  <hr>
+</div>
 <!-- detail div -->
 <div *ngIf='selected && !editPost'>
   <p>Post Id: {{selected.id}}</p>
@@ -35,7 +72,7 @@
 
 </div>
 <!-- See All Posts -->
-<div *ngIf="!selected">
+<div *ngIf="!selected" class="container overflow-hidden p-4">
 	<div *ngFor="let post of posts | flagged: currentUser.role" ng-click="displayPost(post)" class="card" >
     <div class="row g-0">
       <div class="col-md-1">
@@ -93,22 +130,6 @@
 	</div>
 </div>
 
-<form *ngIf='!selected' class="vertical-input-group" >
-  <div class="input-group">
-  <input type="text" name='title' placeholder="Title" [(ngModel)]='newPost.title' >
-  </div>
-  <div class="input-group">
-  <input type="text" name='XXXX' placeholder="Content" [(ngModel)]='newPost.content'>
-  </div>
-  <div class ="input-group">
-    <select id='category' name='category' [(ngModel)]='newPost.category.id'>
-    <option *ngFor="let category of categories" [value]="category.id">
-      {{category.name}}
-    </option>
-  </select>
-  </div>
-  <button (click)='addPost()' type="submit" class="btn btn-success btn-sm">New Post</button>
-  </form>
 <!-- DISPLAY A POST'S COMMENTS -->
   <div *ngIf='selected && !editPost' class="container">
     <h4>Comments</h4>
@@ -166,4 +187,4 @@
 		</form>
 	</div>
 
-</div>
+
