@@ -35,23 +35,36 @@
 
 </div>
 <!-- See All Posts -->
-<div ng-hide="selected">
+<div *ngIf="!selected">
 	<div *ngFor="let post of posts | flagged: currentUser.role" ng-click="displayPost(post)" class="card" >
     <div class="row g-0">
-      <div class="col-md-10">
+      <div class="col-md-1">
+        <div class="card-text">
+          <h5 id="card-category" class="card-body bg-light">{{post.category.name}}</h5>
+        </div>
+
+      </div>
+      <div class="col-md-9">
 
         <div class="card-body">
           <div>
-              <h5 class="card-title" >{{post.name}}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{{post.user.firstName}} {{post.user.lastName}}</h6>
+              <h5 class="card-title" >{{post.title}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                {{post.category.name}} <br>
+                {{post.user.firstName}} {{post.user.lastName}}
+              </h6>
           </div>
-        <p class="card-text">{{post.description}}</p>
+        <p class="card-text">{{post.content}}</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Posted: {{post.createdAt | date: "short"}}</small>
+          <small class="text-muted" *ngIf="post.updatedAt">, Updated At: {{post.updatedAt | date: "short"}}</small>
         </div>
       </div>
       <div class="col-md-2">
         <div class="card-body">
-            <div class="card-text text-end">
-
+            <div class="card-text text-center">
+              <button class="btn btn-info" (click)='displayPost(post)'>More Info</button>
               <button type="button" class="btn btn-warning" (click)="unflagPost(post)" *ngIf="post.flagged">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
                   <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
@@ -79,31 +92,7 @@
     </div>
 	</div>
 </div>
-<table class="table table-striped table-hover" *ngIf='!selected'>
-  <thead class="thead thead-dark">
-    <th>Title</th>
-    <th>Created At</th>
-    <th>Content</th>
-    <th>Author</th>
-    <th></th>
-    <th *ngIf="currentUser.role==='admin'">Delete</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let post of posts">
-      <td (click)='displayPost(post)'>{{post.title}}</td>
-      <td>{{post.createdAt | date:'short' }}</td>
-      <td> {{post.content}}</td>
-      <td>{{post.user.firstName}} {{post.user.lastName}}</td>
-      <!-- <td><input (change)="updatePost(post, false)" type="checkbox" [(ngModel)]='post.completed'></td> -->
-      <td>
-        <button class="btn btn-info" (click)='displayPost(post)'>More Info</button>
-        <button class="btn btn-warning" (click)='flagPost(post)' *ngIf="post.user.id !== currentUser.id && currentUser.role !== 'admin' && !post.flagged">Flag</button>
-        <button class="btn btn-danger" (click)="deletedPost(post.id)" *ngIf="currentUser.role==='admin'">X</button>
-      </td>
-      <!-- <td *ngIf="currentUser.role==='admin'"><button class="btn btn-danger" (click)="deletedPost(post.id)">X</button></td> -->
-    </tr>
-  </tbody>
-</table>
+
 <form *ngIf='!selected' class="vertical-input-group" >
   <div class="input-group">
   <input type="text" name='title' placeholder="Title" [(ngModel)]='newPost.title' >
