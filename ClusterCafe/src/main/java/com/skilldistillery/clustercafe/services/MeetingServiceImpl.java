@@ -1,5 +1,6 @@
 package com.skilldistillery.clustercafe.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -38,6 +39,7 @@ public class MeetingServiceImpl implements MeetingService {
 		return null;
 	}
 	
+	
 	@Override
 	public Meeting show(int id) {
 		return meetingRepo.findByIdAndEnabledTrue(id);
@@ -69,6 +71,8 @@ public class MeetingServiceImpl implements MeetingService {
 	@Override
 	public Meeting update(int id, String username, Meeting meeting) {
 		Meeting updatedMeeting = meetingRepo.findByIdAndEnabledTrueAndUser_username(id, username);
+		System.out.println("******************************" + meetingRepo.findByIdAndEnabledTrue(id));
+		System.out.println("******************************" + meeting.getAttendees());
 		if (updatedMeeting != null) {
 			if (meeting.getEnabled() != null) {
 				updatedMeeting.setEnabled(meeting.getEnabled());
@@ -93,7 +97,22 @@ public class MeetingServiceImpl implements MeetingService {
 			}
 		} else if (meetingRepo.findByIdAndEnabledTrue(id) != null) {
 			updatedMeeting = meetingRepo.findByIdAndEnabledTrue(id);
-			updatedMeeting.setFlagged(meeting.getFlagged());
+			if (meeting.getFlagged() != null) {
+				updatedMeeting.setFlagged(meeting.getFlagged());
+			}
+			if (meeting.getAttendees() != null && meeting.getAttendees().size() > 0) {
+				List<User> managedAttendees = new ArrayList<>();
+				for (User user : userRepo.findByMeetings_Id(meeting.getId())) {
+					user.removeMeeting(updatedMeeting);
+				}
+				for (User user : meeting.getAttendees()) {
+					User userBob = userRepo.findByUsername(user.getUsername());
+					userBob.addMeeting(updatedMeeting);
+					managedAttendees.add(userBob);
+				}
+				updatedMeeting.setAttendees(managedAttendees);
+			}
+			
 		}
 		return updatedMeeting;
 	}

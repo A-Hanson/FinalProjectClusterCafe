@@ -5,8 +5,8 @@ import java.util.List;
 import com.skilldistillery.clustercafe.entities.Meeting;
 
 public interface MeetingService {
-	List <Meeting> showAllForAdmin();
-	List <Meeting> showAllFlaggedForAdmin(String username);
+	List<Meeting> showAllForAdmin();
+	List<Meeting> showAllFlaggedForAdmin(String username);
 	Meeting show(int id);
 	Meeting create(String username, Meeting meeting);
 	Meeting update(int id, String username, Meeting meeting);
