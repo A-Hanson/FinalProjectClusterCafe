@@ -20,6 +20,8 @@ export class MeetingListComponent implements OnInit {
   admin: boolean = false;
   addNewMeeting = false;
   editMeeting = false;
+  newMeeting: Meeting = new Meeting();
+  editedMeeting: Meeting = null;
 
   constructor(
     private meetingService: MeetingService,
@@ -53,34 +55,42 @@ export class MeetingListComponent implements OnInit {
   }
 
   setEditMeeting() {
-    console.log("in setEditMeeting(), value of .seleted: " + this.selected);
     this.editMeeting = true;
+    this.editedMeeting = Object.assign<Meeting, Meeting>(new Meeting(), this.selected);
   }
 
-// Talking to child component
-  addMeeting(newMeeting: Meeting) {
-    if (newMeeting) {
-      this.selected = newMeeting;
-    } else {
-      this.addNewMeeting = false;
-    }
+  cancelAddMeeting() {
+    this.newMeeting = new Meeting();
+    this.addNewMeeting = false;
   }
 
-  getUpdatedMeeting(updatedMeeting: Meeting) {
-    if (updatedMeeting !== null) {
-      this.editMeeting = false;
-      this.addNewMeeting = false;
-      this.selected = null;
-      this.updateMeeting(updatedMeeting, true);
-    } else {
-      this.editMeeting = false;
-      this.addNewMeeting = false;
-      this.selected = null;
-    }
+  sendUpdatedMeeting() {
+    this.updateMeeting(this.editedMeeting, true);
+  }
+
+  cancelUpdateMeeting() {
+    this.editedMeeting = null;
   }
 
 
   // Sending Data
+  addMeeting() {
+    this.meetingService.create(this.newMeeting).subscribe(
+      data => {
+        this.addNewMeeting = false;
+        this.selected = this.newMeeting;
+        this.reloadMeetings();
+        this.newMeeting = new Meeting();
+      },
+      err => {
+        console.error('Error creating Meeting: ' + err);
+        this.addNewMeeting = false;
+        this.reloadMeetings();
+        this.newMeeting = new Meeting();
+      }
+    )
+  }
+
   updateMeeting(meeting: Meeting, display:boolean = false) {
     this.meetingService.update(meeting).subscribe(
       data => {

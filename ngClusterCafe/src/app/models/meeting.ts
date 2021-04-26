@@ -13,7 +13,7 @@ export class Meeting {
   flagged: boolean;
   store: Store;
   user: User;
-  category: Category;
+  category: Category = new Category();
 
   constructor(
     id?: number,
@@ -38,6 +38,6 @@ export class Meeting {
   this.flagged = flagged;
   this.store = store;
   this.user = user;
-  this.category = category;
+  this.category = category === undefined ? new Category() : category;
   }
 }

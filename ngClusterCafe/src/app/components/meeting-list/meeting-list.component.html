@@ -16,14 +16,78 @@
 </div>
 <!-- Add a new Meeting -->
 <div *ngIf="addNewMeeting">
-  <ul>
-    <li *ngFor="let c of categories">{{c.name}}</li>
-  </ul>
-  <app-new-meeting [makeNew]="true" (newMeetingEvent)="addMeeting($event)"></app-new-meeting>
+  <div class="container overflow-hidden p-4">
+    <form class="vertical-input-group">
+      <div class="row g-2">
+        <div class="col p-3">
+            <label for="newName" class="form-label">Meeting Name</label>
+            <input type="text" id="newName" name='name' placeholder="Meeting Name" [(ngModel)]='newMeeting.name' class="form-control">
+        </div>
+        <div class="col p-3">
+            <label for="newCategory" class="form-label">Category</label>
+            <select id='newCategory' name='category' [(ngModel)]='newMeeting.category.id' class="form-control">
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
+              </option>
+            </select>
+        </div>
+        <div class="col p-3">
+          <label for="newDate" class="form-label">Meeting Date & Time</label>
+          <input type="datetime-local" id="newDate" name='date' [(ngModel)]='newMeeting.meetingDate' class="form-control">
+      </div>
+      </div>
+      <div class="row g-2">
+        <div class="col p-3">
+          <div class="form-floating">
+            <label for="floatingTextarea1">Description</label>
+            <textarea class="form-control" placeholder="Description" name="description" id="floatingTextarea1" style="height: 100px" [(ngModel)]='newMeeting.description'></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row g-2 d-flex flex-row-reverse">
+        <button (click)='addMeeting()' type="button" class="btn btn-success btn">Add Meeting</button>
+        <button (click)='cancelAddMeeting()' type="button" class="btn btn-outline-danger btn">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>
 <!-- Edit a Meeting -->
 <div *ngIf="editMeeting">
-  <app-new-meeting [edit]="true" [editedMeeting]="selected" (editMeetingEvent)="getUpdatedMeeting($event)"></app-new-meeting>
+  <div class="container overflow-hidden p-4">
+    <form class="vertical-input-group">
+      <div class="row g-2">
+        <div class="col p-3">
+            <label for="updateName" class="form-label">Meeting Name</label>
+            <input type="text" id="updateName" name='name' placeholder="Meeting Name" [(ngModel)]='editedMeeting.name' class="form-control">
+        </div>
+        <div class="col p-3">
+            <label for="updateCategory" class="form-label">Category</label>
+            <select id='updateCategory' name='category' [(ngModel)]='editedMeeting.category.id' class="form-control">
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
+              </option>
+            </select>
+        </div>
+        <div class="col p-3">
+          <label for="updateDate" class="form-label">Meeting Date & Time</label>
+          <input type="datetime-local" id="updateDate" name='date' [(ngModel)]='editedMeeting.meetingDate' class="form-control">
+      </div>
+      </div>
+      <div class="row g-2">
+        <div class="col p-3">
+          <div class="form-floating">
+            <label for="floatingTextarea2">Description</label>
+            <textarea class="form-control" name="description" placeholder="Description" id="floatingTextarea2" style="height: 100px" [(ngModel)]='editedMeeting.description'></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row g-2 d-flex flex-row-reverse">
+        <button (click)='sendUpdatedMeeting()' type="button" class="btn btn-success btn">Update Meeting</button>
+        <button (click)='cancelUpdateMeeting()' type="button" class="btn btn-outline-danger btn">Cancel</button>
+      </div>
+    </form>
+
+  </div>
 </div>
 <!-- Display Details of Meeting -->
 <div *ngIf="selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
