@@ -110,7 +110,7 @@ export class MeetingListComponent implements OnInit {
         i = index;
       }
     }
-    if (this.checkIfAttending(meeting)) {
+    if (i > -1) {
       meeting.attendees.splice(i, 1);
       console.log("Inside unAttendMeeting ********")
       console.log(meeting);
