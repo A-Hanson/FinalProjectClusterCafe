@@ -25,8 +25,8 @@
     <div class="row g-2">
       <div class="col p-3">
         <div class="form-floating">
-          <label for="floatingTextarea2">Description</label>
-          <textarea class="form-control" placeholder="Description" id="floatingTextarea2" style="height: 100px" [(ngModel)]='newMeeting.description'></textarea>
+          <label for="floatingTextarea1">Description</label>
+          <textarea class="form-control" placeholder="Description" name="description" id="floatingTextarea1" style="height: 100px" [(ngModel)]='newMeeting.description'></textarea>
         </div>
       </div>
     </div>
@@ -45,27 +45,27 @@
   <form class="vertical-input-group">
     <div class="row g-2">
       <div class="col p-3">
-          <label for="newName" class="form-label">Meeting Name</label>
-          <input type="text" id="newName" name='name' placeholder="Meeting Name" [(ngModel)]='meetingToEdit.name' class="form-control">
+          <label for="updateName" class="form-label">Meeting Name</label>
+          <input type="text" id="updateName" name='name' placeholder="Meeting Name" [(ngModel)]='editedMeeting.name' class="form-control">
       </div>
       <div class="col p-3">
-          <label for="newCategory" class="form-label">Category</label>
-          <select id='newCategory' name='category' [(ngModel)]='meetingToEdit.category.id' class="form-control">
+          <label for="updateCategory" class="form-label">Category</label>
+          <select id='updateCategory' name='category' [(ngModel)]='editedMeeting.category.id' class="form-control">
             <option *ngFor="let category of categories" [value]="category.id">
               {{category.name}}
             </option>
           </select>
       </div>
       <div class="col p-3">
-        <label for="newDate" class="form-label">Meeting Date & Time</label>
-        <input type="datetime-local" id="newDate" name='date' [(ngModel)]='meetingToEdit.meetingDate' class="form-control">
+        <label for="updateDate" class="form-label">Meeting Date & Time</label>
+        <input type="datetime-local" id="updateDate" name='date' [(ngModel)]='editedMeeting.meetingDate' class="form-control">
     </div>
     </div>
     <div class="row g-2">
       <div class="col p-3">
         <div class="form-floating">
           <label for="floatingTextarea2">Description</label>
-          <textarea class="form-control" placeholder="Description" id="floatingTextarea2" style="height: 100px" [(ngModel)]='meetingToEdit.description'></textarea>
+          <textarea class="form-control" name="description" placeholder="Description" id="floatingTextarea2" style="height: 100px" [(ngModel)]='editedMeeting.description'></textarea>
         </div>
       </div>
     </div>

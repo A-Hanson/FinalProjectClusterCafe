@@ -53,6 +53,7 @@ export class MeetingListComponent implements OnInit {
   }
 
   setEditMeeting() {
+    console.log("in setEditMeeting(), value of .seleted: " + this.selected);
     this.editMeeting = true;
   }
 

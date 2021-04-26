@@ -12,7 +12,8 @@ import { CategoryService } from 'src/app/services/category.service';
 export class NewMeetingComponent implements OnInit {
   @Input() makeNew: boolean = false;
   newMeeting: Meeting = new Meeting();
-  @Input() meetingToEdit: Meeting = null;
+  @Input() editedMeeting: Meeting = null;
+  copyOfMeeting: Meeting = Object.assign({}, this.editedMeeting);
   @Input() edit: boolean = false;
   categories: Category[] = [];
   @Output() newMeetingEvent = new EventEmitter<Meeting>();
@@ -42,15 +43,17 @@ export class NewMeetingComponent implements OnInit {
   }
 
   updateMeeting() {
+    this.copyOfMeeting = null;
+    this.updateMeetingEvent.emit(this.editedMeeting);
+    this.editedMeeting = null;
     this.edit = false;
-    this.updateMeetingEvent.emit(this.meetingToEdit);
-    this.meetingToEdit = null;
   }
 
   cancelUpdateMeeting() {
+    this.editedMeeting = null;
+    this.updateMeetingEvent.emit(this.copyOfMeeting);
+    this.copyOfMeeting = null;
     this.edit = false;
-    this.meetingToEdit = null;
-    this.updateMeetingEvent.emit(null);
   }
 
   // HELPERS

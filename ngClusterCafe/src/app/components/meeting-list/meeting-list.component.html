@@ -23,7 +23,7 @@
 </div>
 <!-- Edit a Meeting -->
 <div *ngIf="editMeeting">
-  <app-new-meeting [edit]="true" [meetingToEdit]="selected" (editMeetingEvent)="getUpdatedMeeting($event)"></app-new-meeting>
+  <app-new-meeting [edit]="true" [editedMeeting]="selected" (editMeetingEvent)="getUpdatedMeeting($event)"></app-new-meeting>
 </div>
 <!-- Display Details of Meeting -->
 <div *ngIf="selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
