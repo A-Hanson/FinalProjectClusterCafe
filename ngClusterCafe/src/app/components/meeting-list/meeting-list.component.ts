@@ -36,6 +36,13 @@ export class MeetingListComponent implements OnInit {
   }
 
   // Methods
+  numberOfAttendees(meeting: Meeting): number {
+    if (meeting.attendees) {
+      return meeting.attendees.length;
+    }
+    return -1;
+  }
+
   displayMeeting(meeting: Meeting) {
     this.selected = meeting;
   }
@@ -72,6 +79,44 @@ export class MeetingListComponent implements OnInit {
     this.editedMeeting = null;
   }
 
+  checkIfAttending(meeting: Meeting): boolean {
+    console.log("****** in checkIfAttending:")
+    console.log(this.currentUser);
+    console.log(meeting);
+    for (let index = 0; index < meeting.attendees.length; index++) {
+      const user = meeting.attendees[index];
+      if (user.id === this.currentUser.id) {
+        return true;
+      }
+    }
+    // if (meeting.attendees.indexOf(this.currentUser) > -1) {
+    //   return true;
+    // }
+    return false;
+  }
+
+  attendMeeting(meeting: Meeting, show: boolean = false) {
+    console.log("attendMeeting....")
+    meeting.attendees.push(this.currentUser);
+    console.log("list of attendees: " + meeting.attendees);
+    this.updateMeeting(meeting, show);
+  }
+
+  unAttendMeeting(meeting: Meeting, show: boolean = false) {
+    let i = -1;
+    for (let index = 0; index < meeting.attendees.length; index++) {
+      const user = meeting.attendees[index];
+      if (user.id === this.currentUser.id) {
+        i = index;
+      }
+    }
+    if (i > -1) {
+      meeting.attendees.splice(i, 1);
+      console.log("Inside unAttendMeeting ********")
+      console.log(meeting);
+      this.updateMeeting(meeting, show);
+    }
+  }
 
   // Sending Data
   addMeeting() {
@@ -98,7 +143,7 @@ export class MeetingListComponent implements OnInit {
           this.selected = data;
           this.editMeeting = false;
         }
-        this.reloadMeetings();
+        this.initialLoad();
       },
       err => {
         console.error('Error updating meeting: ' + err)

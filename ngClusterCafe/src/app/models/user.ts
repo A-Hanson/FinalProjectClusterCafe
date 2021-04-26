@@ -1,3 +1,4 @@
+import { Meeting } from "./meeting";
 import { Store } from "./store";
 
 export class User {
@@ -17,6 +18,7 @@ export class User {
   role: string;
   gender: string;
   createdAt: string;
+  meetings: Meeting[] = [];
 
 constructor(
   id?: number,
@@ -34,6 +36,7 @@ constructor(
   role?: string,
   gender?: string,
   createdAt?: string,
+  meetings?: Meeting[]
   ){
     this.id = id;
     this.username = username;
@@ -50,5 +53,6 @@ constructor(
     this.role = role;
     this.gender = gender;
     this.createdAt = createdAt;
+    this.meetings = meetings;
 }
 }
