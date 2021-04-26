@@ -1,6 +1,8 @@
 package com.skilldistillery.clustercafe.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Meeting {
@@ -47,6 +52,10 @@ public class Meeting {
 	
 	@Column(name="meeting_date")
 	private LocalDateTime meetingDate;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "meetings")
+	private List<User> attendees;
 
 	public Meeting() {
 		super();
@@ -138,6 +147,31 @@ public class Meeting {
 
 	public void setMeetingDate(LocalDateTime meetingDate) {
 		this.meetingDate = meetingDate;
+	}
+	
+	public List<User> getAttendees() {
+		return attendees;
+	}
+
+	public void setAttendees(List<User> attendees) {
+		this.attendees = attendees;
+	}
+	
+	public void addAttendee(User user) {
+		if (attendees == null) {
+			attendees = new ArrayList<User>();
+		}
+		if (!attendees.contains(user)) {
+			attendees.add(user);
+			user.addMeeting(this);
+		}
+	}
+	
+	public void removeAttendee(User user) {
+		if (attendees != null && attendees.contains(user)) {
+			attendees.remove(user);
+			user.removeMeeting(this);
+		}
 	}
 
 	@Override
