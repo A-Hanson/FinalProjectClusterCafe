@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-10">
       <h4 class="warning">DEBUGGING MODE: User role - {{currentUser.role}}</h4>
-      <h2>Posts</h2>
-      <h5>Let others know what you are looking for</h5>
+      <h2 *ngIf="!selected">Posts</h2>
+      <h5 *ngIf="!selected">Let others know what you are looking for</h5>
     </div>
     <div class="col-md-2 d-flex" *ngIf="!addNewPost && !selected">
       <div class="align-self-end">
@@ -45,8 +45,23 @@
   <hr>
 </div>
 <!-- detail div -->
+<br>
 <div *ngIf='selected && !editPost'>
-  <p>Post Id: {{selected.id}}</p>
+  <div class="card">
+    <div class="card-header">
+      <h2>{{selected.title}}</h2>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{selected.user.firstName}} {{selected.user.lastName}} ({{selected.user.pronouns}})</h5>
+      <p class="card-text">{{selected.content}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum velit, laborum possimus nemo voluptatibus saepe dolorum dignissimos et error, magnam nam praesentium? Provident sed porro placeat minima reiciendis, dolores odit!</p>
+      <!-- <a href="#" class="btn btn-primary" (click)='displayTable()'>Back</a> -->
+      <!-- <a *ngIf="selected.user.id === currentUser.id" href="#" class="btn btn-primary" (click)='setEditPost()'>Edit</a> -->
+      <button class="btn btn-primary" (click)='displayTable()'>Back</button>
+      <button *ngIf="selected.user.id === currentUser.id || currentUser.role === 'admin'" class="btn btn-info" (click)='setEditPost()'>Edit</button>
+      <button *ngIf="selected.user.id === currentUser.id || currentUser.role === 'admin'" class="btn btn-danger" (click)="deletedPost(selected.id)">Delete</button>
+    </div>
+  </div>
+  <!-- <p>Post Id: {{selected.id}}</p>
   <p>Post Title: {{selected.title}}</p>
   <p>Post Content: {{selected.content}}</p>
 
@@ -60,9 +75,10 @@
     <div class="col-1" *ngIf="selected.user.id === currentUser.id || currentUser.role === 'admin'">
       <button class="btn btn-danger" (click)="deletedPost(selected.id)">Delete</button>
     </div>
-  </div>
+  </div> -->
 
 </div>
+<br>
 <!-- edit Post -->
 <div *ngIf='editPost'>
    Title: <input type="text" name="post" placeholder="Post" [(ngModel)]='editPost.title' /><br />
