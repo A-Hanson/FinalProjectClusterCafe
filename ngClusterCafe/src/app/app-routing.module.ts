@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'landingPage', component: UserLandingPageComponent},
+  { path: 'landingpage', component: UserLandingPageComponent},
   { path: 'posts', component: PostListComponent},
   { path: 'meetings', component: MeetingListComponent},
   { path: 'adminDashboard', component: AdminDashboardComponent},
