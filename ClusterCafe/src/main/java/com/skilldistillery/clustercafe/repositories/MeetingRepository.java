@@ -9,6 +9,7 @@ import com.skilldistillery.clustercafe.entities.Meeting;
 public interface MeetingRepository extends JpaRepository<Meeting, Integer>{
 
 	List<Meeting> findByEnabledTrue();
+	List<Meeting> findByFlaggedTrueAndEnabledTrue();
 	Meeting findByIdAndEnabledTrueAndUser_username(int id, String username);
 	Meeting findByIdAndEnabledTrue(int id);
 }

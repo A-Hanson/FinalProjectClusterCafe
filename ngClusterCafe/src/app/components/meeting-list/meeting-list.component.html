@@ -1,0 +1,163 @@
+
+<!-- list all enabled meetings -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <h4 class="warning">DEBUGGING MODE: User role - {{currentUser.role}}</h4>
+      <h2>Meetings</h2>
+      <h5>See what others have planned</h5>
+    </div>
+    <div class="col-md-2 d-flex" *ngIf="!addNewMeeting && !selected">
+      <div class="align-self-end">
+        <button class="btn btn-primary" (click)="addNewMeeting=true">Add New Meeting</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add a new Meeting -->
+<div *ngIf="addNewMeeting">
+  <div class="container overflow-hidden p-4">
+    <form class="vertical-input-group">
+      <div class="row g-2">
+        <div class="col p-3">
+            <label for="newName" class="form-label">Meeting Name</label>
+            <input type="text" id="newName" name='name' placeholder="Meeting Name" [(ngModel)]='newMeeting.name' class="form-control">
+        </div>
+        <div class="col p-3">
+            <label for="newCategory" class="form-label">Category</label>
+            <select id='newCategory' name='category' [(ngModel)]='newMeeting.category.id' class="form-control">
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
+              </option>
+            </select>
+        </div>
+        <div class="col p-3">
+          <label for="newDate" class="form-label">Meeting Date & Time</label>
+          <input type="datetime-local" id="newDate" name='date' [(ngModel)]='newMeeting.meetingDate' class="form-control">
+      </div>
+      </div>
+      <div class="row g-2">
+        <div class="col p-3">
+          <div class="form-floating">
+            <label for="floatingTextarea1">Description</label>
+            <textarea class="form-control" placeholder="Description" name="description" id="floatingTextarea1" style="height: 100px" [(ngModel)]='newMeeting.description'></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row g-2 d-flex flex-row-reverse">
+        <button (click)='addMeeting()' type="button" class="btn btn-success btn">Add Meeting</button>
+        <button (click)='cancelAddMeeting()' type="button" class="btn btn-outline-danger btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Edit a Meeting -->
+<div *ngIf="editMeeting">
+  <div class="container overflow-hidden p-4">
+    <form class="vertical-input-group">
+      <div class="row g-2">
+        <div class="col p-3">
+            <label for="updateName" class="form-label">Meeting Name</label>
+            <input type="text" id="updateName" name='name' placeholder="Meeting Name" [(ngModel)]='editedMeeting.name' class="form-control">
+        </div>
+        <div class="col p-3">
+            <label for="updateCategory" class="form-label">Category</label>
+            <select id='updateCategory' name='category' [(ngModel)]='editedMeeting.category.id' class="form-control">
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
+              </option>
+            </select>
+        </div>
+        <div class="col p-3">
+          <label for="updateDate" class="form-label">Meeting Date & Time</label>
+          <input type="datetime-local" id="updateDate" name='date' [(ngModel)]='editedMeeting.meetingDate' class="form-control">
+      </div>
+      </div>
+      <div class="row g-2">
+        <div class="col p-3">
+          <div class="form-floating">
+            <label for="floatingTextarea2">Description</label>
+            <textarea class="form-control" name="description" placeholder="Description" id="floatingTextarea2" style="height: 100px" [(ngModel)]='editedMeeting.description'></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row g-2 d-flex flex-row-reverse">
+        <button (click)='sendUpdatedMeeting()' type="button" class="btn btn-success btn">Update Meeting</button>
+        <button (click)='cancelUpdateMeeting()' type="button" class="btn btn-outline-danger btn">Cancel</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+<!-- Display Details of Meeting -->
+<div *ngIf="selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
+  <h2>FINISH ME</h2>
+  <h4>Meeting Id: {{selected.id}}, name: {{selected.name}}</h4>
+  <div class="row">
+    <div class="col-1" *ngIf="selected.user.id === currentUser.id">
+      <button class="btn btn-info" (click)='setEditMeeting()'>Edit</button>
+    </div>
+    <div class="col-1">
+      <button class="btn btn-primary" (click)='displayAll()'>Back</button>
+    </div>
+    <div class="col-1" *ngIf="selected.user.id === currentUser.id || admin">
+      <button class="btn btn-danger" (click)="deleteMeeting(selected.id)">Delete</button>
+    </div>
+  </div>
+
+</div>
+<!-- Show All Meetings -->
+<div *ngIf="!selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
+	<div *ngFor="let meeting of meetings | flagged: currentUser.role" ng-click="displayMeeting(meeting)" class="card" >
+    <div class="row g-0">
+      <div class="col-md-1">
+        <div class="card-text">
+          <h5 id="card-category" class="card-body bg-light">{{meeting.category.name}}</h5>
+        </div>
+
+      </div>
+      <div class="col-md-9">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title" >{{meeting.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{meeting.user.firstName}} {{meeting.user.lastName}}</h6>
+            </div>
+            <div class="col d-flex justify-content-end">
+              <p>
+                Happening at <br>
+                {{meeting.meetingDate | date: "short"}}
+              </p>
+            </div>
+          </div>
+        <p class="card-text">{{meeting.description}}</p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card-body">
+            <div class="card-text text-end">
+              <button class="btn btn-info" (click)='displayMeeting(meeting)'>More Info</button>
+              <button type="button" class="btn btn-warning" (click)="unflagMeeting(meeting)" *ngIf="meeting.flagged">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
+                  <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                </svg>
+              </button>
+              <button type="button" class="btn btn-outline-warning" (click)="flagMeeting(meeting)" *ngIf="!meeting.flagged">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag" viewBox="0 0 16 16">
+                  <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z"/>
+                </svg>
+              </button>
+
+              <button type="button" class="btn btn-outline-danger" (click)="deleteMeeting(meeting)" *ngIf="meeting.user.id === currentUser.id || admin">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                </svg>
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+	</div>
+</div>
+

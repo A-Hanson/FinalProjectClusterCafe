@@ -17,6 +17,10 @@ import { UserLandingPageComponent } from './components/user-landing-page/user-la
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostCommentListComponent } from './components/postComment-list/postComment-list.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { MeetingListComponent } from './components/meeting-list/meeting-list.component';
+import { FlaggedPipe } from './pipes/flagged.pipe';
+import { NewMeetingComponent } from './components/new-meeting/new-meeting.component';
+import { CategoryService } from './services/category.service';
 
 
 @NgModule({
@@ -30,7 +34,10 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     UserLandingPageComponent,
     PostListComponent,
     PostCommentListComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    MeetingListComponent,
+    FlaggedPipe,
+    NewMeetingComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +47,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

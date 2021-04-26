@@ -118,11 +118,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `user_cluster`
+-- Table `user_meeting`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `user_cluster` ;
+DROP TABLE IF EXISTS `user_meeting` ;
 
-CREATE TABLE IF NOT EXISTS `user_cluster` (
+CREATE TABLE IF NOT EXISTS `user_meeting` (
   `user_id` INT NOT NULL,
   `meeting_id` INT NOT NULL,
   INDEX `fk_user_has_event_event1_idx` (`meeting_id` ASC),
@@ -392,11 +392,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `user_cluster`
+-- Data for table `user_meeting`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `clustercafedb`;
-INSERT INTO `user_cluster` (`user_id`, `meeting_id`) VALUES (1, 1);
+INSERT INTO `user_meeting` (`user_id`, `meeting_id`) VALUES (1, 1);
 
 COMMIT;
 

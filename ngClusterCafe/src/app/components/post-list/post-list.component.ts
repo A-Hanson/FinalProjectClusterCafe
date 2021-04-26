@@ -17,8 +17,8 @@ import { UserService } from 'src/app/services/user.service';
 export class PostListComponent implements OnInit {
 posts: Post[] = [];
 selected = null;
-title = 'ngPost';
 newPost = new Post();
+addNewPost: boolean = false;
 editPost = null;
 categories: Category[] = [];
 newPostCategory: Category = null;
@@ -26,6 +26,7 @@ postComments: PostComment[] = [];
 newComment: PostComment = new PostComment();
 editedComment: PostComment = null;
 currentUser: User = null;
+admin: boolean = false;
 
 constructor(
   private postService: PostService,
@@ -53,7 +54,7 @@ constructor(
     this.reloadCategories();
     this.loadCurrentUser();
   }
-
+// LOAD INFO
   reload() {
     this.postService.index().subscribe(
       data => {this.posts = data},
@@ -76,14 +77,22 @@ constructor(
 
   loadCurrentUser() {
     this.userService.retrieveLoggedIn().subscribe(
-      data => {this.currentUser = data},
+      data => {
+        this.currentUser = data
+        this.checkForAdmin();
+      },
       err => {console.error('Error loading current user: ' + err)}
     );
   }
 
-  getNumberOfPosts = function() {
-    return this.posts.length;
+  checkForAdmin() {
+    if (this.currentUser.role === 'admin') {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
   }
+// DISPLAY
   displayPost(post) {
     this.selected = post;
     this.reloadComments();
@@ -92,12 +101,16 @@ constructor(
   displayTable(): void {
     this.selected = null;
   }
-  addPost(): void {
+  cancelAddPost() {
+    this.newPost = new Post();
+    this.addNewPost = false;
+  }
 
-    console.log(this.newPost);
+  addPost(): void {
     this.postService.create(this.newPost).subscribe(
       data => {
         this.newPost = new Post();
+        this.addNewPost = false;
         this.reload();
       },
       err => {
@@ -127,6 +140,11 @@ constructor(
 
   flagPost(post: Post) {
     post.flagged = true;
+    this.updatePost(post, false);
+  }
+
+  unflagPost(post: Post) {
+    post.flagged = false;
     this.updatePost(post, false);
   }
 
