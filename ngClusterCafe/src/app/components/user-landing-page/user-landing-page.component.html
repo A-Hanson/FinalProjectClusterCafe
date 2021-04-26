@@ -1,0 +1,24 @@
+<div class="page-container">
+  <div class="slider-container">
+      <div class="external-neighbourhood">
+          <div class="heading" style="margin-left: 1rem;">
+              <h5>NEIGHBORHOODS</h5>
+          </div>
+          <div class="no-image" *ngIf="neighbourhoodPlaces.length===0">No Images</div>
+          <div class="neighbourhood" *ngIf="neighbourhoodPlaces.length>0">
+
+              <div id="pnProductNav" class="wrapper-container">
+                  <div id="pnProductNavContents" class="pn-ProductNav_Contents  places-container" *ngFor="let place of neighbourhoodPlaces">
+                      <div class="dest-card" [style.background-image]="sanitizer.bypassSecurityTrustStyle('url('+ place.placePhoto + ')')">
+                          <div class="content-container">
+                              <div class="place-name">{{place.placeName}}</div>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div id="map"></div>

@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~11.2.9",
     "@angular/router": "~11.2.9",
     "@ng-bootstrap/ng-bootstrap": "^9.1.0",
+    "@types/googlemaps": "^3.43.3",
     "bootstrap": "^4.6.0",
     "bootstrap-icons": "^1.4.1",
     "rxjs": "~6.6.0",
