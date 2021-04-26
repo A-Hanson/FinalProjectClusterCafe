@@ -19,6 +19,7 @@ export class MeetingListComponent implements OnInit {
   currentUser: User = null;
   admin: boolean = false;
   addNewMeeting = false;
+  editMeeting = false;
 
   constructor(
     private meetingService: MeetingService,
@@ -50,6 +51,11 @@ export class MeetingListComponent implements OnInit {
     meeting.flagged = false;
     this.updateMeeting(meeting);
   }
+
+  setEditMeeting() {
+    this.editMeeting = true;
+  }
+
 // Talking to child component
   addMeeting(newMeeting: Meeting) {
     if (newMeeting) {
@@ -59,11 +65,28 @@ export class MeetingListComponent implements OnInit {
     }
   }
 
+  getUpdatedMeeting(updatedMeeting: Meeting) {
+    if (updatedMeeting !== null) {
+      this.editMeeting = false;
+      this.addNewMeeting = false;
+      this.selected = null;
+      this.updateMeeting(updatedMeeting, true);
+    } else {
+      this.editMeeting = false;
+      this.addNewMeeting = false;
+      this.selected = null;
+    }
+  }
+
 
   // Sending Data
-  updateMeeting(meeting: Meeting) {
+  updateMeeting(meeting: Meeting, display:boolean = false) {
     this.meetingService.update(meeting).subscribe(
       data => {
+        if (display) {
+          this.selected = data;
+          this.editMeeting = false;
+        }
         this.reloadMeetings();
       },
       err => {

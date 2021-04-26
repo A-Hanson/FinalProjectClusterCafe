@@ -19,16 +19,31 @@
   <ul>
     <li *ngFor="let c of categories">{{c.name}}</li>
   </ul>
-  <app-new-meeting (newMeetingEvent)="addMeeting($event)"></app-new-meeting>
+  <app-new-meeting [makeNew]="true" (newMeetingEvent)="addMeeting($event)"></app-new-meeting>
+</div>
+<!-- Edit a Meeting -->
+<div *ngIf="editMeeting">
+  <app-new-meeting [edit]="true" [meetingToEdit]="selected" (editMeetingEvent)="getUpdatedMeeting($event)"></app-new-meeting>
 </div>
 <!-- Display Details of Meeting -->
-<div *ngIf="selected && !addNewMeeting" class="container overflow-hidden p-4">
+<div *ngIf="selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
   <h2>FINISH ME</h2>
   <h4>Meeting Id: {{selected.id}}, name: {{selected.name}}</h4>
-  <button class="btn btn-primary" (click)='displayAll()'>Go Back</button>
+  <div class="row">
+    <div class="col-1" *ngIf="selected.user.id === currentUser.id">
+      <button class="btn btn-info" (click)='setEditMeeting()'>Edit</button>
+    </div>
+    <div class="col-1">
+      <button class="btn btn-primary" (click)='displayAll()'>Back</button>
+    </div>
+    <div class="col-1" *ngIf="selected.user.id === currentUser.id || admin">
+      <button class="btn btn-danger" (click)="deleteMeeting(selected.id)">Delete</button>
+    </div>
+  </div>
+
 </div>
 <!-- Show All Meetings -->
-<div *ngIf="!selected && !addNewMeeting" class="container overflow-hidden p-4">
+<div *ngIf="!selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
 	<div *ngFor="let meeting of meetings | flagged: currentUser.role" ng-click="displayMeeting(meeting)" class="card" >
     <div class="row g-0">
       <div class="col-md-1">
