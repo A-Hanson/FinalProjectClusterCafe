@@ -36,6 +36,13 @@ export class MeetingListComponent implements OnInit {
   }
 
   // Methods
+  numberOfAttendees(meeting: Meeting): number {
+    if (meeting.attendees) {
+      return meeting.attendees.length;
+    }
+    return -1;
+  }
+
   displayMeeting(meeting: Meeting) {
     this.selected = meeting;
   }

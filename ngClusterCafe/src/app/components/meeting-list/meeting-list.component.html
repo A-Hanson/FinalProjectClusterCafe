@@ -93,6 +93,12 @@
 <div *ngIf="selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
   <h2>FINISH ME</h2>
   <h4>Meeting Id: {{selected.id}}, name: {{selected.name}}</h4>
+  <h5>Number of Attendees: {{numberOfAttendees(selected)}}</h5>
+  <ul>
+    <li *ngFor="let attendee of selected.attendees">
+      First Name: {{attendee.firstName}}
+    </li>
+  </ul>
   <div class="row">
     <div class="col-1" *ngIf="selected.user.id === currentUser.id">
       <button class="btn btn-info" (click)='setEditMeeting()'>Edit</button>

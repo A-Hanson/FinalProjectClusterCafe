@@ -13,7 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 public class Meeting {
@@ -53,7 +54,7 @@ public class Meeting {
 	@Column(name="meeting_date")
 	private LocalDateTime meetingDate;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"meetings"})
 	@ManyToMany(mappedBy = "meetings")
 	private List<User> attendees;
 

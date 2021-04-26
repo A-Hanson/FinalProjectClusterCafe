@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -60,7 +61,7 @@ public class User {
 			)
 	private List<ClusterGroup> clusterGroups;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"attendees", "user"})
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(
 			name="user_meeting",

@@ -38,6 +38,7 @@ public class MeetingServiceImpl implements MeetingService {
 		return null;
 	}
 	
+	
 	@Override
 	public Meeting show(int id) {
 		return meetingRepo.findByIdAndEnabledTrue(id);

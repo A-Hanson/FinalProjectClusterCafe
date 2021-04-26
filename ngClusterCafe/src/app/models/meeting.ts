@@ -14,6 +14,7 @@ export class Meeting {
   store: Store;
   user: User;
   category: Category = new Category();
+  attendees: User[] = [];
 
   constructor(
     id?: number,
@@ -27,6 +28,7 @@ export class Meeting {
     store?: Store,
     user?: User,
     category?: Category,
+    attendees?: User[]
   ) {
   this.id = id;
   this.name = name;
@@ -39,5 +41,6 @@ export class Meeting {
   this.store = store;
   this.user = user;
   this.category = category === undefined ? new Category() : category;
+  this.attendees = attendees;
   }
 }
