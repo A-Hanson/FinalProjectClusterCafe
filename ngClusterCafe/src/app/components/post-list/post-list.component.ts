@@ -107,6 +107,8 @@ constructor(
   }
 
   addPost(): void {
+    console.log(this.newPost);
+
     this.postService.create(this.newPost).subscribe(
       data => {
         this.newPost = new Post();
