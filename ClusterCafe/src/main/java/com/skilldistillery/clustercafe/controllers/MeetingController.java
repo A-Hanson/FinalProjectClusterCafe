@@ -53,6 +53,7 @@ public class MeetingController {
 		return meeting;
 	}
 
+
 	@PostMapping("meetings")
 	public Meeting create(@RequestBody Meeting meeting, HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		try {

@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-10">
-      <h4 class="warning">DEBUGGING MODE: User role - {{currentUser.role}}</h4>
+      <!-- <h4 class="warning">DEBUGGING MODE: User role - {{currentUser.role}}</h4> -->
       <h2>Meetings</h2>
       <h5>See what others have planned</h5>
     </div>
@@ -93,6 +93,12 @@
 <div *ngIf="selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
   <h2>FINISH ME</h2>
   <h4>Meeting Id: {{selected.id}}, name: {{selected.name}}</h4>
+  <h5>Number of Attendees: {{numberOfAttendees(selected)}}</h5>
+  <ul>
+    <li *ngFor="let attendee of selected.attendees">
+      First Name: {{attendee.firstName}}
+    </li>
+  </ul>
   <div class="row">
     <div class="col-1" *ngIf="selected.user.id === currentUser.id">
       <button class="btn btn-info" (click)='setEditMeeting()'>Edit</button>
@@ -124,10 +130,24 @@
               <h6 class="card-subtitle mb-2 text-muted">{{meeting.user.firstName}} {{meeting.user.lastName}}</h6>
             </div>
             <div class="col d-flex justify-content-end">
-              <p>
-                Happening at <br>
-                {{meeting.meetingDate | date: "short"}}
-              </p>
+
+                <p>
+                  Happening at <br>
+                  {{meeting.meetingDate | date: "short"}}
+                </p>
+                <p>
+                  <button type="button" class="btn btn-outline-success" (click)="attendMeeting(meeting)" *ngIf="!checkIfAttending(meeting)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16">
+                      <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="btn btn-success" (click)="unAttendMeeting(meeting)" *ngIf="checkIfAttending(meeting)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                      <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+                    </svg>
+                  </button>
+                </p>
             </div>
           </div>
         <p class="card-text">{{meeting.description}}</p>

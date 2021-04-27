@@ -2,6 +2,7 @@ package com.skilldistillery.clustercafe.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -59,6 +61,15 @@ public class User {
 			)
 	private List<ClusterGroup> clusterGroups;
 	
+	@JsonIgnoreProperties({"attendees", "user"})
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(
+			name="user_meeting",
+			joinColumns= @JoinColumn(name="user_id"),
+			inverseJoinColumns= @JoinColumn(name="meeting_id")
+			)
+	private List<Meeting> meetings;
+	
 	@Column(name="created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
@@ -71,7 +82,37 @@ public class User {
 //	Constructor
 	public User() {}
 
-public List<ClusterGroup> getClusterGroups() {
+	
+	
+	
+	public List<Meeting> getMeetings() {
+		return meetings;
+	}
+
+
+	public void setMeetings(List<Meeting> meetings) {
+		this.meetings = meetings;
+	}
+	
+	public void addMeeting(Meeting meeting) {
+		if (meetings == null) {
+			meetings = new ArrayList<Meeting>();
+		}
+		if (!meetings.contains(meeting)) {
+			meetings.add(meeting);
+			meeting.addAttendee(this);
+		}	
+	}
+	
+	public void removeMeeting(Meeting meeting) {
+		if (meetings != null && meetings.contains(meeting)) {
+			meetings.remove(meeting);
+			meeting.removeAttendee(this);
+		}
+	}
+
+
+	public List<ClusterGroup> getClusterGroups() {
 		return clusterGroups;
 	}
 

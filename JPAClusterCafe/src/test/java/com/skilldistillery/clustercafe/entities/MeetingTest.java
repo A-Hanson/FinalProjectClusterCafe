@@ -46,6 +46,14 @@ class MeetingTest {
 		assertNotNull(meeting);
 		assertEquals("Jogging", meeting.getName());
 	}
+	
+	@Test
+	@DisplayName("Test Meeting to User(Attendees) mapping")
+	void test_2() {
+		assertNotNull(meeting);
+		assertNotNull(meeting.getAttendees());
+		assertTrue(meeting.getAttendees().size() > 0);
+	}
 
 
 }

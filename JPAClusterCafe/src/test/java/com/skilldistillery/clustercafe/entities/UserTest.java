@@ -81,5 +81,20 @@ class UserTest {
 		assertTrue(user.getClusterGroups().size() > 0);
 
 	}
+	
+	@Test
+	@DisplayName("Test User to Meeting mapping")
+	void test_4() {
+//		mysql> select meeting.name from user JOIN user_meeting on user.id = user_meeting.user_id JOIN meeting on user_meeting.meeting_id = meet
+//				+---------+
+//				| name    |
+//				+---------+
+//				| Jogging |
+//				+---------+
+		assertNotNull(user);
+		assertNotNull(user.getMeetings());
+		assertTrue(user.getMeetings().size() > 0);
+		
+	}
 
 }
