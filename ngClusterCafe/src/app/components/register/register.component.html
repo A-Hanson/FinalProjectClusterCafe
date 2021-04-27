@@ -31,7 +31,7 @@
           {{pronoun}}
         </option>
       </select>
-      <label for='pronoun'>Preferred Pronoun</label>
+      <label for='pronoun'>Gender</label>
       <select id='gender' name='gender' [(ngModel)]='newUser.gender'>
         <option selected disabled>Choose here</option>
         <option *ngFor="let gender of genders" [value]="gender">
