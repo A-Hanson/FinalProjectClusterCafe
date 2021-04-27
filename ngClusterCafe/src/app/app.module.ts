@@ -23,6 +23,7 @@ import { NewMeetingComponent } from './components/new-meeting/new-meeting.compon
 import { CategoryService } from './services/category.service';
 import { userPostsPipe } from './pipes/userPost.pipe';
 import { userCommentsPipe } from './pipes/userComments.pipe';
+import { CategoryPipe } from './pipes/category.pipe';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { userCommentsPipe } from './pipes/userComments.pipe';
     FlaggedPipe,
     NewMeetingComponent,
     userPostsPipe,
-    userCommentsPipe
+    userCommentsPipe,
+    CategoryPipe
   ],
   imports: [
     BrowserModule,

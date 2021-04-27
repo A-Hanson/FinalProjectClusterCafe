@@ -23,6 +23,8 @@ export class AdminDashboardComponent implements OnInit {
   selectedComment: PostComment = null;
   meetings: Meeting[] = [];
   selectedMeeting: Meeting = null;
+  users: User[] = [];
+  selectedUser = null;
   currentUser: User = null;
 
   constructor(
@@ -114,7 +116,6 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   deleteMeeting(meeting: Meeting) {
-    meeting.flagged = false;
     this.meetingService.delete(meeting.id).subscribe(
       data => {
         this.loadFlaggedMeetings();
@@ -126,12 +127,40 @@ export class AdminDashboardComponent implements OnInit {
     )
   }
 
+  selectUser(user: User) {
+    this.selectedUser = user;
+  }
+
+  unDeleteUser(user: User) {
+    user.enabled = true;
+    this.userService.update(user).subscribe(
+      data => {
+        this.loadUsers();
+      },
+      err => {
+        console.error('Error in unDeleteUser()')
+        console.error('Error unDeleting User for admin' + err)
+      }
+    )
+  }
+
+  deleteUser(user: User) {
+    this.userService.delete(user.id).subscribe(
+      data => {
+        this.loadUsers();
+      },
+      err => {
+        console.error('Error in deleteUser()')
+        console.error('Error deleting User for admin' + err)
+      }
+    )
+  }
+
 // Helpers
   reloadCurrentUser() {
     this.userService.retrieveLoggedIn().subscribe(
       data => {
         this.currentUser = data;
-        console.log("user loaded")
         this.checkForAdmin();
       },
       err => {console.error('Error loading current user: ' + err)}
@@ -140,10 +169,9 @@ export class AdminDashboardComponent implements OnInit {
 
   checkForAdmin() {
     if (this.currentUser.role === 'admin') {
-      console.log("user is an admin")
       this.loadInitial()
     } else {
-      this.router.navigateByUrl('notFound');
+      this.router.navigateByUrl('notfound');
     }
   }
 
@@ -151,6 +179,7 @@ export class AdminDashboardComponent implements OnInit {
     this.loadFlaggedPosts();
     this.loadFlaggedPostComments();
     this.loadFlaggedMeetings();
+    this.loadUsers();
   }
 
   loadFlaggedPosts() {
@@ -187,6 +216,18 @@ export class AdminDashboardComponent implements OnInit {
         console.error('Error loading flagged meetings for admin' + err)
       }
     )
+  }
+
+  loadUsers() {
+    this.userService.index().subscribe(
+      data => {
+        this.users = data
+      },
+      err => {
+        console.error('Error in loadUsers()');
+        console.error('Error loading users for admin' + err)
+      }
+    );
   }
 
 }

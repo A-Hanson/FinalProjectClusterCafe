@@ -28,14 +28,13 @@ export class NavBarComponent implements OnInit {
     );
   }
   checkAdmin(){
-    console.log(this.currentUser);
-    console.log(this.currentUser.role);
     if (this.checkLogin() && this.loggedIn===false){
-      console.log("inside if statement");
       this.loggedIn = true;
       this.loadCurrentUser();
     } else if(this.checkLogin() && this.loggedIn===true){
     console.log("nothing");
+
+
     }
     else{
       this.loggedIn = false;

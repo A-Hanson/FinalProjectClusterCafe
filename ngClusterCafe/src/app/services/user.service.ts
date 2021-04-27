@@ -18,6 +18,15 @@ export class UserService {
   ) { }
 
   // INDEX
+  index(): Observable<User[]> {
+    return this.http.get<User[]>(this.url, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error('UserService.index(): error retrieving users - ' + err);
+        return throwError(err);
+      })
+    );
+  }
+
   retrieveLoggedIn(): Observable<User> {
     return this.http.get<User>(this.url + '/username', this.getHttpOptions()).pipe(
       catchError((err: any) => {
@@ -27,7 +36,26 @@ export class UserService {
     );
   }
 
-// SHOW, UPDATE, DELETE
+// SHOW,
+
+  update(updatedUser: User): Observable<User> {
+    return this.http.put<User>(this.url + '/' + updatedUser.id, updatedUser, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error');
+      })
+      );
+  }
+
+
+  delete(id: number) {
+    return this.http.delete<void>(this.url + '/' + id, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error');
+      })
+    );
+  }
 
   private getHttpOptions() {
     const credentials = this.auth.getCredentials();

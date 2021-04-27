@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { Store } from 'src/app/models/store';
+import { StoreService } from 'src/app/services/store.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
                       ]
 
   newStore:Store = new Store();
+  createdStore:Store = null;
   pos;
   map;
   bounds;
@@ -30,7 +32,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private storeService: StoreService
   ) { }
 
   ngOnInit(): void {
@@ -119,7 +122,10 @@ export class RegisterComponent implements OnInit {
           });
           /* Click listener on map markers */
           // Add click listener to each marker
+
           google.maps.event.addListener(marker, 'click', () => {
+            console.log("*********************marker***********************")
+            console.log(marker);
             let request = {
               placeId: place.place_id,
               fields: [
@@ -135,7 +141,12 @@ export class RegisterComponent implements OnInit {
                click in order to minimize API rate limits */
             this.service.getDetails(request, (placeResult, status) => {
               this.showDetails(placeResult, marker, status);
-              // this.setNewStore(placeResult); // THIS IS WHERE YOU PUT IT
+              console.log("*********************marker***********************")
+              console.log(request);
+              console.log(placeResult.geometry);
+              console.log(placeResult.geometry.location.lat);
+              console.log(placeResult.geometry.location.latitude);
+              this.setNewStore(placeResult); // THIS IS WHERE YOU PUT IT
             });
 
           });
@@ -158,6 +169,8 @@ export class RegisterComponent implements OnInit {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       let placeInfowindow = new google.maps.InfoWindow();
       let rating = 'None';
+      console.log("*********************marker***********************")
+      console.log(placeResult.name);
       if (placeResult.rating) rating = placeResult.rating;
       placeInfowindow.setContent(
         '<div><strong>' +
@@ -224,40 +237,42 @@ export class RegisterComponent implements OnInit {
     this.infoPane.classList.add('open');
   }
 
-  // setNewStore(placeResult) {
-  //   //  fields: [
-  //   //   'name',
-  //   //   'formatted_address',
-  //   //   'geometry',
-  //   //   'rating',
-  //   //   'website',
-  //   //   'photos',
-  //   // ],
-  //   this.newStore.name = placeResult.name;
-  //   // this.newStore.latitude = placeResult.fields.geometry.latitude;
-  // }
+  setNewStore(placeResult) {
+    this.newStore.name = placeResult.name;
+    this.newStore.latitude = placeResult.geometry.location.lat();
+    this.newStore.longitude = placeResult.geometry.location.lng();
+
+  }
 
 
 
   register() {
-    // ADD newStore to newUser before sending
-    this.authService.register(this.newUser).subscribe(
-      user => {
-        this.authService.login(this.newUser.username, this.newUser.password).subscribe(
-          success => {
-            this.router.navigateByUrl('/landingPage');
+    this.storeService.create(this.newStore).subscribe(
+      data => {
+        this.createdStore = data;
+        this.newUser.store = this.createdStore;
+        this.authService.register(this.newUser).subscribe(
+          user => {
+            this.authService.login(this.newUser.username, this.newUser.password).subscribe(
+              success => {
+                this.newStore = new Store();
+                this.createdStore = null;
+                this.router.navigateByUrl('/landingpage');
+              },
+              fail => {
+                console.log("User unable to login: " + fail);
+                this.router.navigateByUrl('/notFound');
+              }
+            );
+            this.newUser = new User();
           },
           fail => {
-            console.log("User unable to login: " + fail);
+            console.log("Unable to register User: " + fail);
             this.router.navigateByUrl('/notFound');
           }
         );
-        this.newUser = new User();
-      },
-      fail => {
-        console.log("Unable to register User: " + fail);
-        this.router.navigateByUrl('/notFound');
       }
-    );
+    )
+
   }
 }

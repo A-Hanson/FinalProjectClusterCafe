@@ -45,7 +45,6 @@ export class MeetingService {
   }
 
   update(updatedMeeting: Meeting): Observable<Meeting> {
-    console.log(updatedMeeting);
     return this.http.put<Meeting>(this.url + '/' + updatedMeeting.id, updatedMeeting, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
