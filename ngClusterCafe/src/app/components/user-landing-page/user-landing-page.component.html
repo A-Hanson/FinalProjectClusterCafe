@@ -4,3 +4,134 @@ map display image
 <div id="map"></div> -->
 
 <h1>Welcome back {{currentUser.firstName}}!</h1>
+
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel id="toggle-1" title="Posts">
+    <ng-template ngbPanelContent>
+      <div ng-hide="posts">
+        <div *ngFor="let post of posts | userPosts: currentUser" ng-click="selectPost(post)" class="card">
+          <div class="row g-0">
+            <div class="col-md-10">
+              <div class="card-body">
+                <div>
+                    <h5 class="card-title" >{{post.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{post.user.firstName}} {{post.user.lastName}}</h6>
+                </div>
+                <p class="card-text">{{post.content}}</p>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card-body">
+                  <div class="card-text text-end">
+
+                    <button type="button" class="btn btn-outline-success" (click)="editPost(post)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-outline-danger" (click)="deletePost(post)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                      </svg>
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+  <!-- <ngb-panel id="toggle-2" title="Comments">
+    <ng-template ngbPanelContent>
+      <div ng-hide="postComments">
+        <div *ngFor="let postComment of postComments" ng-click="selectPostComment(comment)" class="card">
+          <div class="row g-0">
+            <div class="col-md-10">
+              <div class="card-body">
+                <div>
+                    <h5 class="card-title" ><strong>Comment: </strong>{{postComment.content}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><strong>Name: </strong>{{postComment.user.firstName}} {{postComment.user.lastName}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted"><strong>Username:</strong> {{postComment.user.username}}</h6>
+                </div>
+                <hr>
+                <p class="card-text">In reply to: <br>
+                    {{postComment.post.title}}</p>
+                <p class="card-text">{{postComment.post.content}}</p>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card-body">
+                  <div class="card-text text-end">
+
+                    <button type="button" class="btn btn-outline-success" (click)="editComment(postComment)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-outline-danger" (click)="deletePostComment(postComment)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                      </svg>
+                    </button>
+
+                  </div> -->
+
+
+              <!-- </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel> -->
+  <ngb-panel id="toggle-3" title="Meetings">
+    <ng-template ngbPanelContent>
+      <div ng-hide="postComments">
+        <div *ngFor="let meeting of meetings" ng-click="selectMeeting(meeting)" class="card">
+          <div class="row g-0">
+            <div class="col-md-10">
+              <div class="card-body">
+                <div>
+                    <h5 class="card-title" ><strong>Meeting Title: </strong>{{meeting.name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><strong>Created By: </strong>{{meeting.user.firstName}} {{meeting.user.lastName}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted"><strong>Username:</strong> {{meeting.user.username}}</h6>
+                </div>
+                <hr>
+                <p class="card-text"><strong>Meeting Date:</strong> {{meeting.meetingDate | date: "short"}}</p>
+                <p class="card-text">Meeting Description: <br>
+                    {{meeting.description}}</p>
+
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card-body">
+                  <div class="card-text text-end">
+
+                    <button type="button" class="btn btn-warning" (click)="unflagMeeting(meeting)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
+                        <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                      </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-outline-danger" (click)="deleteMeeting(meeting)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                      </svg>
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

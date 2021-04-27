@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 
+
 @Component({
   selector: 'app-user-landing-page',
   templateUrl: './user-landing-page.component.html',
@@ -24,7 +25,9 @@ export class UserLandingPageComponent implements OnInit {
   postComments: PostComment[] = [];
   posts: Post[] = [];
   admin: boolean = false;
-
+  selected = null;
+  editedComment: PostComment = null;
+  editPost = null;
 
   // neighbourhoodPlaces: Array<Place> = [];
   // constructor(private sanitizer: DomSanitizer) {
@@ -35,7 +38,6 @@ export class UserLandingPageComponent implements OnInit {
   private route: ActivatedRoute,
   private router: Router,
   private userService: UserService,
-  private authService: AuthService,
 
   ){
 
@@ -44,7 +46,21 @@ export class UserLandingPageComponent implements OnInit {
   ngOnInit(): void {
     // this.fetchNeighbourhood();
     // this.initMap();
-    this.loadCurrentUser()
+    let postId = this.route.snapshot.paramMap.get('id');
+    if (postId) {
+      this.postService.show(postId).subscribe(
+        post => {
+          this.selected = post;
+        },
+        fail => {
+          console.error('PostListComponent.ngOnInit(): post retrieve failed');
+          console.error(fail);
+          this.router.navigateByUrl('notFound');
+        }
+      )
+    };
+    this.reload();
+    this.loadCurrentUser();
 
 
   }
@@ -65,6 +81,120 @@ export class UserLandingPageComponent implements OnInit {
       this.admin = false;
     }
   }
+  reload() {
+    this.postService.index().subscribe(
+      data => {this.posts = data},
+      err => {console.error('Error: ' + err)}
+    );
+  }
+  displayPost(post) {
+    this.selected = post;
+    this.reloadComments();
+      }
+
+  reloadComments(){
+    this.postService.getCommentsForPost(this.selected.id).subscribe(
+      data => {this.postComments = data},
+      err => {console.error('Error loading comments for this post' + err)}
+      );
+    }
+    displayTable(): void {
+      this.selected = null;
+    }
+    flagComment(comment: PostComment) {
+      comment.flagged = true;
+      this.editComment(comment);
+    }
+
+    deleteComment(comment: PostComment) {
+      this.postService.deleteCommentForPost(comment.post.id, comment.id).subscribe(
+        data => {
+          this.reloadComments();
+        },
+        err => {
+          console.error('Error deleting comment: ' + err);
+        }
+      );
+    }
+    editComment(comment: PostComment) {
+      this.postService.editCommentForPost(comment.post.id, comment.id, comment).subscribe(
+        data => {
+          this.editedComment = null;
+          this.reloadComments();
+        },
+        err => {
+          console.error('Error editing comment: ' + err);
+        }
+      );
+    }
+    flagPost(post: Post) {
+      post.flagged = true;
+      this.updatePost(post, false);
+    }
+
+    unflagPost(post: Post) {
+      post.flagged = false;
+      this.updatePost(post, false);
+    }
+    updatePost(editedPost: Post, displayPost = true): void {
+      this.postService.update(editedPost).subscribe(
+        data => {
+          if(displayPost) {
+            this.selected = editedPost;
+          }
+            this.editPost = null;
+            this.reload();
+        },
+        err => {
+          console.error('Error: ' + err);
+        }
+      );
+    }
+    unflagPostComment(comment: PostComment) {
+      comment.flagged = false;
+      this.postService.editCommentForPost(comment.post.id, comment.id, comment).subscribe(
+        data => {
+          this.loadFlaggedPostComments();
+        },
+        err => {
+          console.error('Error in unflagPostComment()')
+          console.error('Error unflagging postComment for admin' + err)
+        }
+      );
+    }
+    deletePostComment(comment: PostComment) {
+      this.postService.deleteCommentForPost(comment.post.id, comment.id).subscribe(
+        data => {
+          this.loadFlaggedPostComments();
+        },
+        err => {
+          console.error('Error in deletePostComment()')
+          console.error('Error deleting postComment for admin' + err)
+        }
+      );
+    }
+    loadFlaggedPostComments() {
+      this.postService.indexFlaggedComments().subscribe(
+        data => {
+          this.postComments = data
+        },
+        err => {
+          console.error('Error in loadFlaggedPostComments()')
+          console.error('Error loading flagged comments for admin' + err)
+        }
+      )
+    }
+    deletePost(id: number): void {
+      this.postService.delete(id).subscribe(
+        data => {
+          this.selected = null;
+          this.reload();
+        },
+        err => {
+          console.error('Error: ' + err);
+        }
+      );
+    }
 //   getUserPosts(){
 // this.user.
 //   }
@@ -296,4 +426,7 @@ export class UserLandingPageComponent implements OnInit {
   //   // Open the infoPane
   //   this.infoPane.classList.add('open');
   // }
+
+
+
 }

@@ -1,6 +1,5 @@
 package com.skilldistillery.clustercafe.controllers;
 
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,101 +16,82 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.clustercafe.entities.User;
-import com.skilldistillery.clustercafe.services.UserService;
+import com.skilldistillery.clustercafe.entities.Store;
+import com.skilldistillery.clustercafe.services.StoreService;
 
+@RestController
 @CrossOrigin({"*", "http://localhost:4290"})
 @RequestMapping("api")
-@RestController
-public class UserController {
-//	NO AUTHENTICATION AT THIS TIME
-
+public class StoreController {
+	
 	@Autowired
-	private UserService userSvc;
+	private StoreService storeSvc;
 	
-	@GetMapping("ping")
-	public String ping() {
-		return "pong";
+	@GetMapping("stores")
+	public List<Store> index(HttpServletRequest req, 
+			HttpServletResponse res) {
+		return storeSvc.indexEnabled();
 	}
 	
-	@GetMapping("users") 
-	public List<User> index(HttpServletRequest req, HttpServletResponse res){
-		return userSvc.index();
-	}
-	
-	@GetMapping("users/{id}") 
-	public User show(@PathVariable int id, 
-					HttpServletRequest req, 
-					HttpServletResponse res){
-		User user = userSvc.show(id);
-		if (user == null) {
-			res.setStatus(404);
-		}
-		return user;
-	}
-	
-	@GetMapping("users/username") 
-	public User showLoggedIn(Principal principal, 
+	@GetMapping("stores/{id}")
+	public Store show(@PathVariable int id, 
 			HttpServletRequest req, 
-			HttpServletResponse res){
-		User user = userSvc.showLoggedIn(principal.getName());
-		if (user == null) {
+			HttpServletResponse res) {
+		Store store = storeSvc.show(id);
+		if (store == null) {
 			res.setStatus(404);
 		}
-		return user;
+		return store;
 	}
 	
-	@PostMapping("users")
-	public User create(@RequestBody User user,
+	@PostMapping("stores")
+	public Store create(@RequestBody Store store,
 			HttpServletRequest req, 
 			HttpServletResponse res) {
 		try {
-			userSvc.create(user);
+			store = storeSvc.create(store);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();			
-			url.append("/").append(user.getId());
+			url.append("/").append(store.getId());
 			res.setHeader("location", url.toString());
 		}
 		catch  (Exception e) {
 			System.err.println(e);
 			res.setStatus(400);
-			user = null;
+			store = null;
 		}
-		return user;
+		return store;
 	}
 	
-
-	@PutMapping("users/{id}") 
-	public User update(@PathVariable int id, 
-					@RequestBody User user,
-					HttpServletRequest req, 
-					HttpServletResponse res,
-					Principal princial){
+	@PutMapping("stores/{id}")
+	public Store update(@PathVariable int id, 
+			@RequestBody Store store,
+			HttpServletRequest req, 
+			HttpServletResponse res) {
 		try {
-			user = userSvc.update(id, user, princial.getName());
-			if (user == null) {
+			store = storeSvc.update(id, store);
+			if (store == null) {
 				res.setStatus(404);
 			}
 			res.setStatus(200);
 			StringBuffer url = req.getRequestURL();			
-			url.append("/").append(user.getId());
+			url.append("/").append(store.getId());
 			res.setHeader("location", url.toString());
 		}
 		catch  (Exception e) {
 			System.err.println(e);
 			res.setStatus(400);
-			user = null;
+			store = null;
 		}
-		return user;
+		return store;
 	}
 	
-	@DeleteMapping("users/{id}")
+	@DeleteMapping("stores/{id}")
 	public void destroy(@PathVariable int id, 
 					HttpServletRequest req, 
-					HttpServletResponse res,
-					Principal principal) {
+					HttpServletResponse res) {
 		try {
-			boolean deleted = userSvc.softDelete(id, principal.getName());
+			boolean deleted = storeSvc.softDelete(id);
 			if (deleted) {
 				res.setStatus(204);
 			} else {
@@ -122,11 +102,14 @@ public class UserController {
 		catch (Exception e) {
 			System.err.println(e);
 			res.setStatus(400);			
-		}		
+		}	
 	}
-	
-	
+
 }
+
+
+
+
 
 
 
