@@ -11,31 +11,27 @@
 </head>
 
 <body>
-
-<div class="contact-wrap">
-  <div class="contact-in">
-
-
-  </div>
-  <div class="contact-in">
-    <h1>Register Account</h1>
-    <form>
-      <input type="text" placeholder="First Name" class="contact-in-input" name="firstname" id="firstname" [(ngModel)]="newUser.firstName">
-      <input type="text" placeholder="Last Name" class="contact-in-input" name="lastname" id="lastname" [(ngModel)]="newUser.lastName">
-      <input type="text" placeholder="Username" class="contact-in-input" name="username" id="username" [(ngModel)]="newUser.username">
-      <input type="text" placeholder="Email" class="contact-in-input" name="email" id="email" [(ngModel)]="newUser.email">
-      <input type="password" placeholder="Password" class="contact-in-input" name="password" id="password" [(ngModel)]="newUser.password">
-      <!-- <input type="password" placeholder="Re-enter Password" class="contact-in-input" name="password" id="password" [(ngModel)]="newUser.password"> -->
-      <input type="date" placeholder="Date of Birth" class="contact-in-input" name="dob" id="dob" value= "<?php echo date('Y-m-d'); ?>" [(ngModel)]="newUser.dob">
+  <div class="container">
+    <div class="welcome">
+      <div class="pinkbox">
+        <div class="signin">
+          <h1>Register A<span>cc</span>ount</h1>
+    <form class = "more-padding" autocomplete="off">
+      <input type="text" placeholder="First Name"  name="firstname" id="firstname" [(ngModel)]="newUser.firstName">
+      <input type="text" placeholder="Last Name"  name="lastname" id="lastname" [(ngModel)]="newUser.lastName">
+      <input type="text" placeholder="Username"  name="username" id="username" [(ngModel)]="newUser.username">
+      <input type="text" placeholder="Email"  name="email" id="email" [(ngModel)]="newUser.email">
+      <input type="password" placeholder="Password"  name="password" id="password" [(ngModel)]="newUser.password">
+      <input type="date" placeholder="Date of Birth"  name="dob" id="dob" value= "<?php echo date('Y-m-d'); ?>" [(ngModel)]="newUser.dob">
       <p></p>
-      <span> Preferred Pronoun &nbsp;</span>
+      <label for='pronoun'>Preferred Pronoun</label>
       <select id='pronoun' name='pronoun' [(ngModel)]='newUser.pronouns'>
           <option selected disabled>Choose here</option>
           <option *ngFor="let pronoun of pronouns" [value]="pronoun">
           {{pronoun}}
         </option>
       </select>
-      <span> Gender &nbsp;</span>
+      <label for='pronoun'>Preferred Pronoun</label>
       <select id='gender' name='gender' [(ngModel)]='newUser.gender'>
         <option selected disabled>Choose here</option>
         <option *ngFor="let gender of genders" [value]="gender">
@@ -45,61 +41,19 @@
     <p></p>
       <!-- \/ NEEDS TO BE EDITED AND NEEDS TO REFERENCE GOOGLE MAPS API WHEN IMPLEMENTED \/ -->
       <!-- <input type="text" placeholder="Selected coffee shop" class="contact-in-input" name="selectedcoffeeshop" id="selectedcoffeeshop" [(ngModel)]="selectedcoffeeshop"> -->
-      <button type="submit" class="contact-in-btn" (click)="register()">Submit</button>
-      </form>
-  </div>
-  <div class="contact-in">
-    <h1> Select Your Home Coffee Shop </h1>
-    <!-- Map side-bar popout on result -->
-<!-- <div id="panel"></div> -->
-<!-- map display image -->
-<div id="map"></div>
-
-    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d196281.882898
-                 22207!2d-104.99554117229887!3d39.76425433602047!2m3!1f0!2f0!3f0!3m2
-                 !1i1024!2i768!4f13.1!3m3!1m2!1s0x876b80aa231f17cf%3A0x118ef4f8278a3
-                 6d6!2sDenver%2C%20CO!5e0!3m2!1sen!2sus!4v1619114061553!5m2!1sen!2sus"
-            width="100%"
-            height="auto"
-            frameborder="0"
-            style="border:0;"
-            allowfullscreen=""
-            aria-hidden="false"
-            tabindex="0">
-    </iframe> -->
+      <button type="submit" class="button submit" (click)="register()">Complete Sign Up</button>
+    </form>
   </div>
 </div>
-</body>
+<div class="leftbox">
 
-<!-- </html><div class="container">
-  <h5>DEBUGGING MODE</h5>
-  <h5>Register New User</h5>
-  <form>
-    <div class="mb-3">
-      <label for="firstName" class="form-label">First Name</label>
-      <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="newUser.firstName">
-    </div>
-    <div class="mb-3">
-      <label for="lastName" class="form-label">Last Name</label>
-      <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="newUser.lastName">
-    </div>
-    <div class="mb-3">
-      <label for="dob" class="form-label">Date of Birth</label>
-      <input type="date" class="form-control" id="dob" name="dob" [(ngModel)]="newUser.dob">
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" [(ngModel)]="newUser.email">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-      <label for="username" class="form-label">User Name</label>
-      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="newUser.username">
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="newUser.password">
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="register()">Submit</button>
-  </form>
-</div> -->
+</div>
+<div class="rightbox">
+  <h2 class="title"></h2>
+  <p class="desc"> pick your home <span>coffee shop</span></p>
+  <div id="map"></div>
+</div>
+</div>
+</div>
+
+  </body>

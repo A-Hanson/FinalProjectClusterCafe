@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
     let request = {
       location: position,
       rankBy: google.maps.places.RankBy.DISTANCE,
-      keyword: 'sushi',
+      keyword: 'coffee shop',
     };
     this.service = new google.maps.places.PlacesService(this.map);
     this.service.nearbySearch(request,(results, status) => {
