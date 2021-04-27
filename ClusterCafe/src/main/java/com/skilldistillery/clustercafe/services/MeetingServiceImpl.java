@@ -71,8 +71,6 @@ public class MeetingServiceImpl implements MeetingService {
 	@Override
 	public Meeting update(int id, String username, Meeting meeting) {
 		Meeting updatedMeeting = meetingRepo.findByIdAndEnabledTrueAndUser_username(id, username);
-		System.out.println("******************************" + meetingRepo.findByIdAndEnabledTrue(id));
-		System.out.println("******************************" + meeting.getAttendees());
 		if (updatedMeeting != null) {
 			if (meeting.getEnabled() != null) {
 				updatedMeeting.setEnabled(meeting.getEnabled());

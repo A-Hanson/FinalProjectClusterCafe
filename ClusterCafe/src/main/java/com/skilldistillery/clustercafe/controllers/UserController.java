@@ -85,9 +85,10 @@ public class UserController {
 	public User update(@PathVariable int id, 
 					@RequestBody User user,
 					HttpServletRequest req, 
-					HttpServletResponse res){
+					HttpServletResponse res,
+					Principal princial){
 		try {
-			user = userSvc.update(id, user);
+			user = userSvc.update(id, user, princial.getName());
 			if (user == null) {
 				res.setStatus(404);
 			}

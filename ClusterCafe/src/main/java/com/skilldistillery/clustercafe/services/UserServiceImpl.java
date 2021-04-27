@@ -48,10 +48,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User update(int id, User user) {
-		User managedUser = null;
-		if (userRepo.findById(id).isPresent()) {
-			managedUser = userRepo.findById(id).get();
+	public User update(int id, User user, String username) {
+		User managedUser = userRepo.findByIdAndEnabledTrueAndUsername(id, username);
+		boolean admin = userRepo.findByUsername(username).getRole().equals("admin");
+		if (managedUser != null) {
+//			managedUser = userRepo.findById(id).get();
 			if (user.getDob() != null) {
 				managedUser.setDob(user.getDob());
 			}
@@ -78,6 +79,14 @@ public class UserServiceImpl implements UserService{
 			}
 			if (user.getStore() != null) {
 				managedUser.setStore(user.getStore());
+			}
+			if (user.getEnabled() != null) {
+				managedUser.setEnabled(user.getEnabled());
+			}
+		} else if (admin && userRepo.findByIdAndEnabledTrue(id) != null) {
+			managedUser = userRepo.findByIdAndEnabledTrue(id);
+			if (user.getEnabled() != null) {
+				managedUser.setEnabled(user.getEnabled());
 			}
 		}
 		return managedUser;
