@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Meeting } from 'src/app/models/meeting';
+import { Store } from 'src/app/models/store';
 import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { MeetingService } from 'src/app/services/meeting.service';
+import { StoreService } from 'src/app/services/store.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -22,13 +24,15 @@ export class MeetingListComponent implements OnInit {
   editMeeting = false;
   newMeeting: Meeting = new Meeting();
   editedMeeting: Meeting = null;
+  stores: Store[] = [];
 
   constructor(
     private meetingService: MeetingService,
     private route: ActivatedRoute,
     private router: Router,
     private categoryService: CategoryService,
-    private userService: UserService
+    private userService: UserService,
+    private storeService: StoreService
   ) { }
 
   ngOnInit(): void {
@@ -168,6 +172,7 @@ export class MeetingListComponent implements OnInit {
     this.reloadMeetings();
     this.reloadCategories();
     this.reloadCurrentUser();
+    this.reloadStores();
   }
 
   reloadMeetings() {
@@ -196,6 +201,15 @@ export class MeetingListComponent implements OnInit {
       },
       err => {console.error('Error loading current user: ' + err)}
     );
+  }
+
+  reloadStores() {
+    this.storeService.index().subscribe(
+      data => {
+        this.stores = data
+      },
+      err => {console.error('Error loading stores: ' + err)}
+    )
   }
 
   checkForAdmin() {
