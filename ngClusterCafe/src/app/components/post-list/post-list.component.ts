@@ -175,7 +175,11 @@ constructor(
     );
   }
   setEditComment(comment: PostComment) {
-    this.editedComment = comment;
+    this.editedComment = Object.assign<PostComment, PostComment>(new PostComment(), comment);
+  }
+
+  cancelEditComment() {
+    this.editedComment = null;
   }
 
   editComment(comment: PostComment) {
@@ -192,6 +196,11 @@ constructor(
 
   flagComment(comment: PostComment) {
     comment.flagged = true;
+    this.editComment(comment);
+  }
+
+  unflagComment(comment: PostComment) {
+    comment.flagged = false;
     this.editComment(comment);
   }
 
