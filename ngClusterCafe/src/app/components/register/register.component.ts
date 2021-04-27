@@ -135,6 +135,7 @@ export class RegisterComponent implements OnInit {
                click in order to minimize API rate limits */
             this.service.getDetails(request, (placeResult, status) => {
               this.showDetails(placeResult, marker, status);
+              // this.setNewStore(placeResult); // THIS IS WHERE YOU PUT IT
             });
 
           });
@@ -223,11 +224,23 @@ export class RegisterComponent implements OnInit {
     this.infoPane.classList.add('open');
   }
 
-
+  // setNewStore(placeResult) {
+  //   //  fields: [
+  //   //   'name',
+  //   //   'formatted_address',
+  //   //   'geometry',
+  //   //   'rating',
+  //   //   'website',
+  //   //   'photos',
+  //   // ],
+  //   this.newStore.name = placeResult.name;
+  //   // this.newStore.latitude = placeResult.fields.geometry.latitude;
+  // }
 
 
 
   register() {
+    // ADD newStore to newUser before sending
     this.authService.register(this.newUser).subscribe(
       user => {
         this.authService.login(this.newUser.username, this.newUser.password).subscribe(
