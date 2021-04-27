@@ -34,9 +34,9 @@ export class StoreService {
     );
   }
 
-  create(newStore: Store): Observable<Store[]> {
+  create(newStore: Store): Observable<Store> {
     newStore.enabled = true;
-    return this.http.post<Store[]>(this.url, newStore, this.getHttpOptions()).pipe(
+    return this.http.post<Store>(this.url, newStore, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error');

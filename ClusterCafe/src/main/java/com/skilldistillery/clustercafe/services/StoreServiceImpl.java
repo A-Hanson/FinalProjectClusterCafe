@@ -36,6 +36,10 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public Store create(Store store) {
+		Store storeInDatabase = storeRepo.findByLatitudeAndLongitudeAndName(store.getLatitude(), store.getLongtitude(), store.getName());
+		if (storeInDatabase != null) {
+			return storeInDatabase;
+		}
 		if (store.isEnabled() == null) {
 			store.setEnabled(true);
 		}
