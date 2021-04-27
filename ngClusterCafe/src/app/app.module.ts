@@ -21,6 +21,8 @@ import { MeetingListComponent } from './components/meeting-list/meeting-list.com
 import { FlaggedPipe } from './pipes/flagged.pipe';
 import { NewMeetingComponent } from './components/new-meeting/new-meeting.component';
 import { CategoryService } from './services/category.service';
+import { userPostsPipe } from './pipes/userPost.pipe';
+import { userCommentsPipe } from './pipes/userComments.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
 
 
@@ -39,6 +41,8 @@ import { CategoryPipe } from './pipes/category.pipe';
     MeetingListComponent,
     FlaggedPipe,
     NewMeetingComponent,
+    userPostsPipe,
+    userCommentsPipe,
     CategoryPipe
   ],
   imports: [
@@ -50,7 +54,7 @@ import { CategoryPipe } from './pipes/category.pipe';
   ],
   providers: [
     AuthService,
-    CategoryService
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })
