@@ -2,27 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-
   currentUser: User = new User();
   loggedIn: boolean = false;
-
   constructor(
     private authService: AuthService,
     private userService: UserService
-
   ) { }
-
   ngOnInit(): void {
     // this.checkLogin();
     this.loadCurrentUser();
-
   }
   checkLogin(){
     return this.authService.checkLogin()
@@ -42,13 +36,11 @@ export class NavBarComponent implements OnInit {
       this.loadCurrentUser();
     } else if(this.checkLogin() && this.loggedIn===true){
     console.log("nothing");
-
     }
     else{
       this.loggedIn = false;
       this.currentUser = new User();
     }
-
     if (this.currentUser.role==='admin'){
     return true;
     }
