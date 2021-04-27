@@ -33,7 +33,7 @@
       <div class="col p-3">
         <div class="form-floating">
           <label for="floatingTextarea2">Adventure awaits</label>
-          <textarea class="form-control" placeholder="I am looking for..." id="floatingTextarea2" style="height: 100px" [(ngModel)]='newPost.content'></textarea>
+          <textarea name="content" class="form-control" placeholder="I am looking for..." id="floatingTextarea2" style="height: 100px"[(ngModel)]='newPost.content'></textarea>
         </div>
       </div>
     </div>
@@ -44,6 +44,7 @@
   </form>
   <hr>
 </div>
+
 <!-- detail div -->
 <br>
 <div *ngIf='selected && !editPost'>
