@@ -108,9 +108,10 @@ public class UserController {
 	@DeleteMapping("users/{id}")
 	public void destroy(@PathVariable int id, 
 					HttpServletRequest req, 
-					HttpServletResponse res) {
+					HttpServletResponse res,
+					Principal principal) {
 		try {
-			boolean deleted = userSvc.softDelete(id);
+			boolean deleted = userSvc.softDelete(id, principal.getName());
 			if (deleted) {
 				res.setStatus(204);
 			} else {

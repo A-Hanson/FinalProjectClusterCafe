@@ -93,12 +93,17 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean softDelete(int id) {
+	public boolean softDelete(int id, String username) {
 		boolean deleted = false;
-		if (userRepo.findById(id).isPresent()) {
+		User loggedInUser = userRepo.findByUsername(username);
+		if (userRepo.findById(id).isPresent() && loggedInUser != null) {
 			User user = userRepo.findById(id).get();
-			user.setEnabled(false);
-			deleted = true;
+			if (loggedInUser.getUsername().equals(user.getUsername()) ||
+					loggedInUser.getRole().equals("admin")) {
+				user.setEnabled(false);
+				deleted = true;
+			}
+			
 		}
 		return deleted;
 	}

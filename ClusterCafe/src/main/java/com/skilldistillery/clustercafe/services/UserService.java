@@ -10,5 +10,5 @@ public interface UserService {
 	public User showLoggedIn(String username);
 	public User create(User user);
 	public User update(int id, User user, String username);
-	public boolean softDelete(int id);
+	public boolean softDelete(int id, String username);
 }
