@@ -21,6 +21,7 @@ import { MeetingListComponent } from './components/meeting-list/meeting-list.com
 import { FlaggedPipe } from './pipes/flagged.pipe';
 import { NewMeetingComponent } from './components/new-meeting/new-meeting.component';
 import { CategoryService } from './services/category.service';
+import { CategoryPipe } from './pipes/category.pipe';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { CategoryService } from './services/category.service';
     AdminDashboardComponent,
     MeetingListComponent,
     FlaggedPipe,
-    NewMeetingComponent
+    NewMeetingComponent,
+    CategoryPipe
   ],
   imports: [
     BrowserModule,
