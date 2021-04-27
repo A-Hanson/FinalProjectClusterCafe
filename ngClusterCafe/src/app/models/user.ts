@@ -13,7 +13,7 @@ export class User {
   pronouns: string;
   dob: string;
   age: number;
-  store: Store;
+  store: Store = new Store();
   enabled: boolean;
   role: string;
   gender: string;
@@ -48,7 +48,7 @@ constructor(
     this.pronouns = pronouns;
     this.dob = dob;
     this.age = age;
-    this.store = store;
+    this.store = store === undefined ? new Store() : store;
     this.enabled = enabled;
     this.role = role;
     this.gender = gender;

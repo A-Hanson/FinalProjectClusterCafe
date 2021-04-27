@@ -35,8 +35,9 @@ export class StoreService {
   }
 
   create(newStore: Store): Observable<Store> {
+    let createUrl = environment.baseUrl + 'stores'
     newStore.enabled = true;
-    return this.http.post<Store>(this.url, newStore, this.getHttpOptions()).pipe(
+    return this.http.post<Store>(createUrl, newStore).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error');

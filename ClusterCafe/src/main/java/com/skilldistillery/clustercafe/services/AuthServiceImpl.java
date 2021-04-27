@@ -25,10 +25,10 @@ public class AuthServiceImpl implements AuthService {
 		// set other fields to default values
 		user.setRole("standard");
 		user.setEnabled(true);
-		Store store = new Store();// DEBUGGING MODE ONLY
-		store.setId(1);// DEBUGGING MODE ONLY
-		store.setEnabled(true);
-		user.setStore(store); // DEBUGGING MODE ONLY
+//		Store store = new Store();// DEBUGGING MODE ONLY
+//		store.setId(1);// DEBUGGING MODE ONLY
+//		store.setEnabled(true);
+//		user.setStore(store); // DEBUGGING MODE ONLY
 
 		userRepo.saveAndFlush(user);
 		return user;

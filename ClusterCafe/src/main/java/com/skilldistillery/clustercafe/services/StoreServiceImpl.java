@@ -38,12 +38,15 @@ public class StoreServiceImpl implements StoreService {
 	public Store create(Store store) {
 		Store storeInDatabase = storeRepo.findByLatitudeAndLongitudeAndName(store.getLatitude(), store.getLongtitude(), store.getName());
 		if (storeInDatabase != null) {
+			System.out.println("********** store in db: " + storeInDatabase);
 			return storeInDatabase;
 		}
 		if (store.isEnabled() == null) {
 			store.setEnabled(true);
 		}
-		return storeRepo.save(store);
+		store = storeRepo.saveAndFlush(store);
+		System.out.println("************ new store to be returned: " + store);
+		return store;
 	}
 
 	@Override

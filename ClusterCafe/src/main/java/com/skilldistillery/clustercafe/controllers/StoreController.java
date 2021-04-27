@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.clustercafe.entities.Store;
@@ -21,19 +20,18 @@ import com.skilldistillery.clustercafe.services.StoreService;
 
 @RestController
 @CrossOrigin({"*", "http://localhost:4290"})
-@RequestMapping("api")
 public class StoreController {
 	
 	@Autowired
 	private StoreService storeSvc;
 	
-	@GetMapping("stores")
+	@GetMapping("api/stores")
 	public List<Store> index(HttpServletRequest req, 
 			HttpServletResponse res) {
 		return storeSvc.indexEnabled();
 	}
 	
-	@GetMapping("stores/{id}")
+	@GetMapping("api/stores/{id}")
 	public Store show(@PathVariable int id, 
 			HttpServletRequest req, 
 			HttpServletResponse res) {
@@ -51,9 +49,9 @@ public class StoreController {
 		try {
 			store = storeSvc.create(store);
 			res.setStatus(201);
-			StringBuffer url = req.getRequestURL();			
-			url.append("/").append(store.getId());
-			res.setHeader("location", url.toString());
+//			StringBuffer url = req.getRequestURL();			
+//			url.append("/").append(store.getId());
+//			res.setHeader("location", url.toString());
 		}
 		catch  (Exception e) {
 			System.err.println(e);
@@ -63,7 +61,7 @@ public class StoreController {
 		return store;
 	}
 	
-	@PutMapping("stores/{id}")
+	@PutMapping("api/stores/{id}")
 	public Store update(@PathVariable int id, 
 			@RequestBody Store store,
 			HttpServletRequest req, 
@@ -86,7 +84,7 @@ public class StoreController {
 		return store;
 	}
 	
-	@DeleteMapping("stores/{id}")
+	@DeleteMapping("api/stores/{id}")
 	public void destroy(@PathVariable int id, 
 					HttpServletRequest req, 
 					HttpServletResponse res) {

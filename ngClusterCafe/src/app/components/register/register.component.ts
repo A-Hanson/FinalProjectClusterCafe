@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
                       ]
 
   newStore:Store = new Store();
+  createdStore:Store = null;
   pos;
   map;
   bounds;
@@ -246,44 +247,60 @@ export class RegisterComponent implements OnInit {
     //   'photos',
     // ],
     this.newStore.name = placeResult.name;
-    this.newStore.latitude = placeResult.geometry.location.lat;
-    this.newStore.longitude = placeResult.geometry.location.long;
+    this.newStore.latitude = placeResult.geometry.location.lat();
+    this.newStore.longitude = placeResult.geometry.location.lng();
 
   }
 
-  makeNewStore(store: Store) {
-    this.storeService.create(store).subscribe(
-      data => {
-        this.newStore = data;
-      },
-      err => {
-        console.error("error in makeNewStore(): " + err);
-      }
-    )
-  }
+  // makeNewStore(store: Store) {
+  //   console.log("store being sent to service: ")
+  //   console.log(this.newStore);
+  //   this.storeService.create(store).subscribe(
+  //     data => {
+  //       this.createdStore = data;
+  //       console.log("created store returned: ")
+  //       console.log(this.createdStore);
+  //       this.newUser.store = this.createdStore;
+  //       console.log("user after store assignment:")
+  //       console.log(this.newUser);
+  //     },
+  //     err => {
+  //       console.error("error in makeNewStore(): " + err);
+  //     }
+  //   )
+  // }
 
 
   register() {
-    this.makeNewStore(this.newStore);
-    this.newUser.store = this.newStore;
-    this.authService.register(this.newUser).subscribe(
-      user => {
-        this.newStore = new Store();
-        this.authService.login(this.newUser.username, this.newUser.password).subscribe(
-          success => {
-            this.router.navigateByUrl('/landingpage');
+    // this.makeNewStore(this.newStore);
+    // console.log("user being sent to register: ")
+    // console.log(this.newUser);
+    this.storeService.create(this.newStore).subscribe(
+      data => {
+        this.createdStore = data;
+        this.newUser.store = this.createdStore;
+        this.authService.register(this.newUser).subscribe(
+          user => {
+            this.authService.login(this.newUser.username, this.newUser.password).subscribe(
+              success => {
+                this.newStore = new Store();
+                this.createdStore = null;
+                this.router.navigateByUrl('/landingpage');
+              },
+              fail => {
+                console.log("User unable to login: " + fail);
+                this.router.navigateByUrl('/notFound');
+              }
+            );
+            this.newUser = new User();
           },
           fail => {
-            console.log("User unable to login: " + fail);
+            console.log("Unable to register User: " + fail);
             this.router.navigateByUrl('/notFound');
           }
         );
-        this.newUser = new User();
-      },
-      fail => {
-        console.log("Unable to register User: " + fail);
-        this.router.navigateByUrl('/notFound');
       }
-    );
+    )
+
   }
 }
