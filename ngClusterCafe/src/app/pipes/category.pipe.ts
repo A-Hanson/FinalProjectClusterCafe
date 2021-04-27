@@ -12,7 +12,7 @@ export class CategoryPipe implements PipeTransform {
       filtered = value;
     } else {
       value.forEach( (item) => {
-        if (item.category === category) {
+        if (item.category.id === category.id) {
           filtered.push(item);
         }
       });
