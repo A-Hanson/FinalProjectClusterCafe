@@ -21,6 +21,9 @@ import { MeetingListComponent } from './components/meeting-list/meeting-list.com
 import { FlaggedPipe } from './pipes/flagged.pipe';
 import { NewMeetingComponent } from './components/new-meeting/new-meeting.component';
 import { CategoryService } from './services/category.service';
+import { userPostsPipe } from './pipes/userPost.pipe';
+import { userCommentsPipe } from './pipes/userComments.pipe';
+import { CategoryPipe } from './pipes/category.pipe';
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import { CategoryService } from './services/category.service';
     AdminDashboardComponent,
     MeetingListComponent,
     FlaggedPipe,
-    NewMeetingComponent
+    NewMeetingComponent,
+    userPostsPipe,
+    userCommentsPipe,
+    CategoryPipe
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,7 @@ import { CategoryService } from './services/category.service';
   ],
   providers: [
     AuthService,
-    CategoryService
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })

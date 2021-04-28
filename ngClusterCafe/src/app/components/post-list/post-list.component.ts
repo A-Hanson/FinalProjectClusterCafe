@@ -27,6 +27,7 @@ newComment: PostComment = new PostComment();
 editedComment: PostComment = null;
 currentUser: User = null;
 admin: boolean = false;
+searchCategory: Category = null;
 
 constructor(
   private postService: PostService,
@@ -93,6 +94,26 @@ constructor(
     }
   }
 // DISPLAY
+  buttonFill(category: Category) {
+    let classToReturn: string = "btn ";
+    if (category === this.searchCategory) {
+      classToReturn = classToReturn.concat("btn-primary");
+    } else if (category === null) {
+      classToReturn = classToReturn.concat("btn-outline-info");
+    } else {
+      classToReturn = classToReturn.concat("btn-outline-primary");
+    }
+    return classToReturn;
+  }
+
+  setCategory(category: Category) {
+    this.searchCategory = category;
+  }
+
+  removeCategory() {
+    this.searchCategory = null;
+  }
+
   displayPost(post) {
     this.selected = post;
     this.reloadComments();
@@ -175,7 +196,11 @@ constructor(
     );
   }
   setEditComment(comment: PostComment) {
-    this.editedComment = comment;
+    this.editedComment = Object.assign<PostComment, PostComment>(new PostComment(), comment);
+  }
+
+  cancelEditComment() {
+    this.editedComment = null;
   }
 
   editComment(comment: PostComment) {
@@ -192,6 +217,11 @@ constructor(
 
   flagComment(comment: PostComment) {
     comment.flagged = true;
+    this.editComment(comment);
+  }
+
+  unflagComment(comment: PostComment) {
+    comment.flagged = false;
     this.editComment(comment);
   }
 

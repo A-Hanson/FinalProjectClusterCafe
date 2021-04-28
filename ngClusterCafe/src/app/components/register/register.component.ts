@@ -238,43 +238,15 @@ export class RegisterComponent implements OnInit {
   }
 
   setNewStore(placeResult) {
-    //  fields: [
-    //   'name',
-    //   'formatted_address',
-    //   'geometry',
-    //   'rating',
-    //   'website',
-    //   'photos',
-    // ],
     this.newStore.name = placeResult.name;
     this.newStore.latitude = placeResult.geometry.location.lat();
     this.newStore.longitude = placeResult.geometry.location.lng();
 
   }
 
-  // makeNewStore(store: Store) {
-  //   console.log("store being sent to service: ")
-  //   console.log(this.newStore);
-  //   this.storeService.create(store).subscribe(
-  //     data => {
-  //       this.createdStore = data;
-  //       console.log("created store returned: ")
-  //       console.log(this.createdStore);
-  //       this.newUser.store = this.createdStore;
-  //       console.log("user after store assignment:")
-  //       console.log(this.newUser);
-  //     },
-  //     err => {
-  //       console.error("error in makeNewStore(): " + err);
-  //     }
-  //   )
-  // }
 
 
   register() {
-    // this.makeNewStore(this.newStore);
-    // console.log("user being sent to register: ")
-    // console.log(this.newUser);
     this.storeService.create(this.newStore).subscribe(
       data => {
         this.createdStore = data;
