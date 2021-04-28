@@ -81,8 +81,8 @@ export class RegisterComponent implements OnInit {
   }
   // Handle a geolocation error
   handleLocationError(browserHasGeolocation, infoWindow) {
-    // Set default location to Sydney, Australia
-    this.pos = { lat: -33.856, lng: 151.215 };
+    // Set default location to Skill Distillery, Denver, CO
+    this.pos = { lat: 39.61256318922856, lng: -104.89974069104768 };
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: this.pos,
       zoom: 15,
