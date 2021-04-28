@@ -85,7 +85,7 @@
       {{cat.name}}
     </button>
   </div>
-	<div *ngFor="let post of (posts | flagged: currentUser.role | category: searchCategory)" ng-click="displayPost(post)" class="card" >
+	<div *ngFor="let post of (posts | flagged: currentUser.role)" ng-click="displayPost(post)" class="card" >
     <div class="row g-0">
       <div class="col-md-1">
         <div class="card-text">

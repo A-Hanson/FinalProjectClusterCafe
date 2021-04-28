@@ -114,7 +114,13 @@
 </div>
 <!-- Show All Meetings -->
 <div *ngIf="!selected && !addNewMeeting && !editMeeting" class="container overflow-hidden p-4">
-	<div *ngFor="let meeting of meetings | flagged: currentUser.role" ng-click="displayMeeting(meeting)" class="card" >
+  <div class="container p-4">
+    <button type="button" [ngClass]="buttonFill(null)" (click)="removeCategory()">Show All Categories</button>
+    <button *ngFor="let cat of categories" type="button" name="{{cat.name}}" (click)="setCategory(cat)" [ngClass]="buttonFill(cat)">
+      {{cat.name}}
+    </button>
+  </div>
+	<div *ngFor="let meeting of (meetings | flagged: currentUser.role | category: searchCategory)" ng-click="displayMeeting(meeting)" class="card" >
     <div class="row g-0">
       <div class="col-md-1">
         <div class="card-text">

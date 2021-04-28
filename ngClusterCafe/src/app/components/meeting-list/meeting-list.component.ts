@@ -25,6 +25,7 @@ export class MeetingListComponent implements OnInit {
   newMeeting: Meeting = new Meeting();
   editedMeeting: Meeting = null;
   stores: Store[] = [];
+  searchCategory: Category = null;
 
   constructor(
     private meetingService: MeetingService,
@@ -40,6 +41,27 @@ export class MeetingListComponent implements OnInit {
   }
 
   // Methods
+  buttonFill(category: Category) {
+    let classToReturn: string = "btn ";
+    if (category === this.searchCategory) {
+      classToReturn = classToReturn.concat("btn-primary");
+    } else if (category === null) {
+      classToReturn = classToReturn.concat("btn-outline-info");
+    } else {
+      classToReturn = classToReturn.concat("btn-outline-primary");
+    }
+    return classToReturn;
+  }
+
+  setCategory(category: Category) {
+    this.searchCategory = category;
+  }
+
+  removeCategory() {
+    this.searchCategory = null;
+  }
+
+
   numberOfAttendees(meeting: Meeting): number {
     if (meeting.attendees) {
       return meeting.attendees.length;
