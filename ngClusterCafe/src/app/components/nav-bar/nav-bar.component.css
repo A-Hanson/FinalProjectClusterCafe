@@ -14,3 +14,13 @@
   height: 2%;
   overflow: auto;
 }
+
+
+.navbar-expand-lg {
+  background-image: linear-gradient(to right, #654321, #c7ad7f);
+
+}
+
+#nav-bar {
+  background-image: linear-gradient(#c7ad7f, beige);
+}
