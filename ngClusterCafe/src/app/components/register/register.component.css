@@ -232,25 +232,25 @@ input[type="date"] {
   overflow-x: hidden;
   transition: all .2s ease-out;
 }
-
-.open {
-  width: 250px;
+ /* Map details pane pop up size */
+ .open {
+  width: 0px;
 }
 
 /* Styling for individual location details */
-.hero {
+/* .hero {
   width: 100%;
   height: auto;
   max-height: 166px;
   display: block;
-}
+} */
 
-.place,
+/* .place,
 p {
   font-family: 'open sans', arial, sans-serif;
   padding-left: 18px;
   padding-right: 18px;
-}
+} */
 
 .details {
   color: darkslategrey;

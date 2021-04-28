@@ -4,11 +4,24 @@
   margin:auto;
   text-align:center; /*centers horizontally*/
   /* line-height:300px; same as height and for centering vertically */
+
 }
 .header {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  background: #534a4b;
-  color: white;
+  background: #c7ad7f;
+  color: #654321;
   font-size: 30px;
+}
+
+.navbar-expand-lg {
+  background-color:beige;
+  color:beige;
+  background:beige;
+}
+
+.body {
+  background-color:beige;
+  color:beige;
+  background:beige;
 }

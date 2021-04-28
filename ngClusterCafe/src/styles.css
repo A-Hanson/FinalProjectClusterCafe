@@ -6,4 +6,12 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+    background-color:#c7ad7f;
+}
+.container-fluid {
+  background-color: #c7ad7f;
+}
+
+.header {
+  background-color: #c7ad7f;
 }
