@@ -1,45 +1,54 @@
-<!-- <div class="container">
-  <h5>Login</h5>
-  <form>
-    <div class="mb-3">
-      <label for="username" class="form-label">User Name</label>
-      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username">
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password">
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="login()">Submit</button>
-  </form>
-</div> -->
+<!DOCTYPE html>
 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<title>CSS Responsive Login Form</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  crossorigin="anonymous">
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <!-- <img src="https://img.icons8.com/cotton/2x/login-rounded-right.png" style="max-width:10%;" id="icon" alt="User Icon" /> -->
-      <h2 class="text-dark">Cluster Cafe</h2>
-    </div>
-
-    <!-- Login Form -->
-    <form>
+</head>
+<body>
+  <div class="container">
+    <div class="welcome">
+      <div class="pinkbox">
+        <div class="signin">
+          <h1>A<span>cc</span>ount Sign<span>&rarr;</span>In</h1>
+    <form class = "more-padding" autocomplete="off">
       <input type="text" class="fadeIn second" name="username" id="username" placeholder="Username" [(ngModel)]="username">
       <input type="password" id="password" class="fadeIn third" name="password" id="password" placeholder="password" [(ngModel)]="password">
-      <input type="submit" class="fadeIn fourth" value="Log In" (click)="login()">
+      <button type="submit" class="button submit" (click)="login()">Log In</button>
     </form>
-
-    <!-- Remind Passowrd -->
-    <!-- <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
-    </div> -->
-
   </div>
 </div>
+<div class="leftbox">
+
+</div>
+<div class="rightbox">
+  <br />
+  <br />
+  <div id ="two">
+    <p>Ready for your next</p>
+<div class="box">
+  <ul>
+    <li class="item-1">Adventure</li>
+    <br />
+    <li class="item-2">Study Sesh</li>
+    <br />
+    <li class="item-3">5k</li>
+    <br />
+    <li class="item-4">Meet Up</li>
+    <br />
+    <li class="item-5">Hobby</li>
+    <br />
+  </ul>
+</div>
+<p>?</p>
+</div>
+</div>
+</div>
+</div>
+
+  </body>
+
